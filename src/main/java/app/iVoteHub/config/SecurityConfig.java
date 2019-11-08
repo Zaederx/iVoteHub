@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,11 +26,12 @@ import app.iVoteHub.services.CustomUserDetailsServiceImpl;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
-	CustomUserDetailsServiceImpl service = new CustomUserDetailsServiceImpl();
+	UserDetailsService service;
 	@Override
 	protected void configure(HttpSecurity https) throws Exception {
 		//no authetication for home and login pages
-		https.addFilterBefore(addCustomAuthFilter(), UsernamePasswordAuthenticationFilter.class)
+//		https.addFilterBefore(addCustomAuthFilter(), UsernamePasswordAuthenticationFilter.class)
+		https
 		.authorizeRequests()
 		.antMatchers("/home","/login").permitAll()
 			.anyRequest().authenticated() //requires authenticated access 
@@ -79,17 +81,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure (AuthenticationManagerBuilder auth) throws Exception {
 
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
-		CustomUserDetailsAuthenticationProvider provider = new CustomUserDetailsAuthenticationProvider(encoder,service);
-		auth.authenticationProvider(provider);
+//		CustomUserDetailsAuthenticationProvider provider = new CustomUserDetailsAuthenticationProvider(encoder,service);
+//		auth.authenticationProvider(provider);
+		auth.userDetailsService(service).passwordEncoder(encoder);
 	}
 	
 	
-	public CustomAuthenticationFilter addCustomAuthFilter() throws Exception {
-		CustomAuthenticationFilter authFilter = new CustomAuthenticationFilter();
-		authFilter.setAuthenticationFailureHandler(
-		new SimpleUrlAuthenticationFailureHandler("/login-error")
-		);
-		return authFilter;
-	}
+//	public CustomAuthenticationFilter addCustomAuthFilter() throws Exception {
+//		CustomAuthenticationFilter authFilter = new CustomAuthenticationFilter();
+//		authFilter.setAuthenticationFailureHandler(
+//		new SimpleUrlAuthenticationFailureHandler("/login-error")
+//		);
+//		return authFilter;
+//	}
 	
 }

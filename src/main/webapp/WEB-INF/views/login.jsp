@@ -11,11 +11,11 @@
 <title>Candidate Login</title>
 </head>
 <body>
-<form:form action = "${pageContext.request.contextPath}/authentication" method ="POST">
+<form:form action = "${pageContext.request.contextPath}/loginForm" method ="POST">
 <p> UserType</p>
 <select name="usertype" size="1"> 
-<option value="Role_Voter">Voter</option>
-<option value="Role_Candidate">Candidate</option>
+<option value="1">Voter</option>
+<option value="2">Candidate</option>
 </select>
 
 <p> Username</p>

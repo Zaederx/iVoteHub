@@ -1,21 +1,16 @@
 package app.iVoteHub.config;
 
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Assert;
 
-import app.iVoteHub.domain.User;
 import app.iVoteHub.services.CustomUserDetailsService;
 
 /**
@@ -94,12 +89,11 @@ public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetails
 	@Override
 	protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
-		
-		CustomAuthenticationToken token = (CustomAuthenticationToken) authentication;
+		String [] user = username.split(":");
 		UserDetails details = null;
 		
 		try {
-			details = this.userDetailsService.loadUserByUsernameAndUsertype(token.getPrincipal().toString(), token.getUsertype());
+			details = this.userDetailsService.loadUserByUsernameAndUsertype(user[0], user[1]);
 			if (details == null) {
 				throw new InternalAuthenticationServiceException("Error: UserDetails cannot return null.");
 			}
