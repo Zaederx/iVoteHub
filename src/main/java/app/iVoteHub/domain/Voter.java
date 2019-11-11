@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.PrimaryKeyJoinColumn;
 /**
  * 
  * @author Zachary Ishmael
@@ -15,23 +18,25 @@ import javax.persistence.Id;
 @Entity
 public class Voter extends User{
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Column
 	private int id;
+	@Column
+	protected String username;
+	@Column
+	protected String name;
+	@Column
+	protected String password;
+	@Column 
+	protected String role;
 	@Column
 	private String email;
 	@Column
-	private String username;
-	@Column
-	private String fullname;
-	@Column
 	private String constituency;
 	@Column
-	private String password;
-	@Column
 	private int SNI;// Shangri-La National Insurance number
-	@Column
-	private String role;
+//	@Column
+//	private String role;
 	@Column
 	private boolean voted;
 
@@ -43,22 +48,22 @@ public class Voter extends User{
 	 * @param password
 	 * @param SNI - Shangri-La National Insurance number
 	 */
-	public Voter (int id, String fullname, String password, int SNI) {
-		this.id = id;
-		this.fullname = fullname;
-		this.password = password;
+	public Voter (String fullname, String username, String password, int SNI) {
+		this.name = fullname;
+		this.username = username;
+		this.password= password;
 		this.SNI = SNI;
-		this.role = "Role_Voter";
+		this.role = Role.VOTER.toString();
 	}
 
 	
 	/*Fullname*/
-	public String getFullname() {
-		return fullname;
+	public String getName() {
+		return name;
 	}
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
+	public void setName(String fullname) {
+		this.name = fullname;
 	}
 
 	/*Email*/

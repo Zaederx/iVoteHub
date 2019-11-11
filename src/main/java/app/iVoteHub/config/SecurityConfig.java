@@ -1,22 +1,14 @@
 package app.iVoteHub.config;
 
-import java.security.MessageDigest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import app.iVoteHub.services.CustomUserDetailsService;
-import app.iVoteHub.services.CustomUserDetailsServiceImpl;
+import app.iVoteHub.services.GeneralUserDetailsService;
 
 /**
  * 
@@ -26,40 +18,23 @@ import app.iVoteHub.services.CustomUserDetailsServiceImpl;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
-	UserDetailsService service;
+	GeneralUserDetailsService service;
 	@Override
 	protected void configure(HttpSecurity https) throws Exception {
 		//no authetication for home and login pages
 //		https.addFilterBefore(addCustomAuthFilter(), UsernamePasswordAuthenticationFilter.class)
 		https
 		.authorizeRequests()
-		.antMatchers("/home","/login","login-page","/loginForm").permitAll()
 			.anyRequest().authenticated() //requires authenticated access 
 			
 			.and().formLogin()
-			.loginPage("/login").permitAll().defaultSuccessUrl("/homeHome").failureUrl("/login-error")
+//			.loginPage("/login")
+			.permitAll().defaultSuccessUrl("/login-success",true).failureUrl("/login-error").permitAll()
 			.passwordParameter("password")
 			.usernameParameter("username")
-			.defaultSuccessUrl("/home", true)
-			.loginProcessingUrl("/authentication")
+//			.defaultSuccessUrl("/home", true)
+			.loginProcessingUrl("/authentication").defaultSuccessUrl("/home", true).failureForwardUrl("/login-error")
 			.failureHandler(new SimpleUrlAuthenticationFailureHandler("/login-error"))
-			
-			
-			
-			//Trying Different Approach
-//			.and().formLogin()
-//			.loginPage("/Voter/v-login")
-//			.passwordParameter("password")
-//			.usernameParameter("username")
-//			.defaultSuccessUrl("/home",true)
-//			.loginProcessingUrl("Voter/authentication")
-//			
-//			.and().formLogin()
-//			.loginPage("/Candidate/c-login")
-//			.passwordParameter("c-password")
-//			.usernameParameter("c-username")
-//			.defaultSuccessUrl("/home",true)
-//			.loginProcessingUrl("/Candidate/authentication")
 		;
 	}
 	
@@ -75,24 +50,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 * Implements the {@link WebSecurityConfigurerAdapter} configure method.
 	 * Configures the @{@link AuthenticationManagerBuilder} with the 
 	 * {@link CustomUserDetailsAuthenticationProvider} that has been set with the
-	 * {@link BCryptPasswordEncoder} and a {@link CustomUserDetailsServiceImpl}.
+	 * {@link BCryptPasswordEncoder} and a {@link CustomUserDetailsService}.
 	 */
 	@Override
 	public void configure (AuthenticationManagerBuilder auth) throws Exception {
-
+		System.out.println("cofigure authenticationManager - Security Config");
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
-//		CustomUserDetailsAuthenticationProvider provider = new CustomUserDetailsAuthenticationProvider(encoder,service);
-//		auth.authenticationProvider(provider);
 		auth.userDetailsService(service).passwordEncoder(encoder);
 	}
 	
-	
-//	public CustomAuthenticationFilter addCustomAuthFilter() throws Exception {
-//		CustomAuthenticationFilter authFilter = new CustomAuthenticationFilter();
-//		authFilter.setAuthenticationFailureHandler(
-//		new SimpleUrlAuthenticationFailureHandler("/login-error")
-//		);
-//		return authFilter;
-//	}
+
 	
 }

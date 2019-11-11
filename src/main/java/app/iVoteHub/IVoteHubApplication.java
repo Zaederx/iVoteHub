@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import app.iVoteHub.domain.Candidate;
+import app.iVoteHub.domain.User;
 import app.iVoteHub.repositories.CandidateRepository;
 import app.iVoteHub.repositories.VoterRepository;
 
@@ -27,13 +28,13 @@ public class IVoteHubApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 //		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//		Candidate c = new Candidate("Zachary", "Z");
+//		User c = new Candidate("Zachary", "Z");
 //		c.setPassword(encoder.encode("password"));
-//		c.setConstituency("Constituency");
-//		c.setParty("party");
-//		c.setVotes(10000);
+//		((Candidate) c).setConstituency("Constituency");
+//		((Candidate) c).setParty("party");
+//		((Candidate) c).setVotes(10000);
 //		
-//		cRepo.save(c);
+//		cRepo.save((Candidate) c);
 	}
 
 	

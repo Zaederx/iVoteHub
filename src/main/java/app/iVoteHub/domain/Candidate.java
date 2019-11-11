@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 /**
  * 
  * Entity class that represents Candidates in data persistence.<br>
@@ -15,8 +16,9 @@ import javax.persistence.Id;
 @Entity
 public class Candidate extends User{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private int id;
 	@Column
 	private String name;
@@ -34,6 +36,11 @@ public class Candidate extends User{
 	private int votes;
 	
 	
+	
+	public Candidate() {
+		
+	}
+	
 	/**
 	 * @param name
 	 * @param username
@@ -42,7 +49,7 @@ public class Candidate extends User{
 	public Candidate (String name, String username) {
 		this.name = name;
 		this.username = username;
-		this.role = "Role_Candidate";
+		this.role = Role.CANADIDATE.toString();
 	}
 
 

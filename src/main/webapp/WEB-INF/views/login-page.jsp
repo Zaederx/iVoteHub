@@ -11,14 +11,12 @@
 <title>Candidate Login</title>
 </head>
 <body>
-<form:form action = "${pageContext.request.contextPath}/loginForm" modelAttribute="LoginForm"  method ="POST">
-	<form:label path="usertype" modelAttribute= "usertype"> UserType</form:label>
-		<form:select  path="usertype" size="1" items="${usertypeMap}"/>
-	<form:label path="username"> Username</form:label>
-		<form:input path="username"/>
-	<form:label path="password"> Password</form:label>
-		<form:input path="password"/>
-<input type="submit" value="Login"/>
+<form:form action = "${pageContext.request.contextPath}/authenticate"  method ="POST">
+	<h1>Username</h1>
+		<input  type="text" name="username"/>
+	<h1> Password</h1>
+		<input type="password" name="password"/>
+	<input type="submit" value="Login"/>
 </form:form>
 
 </body>

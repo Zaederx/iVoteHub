@@ -27,37 +27,17 @@ public class Home {
 		return "home";
 	}
 	@GetMapping("login")
-	public ModelAndView login () {
-		ModelAndView mv = new ModelAndView("login-page");
-		
-		Map<String,String> usertype = new HashMap<String,String>();
-		usertype.put("Voter", "1");
-		usertype.put("Candidate", "2");
-		
-		mv.addObject("usertypeMap", usertype);
-		mv.addObject("LoginForm", new LoginForm());
+	public String login () {
 		
 		print(s+"login-page");
-		return mv;
+		return "login-page";
 	}
 	
+	@GetMapping("login-success")
+	public String loginSuccess () {
+		return "homeHome";
+	}
 
-	@PostMapping("loginForm")
-	public String login (@ModelAttribute("LoginForm") LoginForm login, Model model) {
-	
-		print(s+"loginForm");
-		String type = "";
-		String view = "";
-		switch (login.getUsertype()) {
-		case "1": type = "VOTER"; view = "/authentication"; break;
-		case "2": type = "CANDIDATE"; view = "/authentication"; break;
-		default : view = "login-error";
-		}
-		String concat = type+":"+ login.getUsername();
-		model.addAttribute("username", concat);
-		System.out.println("This is the selected view:"+view);
-		return view;
-	}
 	
 	@RequestMapping(value = "error-login", method = RequestMethod.GET)
 	public String error (Model model) {
