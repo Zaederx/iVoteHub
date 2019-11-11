@@ -11,21 +11,14 @@
 <title>Candidate Login</title>
 </head>
 <body>
-<form:form action = "${pageContext.request.contextPath}/loginForm" method ="POST">
-<p> UserType</p>
-<select name="usertype" size="1"> 
-<option value="1">Voter</option>
-<option value="2">Candidate</option>
-</select>
-
-<p> Username</p>
- <input type= "text" name="username">
-
-<p> Password</p>
-<input type="password" name="password">
-
+<form:form action = "${pageContext.request.contextPath}/loginForm" modelAttribute="LoginForm"  method ="POST">
+	<form:label path="usertype" modelAttribute= "usertype"> UserType</form:label>
+		<form:select  path="usertype" size="1" items="${usertypeMap}"/>
+	<form:label path="username"> Username</form:label>
+		<form:input path="username"/>
+	<form:label path="password"> Password</form:label>
+		<form:input path="password"/>
 <input type="submit" value="Login"/>
-
 </form:form>
 
 </body>

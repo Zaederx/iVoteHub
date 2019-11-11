@@ -91,7 +91,7 @@ public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetails
 			throws AuthenticationException {
 		String [] user = username.split(":");
 		UserDetails details = null;
-		
+		print("At method: retrieveUser - CustomUserDetailsAuthenticationProvider");
 		try {
 			details = this.userDetailsService.loadUserByUsernameAndUsertype(user[0], user[1]);
 			if (details == null) {
@@ -124,4 +124,7 @@ public class CustomUserDetailsAuthenticationProvider extends AbstractUserDetails
 		return false;
 	}
 
+	public void print(String s) {
+		System.out.println(s);
+	}
 }

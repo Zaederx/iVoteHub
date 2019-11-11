@@ -26,14 +26,14 @@ public class IVoteHubApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Candidate c = new Candidate("Zachary", "Z");
-		c.setPassword(encoder.encode("password"));
-		c.setConstituency("Constituency");
-		c.setParty("party");
-		c.setVotes(10000);
-		
-		cRepo.save(c);
+//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//		Candidate c = new Candidate("Zachary", "Z");
+//		c.setPassword(encoder.encode("password"));
+//		c.setConstituency("Constituency");
+//		c.setParty("party");
+//		c.setVotes(10000);
+//		
+//		cRepo.save(c);
 	}
 
 	

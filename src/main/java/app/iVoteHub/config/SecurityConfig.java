@@ -33,11 +33,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //		https.addFilterBefore(addCustomAuthFilter(), UsernamePasswordAuthenticationFilter.class)
 		https
 		.authorizeRequests()
-		.antMatchers("/home","/login").permitAll()
+		.antMatchers("/home","/login","login-page","/loginForm").permitAll()
 			.anyRequest().authenticated() //requires authenticated access 
 			
 			.and().formLogin()
-			.loginPage("/login")
+			.loginPage("/login").permitAll().defaultSuccessUrl("/homeHome").failureUrl("/login-error")
 			.passwordParameter("password")
 			.usernameParameter("username")
 			.defaultSuccessUrl("/home", true)

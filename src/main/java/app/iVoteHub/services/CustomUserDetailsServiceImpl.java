@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import app.iVoteHub.repositories.CandidateRepository;
 import app.iVoteHub.repositories.VoterRepository;
 
 @Service
-public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
+public class CustomUserDetailsServiceImpl implements CustomUserDetailsService{
 
 	@Autowired
 	private VoterRepository vRepo;
@@ -23,9 +24,11 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
 	@Autowired 
 	private CandidateRepository cRepo;
 	
+	
 	@Override
 	public UserDetails loadUserByUsernameAndUsertype(String username, String usertype)
 			throws UsernameNotFoundException {
+		System.out.println("Load user has been called!!!!!!!!!!!!!");
 		boolean enabled = true;
 		boolean accountNotExpired = true;
 		boolean credentialsNotExpired = true;
