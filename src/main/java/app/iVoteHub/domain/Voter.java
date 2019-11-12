@@ -1,7 +1,13 @@
 package app.iVoteHub.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 /**
  * 
@@ -10,8 +16,8 @@ import javax.persistence.Entity;
  * Entity class used to represent Voters.
  *
  */
-@Entity
-//@PrimaryKeyJoinColumn
+@Entity(name="Voter_Table")
+@PrimaryKeyJoinColumn(name = "voter_id")
 public class Voter extends User{
 	
 
@@ -19,15 +25,16 @@ public class Voter extends User{
 	private String email;
 	@Column
 	private String constituency;
-	@Column
-	private int SNI;// Shangri-La National Insurance number
-//	@Column
-//	private String role;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name="sni", updatable = true, insertable = true,foreignKey = @ForeignKey(foreignKeyDefinition = ""))
+	private SNI sni;// Shangri-La National Insurance number
+
 	@Column
 	private boolean voted;
 
 	Voter () {
-		
+		super();
 	}
 
 	/**
@@ -36,11 +43,12 @@ public class Voter extends User{
 	 * @param password
 	 * @param SNI - Shangri-La National Insurance number
 	 */
-	public Voter (String fullname, String username, String password, int SNI) {
+	public Voter (String fullname, String username, String password, SNI sni) {
+		super();
 		this.name = fullname;
 		this.username = username;
 		this.password= password;
-		this.SNI = SNI;
+//		this.sni = sni;
 		this.role = Role.VOTER.toString();
 	}
 
@@ -75,13 +83,13 @@ public class Voter extends User{
 	}
 
 	/*SNI*/
-	public int getSNI() {
-		return SNI;
-	}
+//	public SNI getSNI() {
+//		return sni;
+//	}
 
-	public void setSNI(int sNI) {
-		SNI = sNI;
-	}
+//	public void setSNI(int sni) {
+//		sni = sni;
+//	}
 	
 	
 	/*Voted*/

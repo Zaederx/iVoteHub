@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		https
 		.authorizeRequests()
 			.anyRequest().authenticated() //requires authenticated access 
-			
+//			.and().antMatcher("/register").authorizeRequests().anyRequest().permitAll()
 			.and().formLogin()
 			.loginPage("/login")
 			.permitAll().defaultSuccessUrl("/login-success",true).failureUrl("/login-error").permitAll()

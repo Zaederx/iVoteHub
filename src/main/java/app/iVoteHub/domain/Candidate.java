@@ -1,7 +1,14 @@
 package app.iVoteHub.domain;
 
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * 
@@ -10,20 +17,13 @@ import javax.persistence.Entity;
  * Stores relevant candidate information.
  * @author Zachary Ishmael
  */
-@Entity
-//@PrimaryKeyJoinColum
+@Entity(name = "Candidate_Table")
+//@PrimaryKeyJoinColumn()
+//@PrimaryKeyJoinColumn(name = "c_id",referencedColumnName = "id",foreignKey = @ForeignKey(value=ConstraintMode.NO_CONSTRAINT))
+//@OnDelete(action = OnDeleteAction.CASCADE)
 public class Candidate extends User{
 
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column
-//	private int id;
-//	@Column
-//	private String name;
-//	@Column
-//	private String username;
-//	@Column
-//	private String password;
+
 	@Column
 	private String role;
 	@Column

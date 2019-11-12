@@ -10,7 +10,9 @@ import javax.persistence.InheritanceType;
 
 
 
-@Entity
+
+
+@Entity(name="General_User_Table")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
 
@@ -26,6 +28,16 @@ public abstract class User {
 	@Column 
 	protected String role;
 	
+	public User () {
+		
+	}
+	
+	public User (String username,String name, String password, String role) {
+		this.username = username;
+		this.name = name;
+		this.password = password;
+		this.role = role;
+	}
 	/*Id*/
 	public abstract int getId();
 	

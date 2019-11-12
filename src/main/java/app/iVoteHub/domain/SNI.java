@@ -1,13 +1,22 @@
 package app.iVoteHub.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 /**
  * @author Zachary Ishmael
  *
  */
-
+@Entity(name = "SNI_Table")
 public class SNI {
 	
-	private int SNI;
+	@Id
+	
+	private int sniCode;
+	
+//	@OneToOne(mappedBy = "sni")
+//	private Voter voter;
 	
 	private boolean used;
 	
@@ -16,11 +25,11 @@ public class SNI {
 	}
 
 	public int getSNI() {
-		return SNI;
+		return sniCode;
 	}
 
-	public void setSNI(int sNI) {
-		SNI = sNI;
+	public void setSNI(int sni) {
+		sniCode = sni;
 	}
 
 	public boolean isUsed() {
