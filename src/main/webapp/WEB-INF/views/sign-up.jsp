@@ -23,17 +23,23 @@
 </div>
 <div class="form-group">
 <p>Please enter the following details:</p>
-<form:form action="${pageContext.request.contextPath}/registerUser" modelAttribue="voter"> 
+<form:form action="${pageContext.request.contextPath}/registerUser" modelAttribute="voter"> 
 <!-- Make sure to have a tool tup explaining what is meant by fullname -->
-	<p> Full name:</p>
- 	<form:input path="fullname"/>
- 	<p> Email Address: </p>
+	<form:label path="name">Name</form:label>
+ 	<form:input path="name"/>
+
+ 	<form:label path="email">Email</form:label>
  	<form:input path="email"/>
- 	<p>SNI</p>
- 	<form:input path="sni"/>
- 	<p>Password</p>
- 	<form:input path password="password"/>
- 	<form:input path password="password2"/>
+ 
+ 	<form:form path="sni" modelAttribute="sni">
+ 	<form:label path="sniCode">SNI</form:label>
+ 	<form:input path="sniCode"/>
+ 	<form:hidden path="used" value="true"/>
+ 	</form:form>
+ 	<form:label path="password">Password</form:label>
+ 	<form:input path="password"/>
+ 	<form:label path="password2">Re-enter Password</form:label>
+ 	<form:input path="password2"/>
  	
  	
  	<input type="submit" class="btn btn-default" value="Register"/>

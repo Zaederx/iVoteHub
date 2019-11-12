@@ -2,12 +2,10 @@ package app.iVoteHub.domain;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Transient;
 
 /**
  * 
@@ -26,8 +24,10 @@ public class Voter extends User{
 	@Column
 	private String constituency;
 	
+	@Transient
+	private String password2;
+	
 	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name="sni", updatable = true, insertable = true,foreignKey = @ForeignKey(foreignKeyDefinition = ""))
 	private SNI sni;// Shangri-La National Insurance number
 
 	@Column
@@ -48,7 +48,7 @@ public class Voter extends User{
 		this.name = fullname;
 		this.username = username;
 		this.password= password;
-//		this.sni = sni;
+		this.sni = sni;
 		this.role = Role.VOTER.toString();
 	}
 
@@ -83,13 +83,13 @@ public class Voter extends User{
 	}
 
 	/*SNI*/
-//	public SNI getSNI() {
-//		return sni;
-//	}
+	public SNI getSNI() {
+		return sni;
+	}
 
-//	public void setSNI(int sni) {
-//		sni = sni;
-//	}
+	public void setSNI(SNI sni) {
+		this.sni = sni;
+	}
 	
 	
 	/*Voted*/
@@ -139,6 +139,14 @@ public class Voter extends User{
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
 	}
 	
 	

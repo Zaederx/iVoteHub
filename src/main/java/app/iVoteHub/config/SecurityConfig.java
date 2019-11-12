@@ -24,10 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//no authetication for home and login pages
 //		https.addFilterBefore(addCustomAuthFilter(), UsernamePasswordAuthenticationFilter.class)
 		https
-		.authorizeRequests()
+		.authorizeRequests().antMatchers("/register").permitAll()
 			.anyRequest().authenticated() //requires authenticated access 
-//			.and().antMatcher("/register").authorizeRequests().anyRequest().permitAll()
-			.and().formLogin()
+			.and().formLogin() 
 			.loginPage("/login")
 			.permitAll().defaultSuccessUrl("/login-success",true).failureUrl("/login-error").permitAll()
 			.passwordParameter("password")
@@ -35,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //			.defaultSuccessUrl("/home", true)
 			.loginProcessingUrl("/authenticate").defaultSuccessUrl("/home", true).failureForwardUrl("/login-error")
 			.failureHandler(new SimpleUrlAuthenticationFailureHandler("/login-error"))
-		;
+		; 
 	}
 	
 //	@Autowired

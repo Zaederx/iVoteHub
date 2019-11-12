@@ -26,6 +26,7 @@ public class Home {
 		print(s+"home");
 		return "home";
 	}
+	
 	@GetMapping("login")
 	public String login () {
 		

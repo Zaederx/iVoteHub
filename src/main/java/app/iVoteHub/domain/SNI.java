@@ -6,13 +6,13 @@ import javax.persistence.OneToOne;
 
 /**
  * @author Zachary Ishmael
- *
+ * Entity class to represent SNI numbers.
+ * SNI stands for Shangri-La National Insurance number.
  */
 @Entity(name = "SNI_Table")
 public class SNI {
 	
 	@Id
-	
 	private int sniCode;
 	
 //	@OneToOne(mappedBy = "sni")
@@ -24,11 +24,11 @@ public class SNI {
 		used = false;
 	}
 
-	public int getSNI() {
+	public int getsniCode() {
 		return sniCode;
 	}
 
-	public void setSNI(int sni) {
+	public void setsniCode(int sni) {
 		sniCode = sni;
 	}
 

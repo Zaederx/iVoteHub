@@ -32,18 +32,18 @@ public class IVoteHubApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User u = uRepo.findByUsername("Z");
-		if (!u.equals(null)) {
-			uRepo.delete(u);
-		}
-		
+//		User u = uRepo.findByUsername("Z");
+//		if (!u.equals(null)) {
+//			uRepo.delete(u);
+//		}
+//		
 //		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 //		User c = new Candidate("Zachary", "Z");
 //		c.setPassword(encoder.encode("password"));
 //		((Candidate) c).setConstituency("Constituency");
 //		((Candidate) c).setParty("party");
 //		((Candidate) c).setVotes(10000);
-		
+//		
 //		uRepo.save(c);
 //		cRepo.save((Candidate) c);
 //		Candidate u = cRepo.findById(1);
