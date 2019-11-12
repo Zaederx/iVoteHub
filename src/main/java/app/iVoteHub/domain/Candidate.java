@@ -2,10 +2,7 @@ package app.iVoteHub.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
+
 /**
  * 
  * Entity class that represents Candidates in data persistence.<br>
@@ -14,18 +11,19 @@ import javax.persistence.PrimaryKeyJoinColumn;
  * @author Zachary Ishmael
  */
 @Entity
+//@PrimaryKeyJoinColum
 public class Candidate extends User{
 
 //	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
-	private int id;
-	@Column
-	private String name;
-	@Column
-	private String username;
-	@Column
-	private String password;
+//	@Column
+//	private int id;
+//	@Column
+//	private String name;
+//	@Column
+//	private String username;
+//	@Column
+//	private String password;
 	@Column
 	private String role;
 	@Column
@@ -36,7 +34,8 @@ public class Candidate extends User{
 	private int votes;
 	
 	
-	
+	/*Default Constrcutor - Explicitly Required  by 
+	 * Spring for new Object generation and casting */
 	public Candidate() {
 		
 	}

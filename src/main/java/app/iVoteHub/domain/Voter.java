@@ -2,12 +2,7 @@ package app.iVoteHub.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.PrimaryKeyJoinColumn;
+
 /**
  * 
  * @author Zachary Ishmael
@@ -16,19 +11,10 @@ import javax.persistence.PrimaryKeyJoinColumn;
  *
  */
 @Entity
+//@PrimaryKeyJoinColumn
 public class Voter extends User{
 	
 
-	@Column
-	private int id;
-	@Column
-	protected String username;
-	@Column
-	protected String name;
-	@Column
-	protected String password;
-	@Column 
-	protected String role;
 	@Column
 	private String email;
 	@Column
@@ -40,10 +26,12 @@ public class Voter extends User{
 	@Column
 	private boolean voted;
 
+	Voter () {
+		
+	}
 
 	/**
 	 * 
-	 * @param id
 	 * @param fullname
 	 * @param password
 	 * @param SNI - Shangri-La National Insurance number

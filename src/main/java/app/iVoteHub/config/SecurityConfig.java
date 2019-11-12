@@ -28,12 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().authenticated() //requires authenticated access 
 			
 			.and().formLogin()
-//			.loginPage("/login")
+			.loginPage("/login")
 			.permitAll().defaultSuccessUrl("/login-success",true).failureUrl("/login-error").permitAll()
 			.passwordParameter("password")
 			.usernameParameter("username")
 //			.defaultSuccessUrl("/home", true)
-			.loginProcessingUrl("/authentication").defaultSuccessUrl("/home", true).failureForwardUrl("/login-error")
+			.loginProcessingUrl("/authenticate").defaultSuccessUrl("/home", true).failureForwardUrl("/login-error")
 			.failureHandler(new SimpleUrlAuthenticationFailureHandler("/login-error"))
 		;
 	}

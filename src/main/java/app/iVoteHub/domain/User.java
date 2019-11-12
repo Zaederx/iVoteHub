@@ -11,7 +11,7 @@ import javax.persistence.InheritanceType;
 
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
 
 	@Id
