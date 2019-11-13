@@ -8,40 +8,41 @@
 <head>
 <meta charset="UTF-8">
 <title>Register For Voting</title>
-<!-- Latest compiled and minified CSS -->
+<!-- CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
+<!-- JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="jumbotron text-center">
 <h1>Voter Registration</h1>
 </div>
-<div class="form-group">
-<p>Please enter the following details:</p>
-<form:form action="${pageContext.request.contextPath}/registerUser" modelAttribute="voter"> 
+<div class="form-group text-center">
+<h2>Please enter the following details:</h2>
+<form:form action="${pageContext.request.contextPath}/register/post" modelAttribute="voterForm"> 
 <!-- Make sure to have a tool tup explaining what is meant by fullname -->
-	<form:label path="name">Name</form:label>
- 	<form:input path="name"/>
+	<form:label path="name">Name</form:label><br>
+ 	<form:input path="name"/><br>
+ 	
+ 	<form:label path="username">Username</form:label><br>
+ 	<form:input path="username"/><br>
+ 	
+ 	<form:label path="email">Email</form:label><br>
+ 	<form:input path="email"/><br>
+ 	
+ 	<form:label path="password">Password</form:label><br>
+ 	<form:password  path="password"/><br>
+ 	<form:label  path="password2">Re-enter Password</form:label><br>
+ 	<form:password path="password2"/><br>
+ 	
+ 	<form:label path="sniNum">SNI number</form:label><br> <!-- Add tool tip later -->
+ 	<form:input path="sniNum"/><br><br>
+ 	
 
- 	<form:label path="email">Email</form:label>
- 	<form:input path="email"/>
- 
- 	<form:form path="sni" modelAttribute="sni">
- 	<form:label path="sniCode">SNI</form:label>
- 	<form:input path="sniCode"/>
- 	<form:hidden path="used" value="true"/>
- 	</form:form>
- 	<form:label path="password">Password</form:label>
- 	<form:input path="password"/>
- 	<form:label path="password2">Re-enter Password</form:label>
- 	<form:input path="password2"/>
- 	
- 	
  	<input type="submit" class="btn btn-default" value="Register"/>
  </form:form>
 </div>

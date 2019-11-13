@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//no authetication for home and login pages
 //		https.addFilterBefore(addCustomAuthFilter(), UsernamePasswordAuthenticationFilter.class)
 		https
-		.authorizeRequests().antMatchers("/register").permitAll()
+		.authorizeRequests().antMatchers("/register","/home","/login").permitAll()
 			.anyRequest().authenticated() //requires authenticated access 
 			.and().formLogin() 
 			.loginPage("/login")

@@ -7,6 +7,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 
+import app.iVoteHub.modelAttributes.VoterRegForm;
+
 /**
  * 
  * @author Zachary Ishmael
@@ -15,7 +17,7 @@ import javax.persistence.Transient;
  *
  */
 @Entity(name="Voter_Table")
-@PrimaryKeyJoinColumn(name = "voter_id")
+//@PrimaryKeyJoinColumn(name = "voter_id")//for naming primary key in ddl
 public class Voter extends User{
 	
 
@@ -27,13 +29,13 @@ public class Voter extends User{
 	@Transient
 	private String password2;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	private SNI sni;// Shangri-La National Insurance number
 
 	@Column
 	private boolean voted;
 
-	Voter () {
+	public Voter () {
 		super();
 	}
 
@@ -44,7 +46,6 @@ public class Voter extends User{
 	 * @param SNI - Shangri-La National Insurance number
 	 */
 	public Voter (String fullname, String username, String password, SNI sni) {
-		super();
 		this.name = fullname;
 		this.username = username;
 		this.password= password;
@@ -53,6 +54,13 @@ public class Voter extends User{
 	}
 
 	
+	public Voter(VoterRegForm voterForm) {
+		this.name = voterForm.getName();
+		this.username = voterForm.getUsername();
+		this.password = voterForm.getPassword();
+		this.role = Role.VOTER.toString();
+	}
+
 	/*Fullname*/
 	public String getName() {
 		return name;
@@ -148,7 +156,5 @@ public class Voter extends User{
 	public void setPassword2(String password2) {
 		this.password2 = password2;
 	}
-	
-	
 	
 }

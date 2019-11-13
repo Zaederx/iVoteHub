@@ -15,8 +15,8 @@ public class SNI {
 	@Id
 	private int sniCode;
 	
-//	@OneToOne(mappedBy = "sni")
-//	private Voter voter;
+	@OneToOne(mappedBy = "sni")
+	private Voter voter;
 	
 	private boolean used;
 	
@@ -24,15 +24,15 @@ public class SNI {
 		used = false;
 	}
 
-	public int getsniCode() {
+	public int getSniCode() {
 		return sniCode;
 	}
 
-	public void setsniCode(int sni) {
+	public void setSniCode(int sni) {
 		sniCode = sni;
 	}
 
-	public boolean isUsed() {
+	public boolean getUsed() {
 		return used;
 	}
 
