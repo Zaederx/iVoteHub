@@ -25,8 +25,8 @@
 	</div>
 	<div class="tron text-center">
 		<p>Vote</p>
-		<button >Vote</button>
-		<button>Logout</button>
+		<button href="/vote">Vote</button>
+		<button href="/logout">Logout</button>
 	</div>
 </body>
 </html>
