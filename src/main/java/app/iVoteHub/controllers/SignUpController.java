@@ -1,12 +1,13 @@
 package app.iVoteHub.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import app.iVoteHub.domain.SNI;
 import app.iVoteHub.domain.Voter;
@@ -19,7 +20,6 @@ import helperClass.Print;
 
 
 @Controller
-@RequestMapping("register")
 public class SignUpController {
 
 	@Autowired
@@ -28,31 +28,39 @@ public class SignUpController {
 	VoterRepository vRepo;
 	
 	
-	@GetMapping
-	String signUp (Model model) {
+	@GetMapping(value = "register")
+	public String signUp (Model model) {
 		Print.p("sign-up");
 		model.addAttribute("voterForm", new VoterRegForm());
 		model.addAttribute("sni", new SNI());
 		return "sign-up";
 	}
 	
-	@PostMapping("/post")
-	String postForm (@ModelAttribute(name = "voterForm") VoterRegForm voterForm, Model model) { 
-		String view = "";
+	@PostMapping("register-voter-form")
+	public String postForm (@ModelAttribute(name = "voterForm") VoterRegForm voterForm, Model model, HttpServletRequest request) { 
 		Print.p("postForm");
+		boolean safe = false;
+		
 		if (voterForm != null && getSNI(voterForm.getSniNum())!= null) {
 			SNI sni = getSNI(voterForm.getSniNum());
+			sni.setUsed(true);
 			Voter voter = new Voter(voterForm);
 			voter.setSNI(sni);//so that it also passes SNI object with id.
 			vRepo.save(voter);
-			model.addAttribute("voter", voterForm);
-			view = "voter-home";
-			
-		}else {
-			view = "register";
+			model.addAttribute("voter", voter);
+			return "redirect:"+request.getContextPath()+"voter-main";
 		}
-		Print.p("postForm:end of method");
-		return view;
+		return "login-error";
+		
+		
+		
+		
+		
+		/*Note to self:
+		 * redirect:something - directs url to new ${contextPath+something} url - work after posting data for processing
+		 * forward:something - original request sent directly to server - but url on client browser stays unchnaged (lasy url sent by browser)
+		 * redirect:forward:something - results in staying on the samge page and url [as forward cannot be appended] and forwarding of request still happens
+		*/
 	}
 	
 	

@@ -5,11 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("voter")
 public class VoterController {
 
 	
-	@GetMapping("/home")
+	@GetMapping("voter-main")
 	public String voterHome() {
 		return "voter-home";
 	}
