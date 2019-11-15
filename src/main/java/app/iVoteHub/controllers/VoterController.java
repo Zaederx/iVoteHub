@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import app.iVoteHub.addressEnums.VoterAddress;
+import app.iVoteHub.domain.Candidate;
 import app.iVoteHub.domain.Voter;
 import app.iVoteHub.modelAttributes.VoterForm;
+import app.iVoteHub.repositories.CandidateRepository;
 import app.iVoteHub.repositories.VoterRepository;
 import helperClass.Print;
 
@@ -35,7 +37,7 @@ import helperClass.Print;
 @RequestMapping("voter")
 public class VoterController {
 	@Autowired
-	VoterRepository vRepo;
+	CandidateRepository cRepo;
 
 	/*Returns voter-home*/
 	@GetMapping("/voter-main")
@@ -48,17 +50,18 @@ public class VoterController {
 	/* Return the page from which voter can vote.<br>
 	 * if the voter has voted, redirects to voter-main*/
 	@GetMapping("/vote")
-	public String vote(@ModelAttribute("voter") Voter voter,@ModelAttribute Model model) {
+	public String vote(@ModelAttribute("voter") Voter voter, Model model) {
 		if (voter.hasVoted()) {
 			Print.p("vote - hasVoted Loop");
 			return "redirect:voter/voter-main?voted=true";//forward?
 		} else {
 //			ModelAndView m = new ModelAndView();
-			List<Voter> candidates = (List<Voter>) vRepo.findAll();
+			List<Candidate> candidates = (List<Candidate>) cRepo.findAll();
 			model.addAttribute("candidates", candidates);
 			Print.p("vote - else statement");
 			System.out.println(voter.getName());
 			model.addAttribute("name", voter.getName());
+			model.addAttribute("voterForm", new VoterForm());
 			return VoterAddress.VOTE.jsp();
 		}
 	}

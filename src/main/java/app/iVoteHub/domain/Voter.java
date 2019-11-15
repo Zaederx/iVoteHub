@@ -59,6 +59,7 @@ public class Voter extends User{
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		this.name = voterForm.getName();
 		this.username = voterForm.getUsername();
+		this.email = voterForm.getEmail();
 		this.password = encoder.encode(voterForm.getPassword());
 		this.role = Role.VOTER.role();
 	}

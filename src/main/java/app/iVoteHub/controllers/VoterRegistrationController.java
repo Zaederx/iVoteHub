@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import app.iVoteHub.addressEnums.VoterAddress;
 import app.iVoteHub.domain.SNI;
+import app.iVoteHub.domain.User;
 import app.iVoteHub.domain.Voter;
 import app.iVoteHub.modelAttributes.VoterRegForm;
 import app.iVoteHub.repositories.SNIRepository;
@@ -40,15 +41,14 @@ public class VoterRegistrationController {
 	
 	@PostMapping("register-voter-form")
 	public String postForm (@ModelAttribute(name = "voterForm") VoterRegForm voterForm, Model model, HttpServletRequest request) { 
-		Print.p("postForm");
+		Print.p("VoterRegistration - postForm");
 	
-		
-		if (voterForm != null && getSNI(voterForm.getSniNum())!= null) {
-			SNI sni = getSNI(voterForm.getSniNum());
+		SNI sni = getSNI(voterForm.getSniNum());
+		if (voterForm != null && sni != null) {
 			sni.setUsed(true);
-			Voter voter = new Voter(voterForm);
-			voter.setSNI(sni);//so that it also passes SNI object with id.
-			vRepo.save(voter);
+			User voter = new Voter(voterForm);
+			((Voter) voter).setSNI(sni);//so that it also passes SNI object with id.
+			vRepo.save((Voter) voter);
 			model.addAttribute("voter", voter);
 			model.addAttribute("name",voter.getName());
 			Print.p("redirect:"+request.getContextPath()+VoterAddress.HOME.configUrl());
@@ -72,12 +72,18 @@ public class VoterRegistrationController {
 	/**
 	 * Return an SNI object from db if found.
 	 * Returns null otherwise
-	 * @param sni - attribut from registration form.
+	 * @param sni - attribute from registration form.
 	 * @return true if not used | false if used
 	 */
 	 private SNI getSNI(int sniNum) {
-		 Print.p("isNotUsed");
-		 SNI tableSni = sniRepo.findBySniCode(sniNum);
+		 Print.p("getSNI");
+		 SNI tableSni = null;
+		 try {
+		 tableSni = sniRepo.findBySniCode(sniNum);
+		 } catch (NullPointerException e) {
+			 e.printStackTrace();
+			 return tableSni;
+		 }
 		 return tableSni;
 	 }
 }
