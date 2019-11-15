@@ -34,12 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/voter/**").hasRole(Role.VOTER.toString())
 		.antMatchers("/candidate/**").hasRole(Role.CANADIDATE.toString()).anyRequest().authenticated() //requires authenticated access 
 			.and().formLogin() 
-			.loginPage("/login")
-			.permitAll().defaultSuccessUrl("/login-success",true).failureUrl("/login-error").permitAll()
+			.loginPage("/login").permitAll()
+//			.defaultSuccessUrl("/login-success",true)
+			.failureUrl("/login-error").permitAll()
 			.passwordParameter("password")
 			.usernameParameter("username")
 //			.defaultSuccessUrl("/home", true)
-			.loginProcessingUrl("/authenticate").defaultSuccessUrl("/home", true).failureForwardUrl("/login-error")
+			.loginProcessingUrl("/authenticate").failureForwardUrl("/login-error")
 			.failureHandler(new SimpleUrlAuthenticationFailureHandler("/login-error"))
 		; 
 	}

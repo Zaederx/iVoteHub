@@ -6,9 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import app.iVoteHub.addressEnums.Role;
 import app.iVoteHub.modelAttributes.VoterRegForm;
 
@@ -51,16 +49,17 @@ public class Voter extends User{
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		this.name = fullname;
 		this.username = username;
-		this.password= encoder.encode(password);
+		this.password = encoder.encode(password);
 		this.sni = sni;
 		this.role = Role.VOTER.role();
 	}
 
 	
 	public Voter(VoterRegForm voterForm) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		this.name = voterForm.getName();
 		this.username = voterForm.getUsername();
-		this.password = voterForm.getPassword();
+		this.password = encoder.encode(voterForm.getPassword());
 		this.role = Role.VOTER.role();
 	}
 
@@ -89,7 +88,7 @@ public class Voter extends User{
 		return constituency;
 	}
 
-	public void setConstituency(String constituency) {
+	public void setCandidate(String constituency) {
 		this.constituency = constituency;
 	}
 

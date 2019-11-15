@@ -21,6 +21,22 @@
 <div class="jumbotron text-center">
 <div>
 <p>Please Select one candidate of a constituency for whom you will vote</p>
+<form:form action="forward:${pageContent.request.contextPath}/voter/vote" modelAttribute="voterForm">
+<table>
+	<tr> 
+		<th>Candidate</th>
+		<th>Constituency</th>
+		<th>Select</th>
+	</tr>
+	<c:forEach var = "candidate" items ="${candidates}" >
+		<tr>
+			<td>${candidate.name}</td>
+			<td>${candidate.constituency}</td>
+			<td> <form:button path="vote" value="${candidate.username}"></form:button> </td>
+		</tr>
+	</c:forEach>
+</table>
+</form:form>
 </div>
 </div>
 </body>

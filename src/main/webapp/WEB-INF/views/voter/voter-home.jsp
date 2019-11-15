@@ -24,7 +24,7 @@
 		<h2>Welcome <c:out value="${name}"></c:out></h2>
 	</div>
 	<div class="tron text-center">
-		<a href="${pageContext.request.contextPath}/voter/vote"><button type="button" class="btn default-btn">Vote</button></a>
+		<a href="${pageContext.request.contextPath}vote"><button type="button" class="btn default-btn">Vote</button></a>
 		<a href="/logout"><button type="button" class="btn default-btn">Logout</button></a>
 	</div>
 </body>

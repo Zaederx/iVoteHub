@@ -51,7 +51,7 @@ public class IVoteHubApplication implements CommandLineRunner {
 //			
 //			uRepo.delete(u.get());
 //		}
-		
+//		
 //		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 //		Candidate c = new Candidate("Zachary", "Z");
 //		c.setPassword(encoder.encode("password"));
