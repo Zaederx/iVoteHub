@@ -51,6 +51,7 @@ public class VoterRegistrationController {
 			vRepo.save((Voter) voter);
 			model.addAttribute("voter", voter);
 			model.addAttribute("name",voter.getName());
+			Print.p("VoterRegistration - postForm - voter.getName()="+ voter.getName());
 			Print.p("redirect:"+request.getContextPath()+VoterAddress.HOME.configUrl());
 			return "redirect:"+request.getContextPath()+VoterAddress.HOME.configUrl();
 		}

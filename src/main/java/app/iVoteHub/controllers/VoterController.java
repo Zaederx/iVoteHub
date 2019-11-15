@@ -53,13 +53,14 @@ public class VoterController {
 	public String vote(@ModelAttribute("voter") Voter voter, Model model) {
 		if (voter.hasVoted()) {
 			Print.p("vote - hasVoted Loop");
+			Print.p("hasVoted"+voter.getName());
 			return "redirect:voter/voter-main?voted=true";//forward?
 		} else {
 //			ModelAndView m = new ModelAndView();
 			List<Candidate> candidates = (List<Candidate>) cRepo.findAll();
 			model.addAttribute("candidates", candidates);
 			Print.p("vote - else statement");
-			System.out.println(voter.getName());
+			Print.p(voter.getName());
 			model.addAttribute("name", voter.getName());
 			model.addAttribute("voterForm", new VoterForm());
 			return VoterAddress.VOTE.jsp();
@@ -71,9 +72,15 @@ public class VoterController {
 		voter.setCandidate(voterForm.getVote());
 		voter.setVoted(true);
 		
-		return "redirect:"+VoterAddress.HOME.jsp();
+		return "redirect:"+VoterAddress.VOTE_SUCCESS.jsp();
 	}
 	
+	@GetMapping("/voter-main-success")
+	public String successHome() {
+		return VoterAddress.VOTE_SUCCESS.jsp();
+		
+	}
+
 	
 	
 }

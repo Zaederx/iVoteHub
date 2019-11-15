@@ -21,7 +21,7 @@
 <body>
 	<div class= "jumbotron text-center" >
 		<h1>Voter Home Page</h1>
-		<h2>Welcome <c:out value="${name}"></c:out></h2>
+		<h2>Welcome ${name}</h2>
 	</div>
 	<div class="tron text-center">
 		<a href="${pageContext.request.contextPath}vote"><button type="button" class="btn default-btn">Vote</button></a>

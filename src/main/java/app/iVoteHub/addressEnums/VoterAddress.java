@@ -18,7 +18,8 @@ public enum VoterAddress {
 	REGISTRATION ("voter-registration", "/voter/sign-up"),
 	LOGIN("login",""),
 	HOME("voter/voter-main", "voter/voter-home"),
-	VOTE("voter/vote", "voter/voter-vote");
+	VOTE("voter/vote", "voter/voter-vote"),
+	VOTE_SUCCESS("voter/voter-post", "voter/vote-success");
 	
 	/*controller mapping address*/
 	private String address;
