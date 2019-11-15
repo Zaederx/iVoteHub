@@ -23,7 +23,7 @@
 </div>
 <div class="form-group text-center">
 <h2>Please enter the following details:</h2>
-<form:form action="/register-voter-form" modelAttribute="voterForm"> 
+<form:form action="${pageContext.request.contextPath}/register-voter-form" modelAttribute="voterForm" method="POST"> 
 <!-- Make sure to have a tool tup explaining what is meant by fullname -->
 	<form:label path="name">Name</form:label><br>
  	<form:input path="name"/><br>

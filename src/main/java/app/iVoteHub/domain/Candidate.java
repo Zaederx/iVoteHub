@@ -10,6 +10,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import app.iVoteHub.addressEnums.Role;
+
 /**
  * 
  * Entity class that represents Candidates in data persistence.<br>

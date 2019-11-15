@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import app.iVoteHub.modelAttributes.LoginForm;
 
 @Controller
-public class LoginController {
+public class Home {
 	
 	@GetMapping("/")
 	public String root () {
@@ -26,7 +26,7 @@ public class LoginController {
 	}
 
 	String s = "At view:";
-	@RequestMapping(value = "home", method = RequestMethod.GET)
+	@GetMapping("home")
 	public String home () {
 		print(s+"home");
 		return "home";

@@ -7,6 +7,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import app.iVoteHub.addressEnums.Role;
 import app.iVoteHub.modelAttributes.VoterRegForm;
 
 /**
@@ -20,7 +23,6 @@ import app.iVoteHub.modelAttributes.VoterRegForm;
 //@PrimaryKeyJoinColumn(name = "voter_id")//for naming primary key in ddl
 public class Voter extends User{
 	
-
 	@Column
 	private String email;
 	@Column
@@ -46,11 +48,12 @@ public class Voter extends User{
 	 * @param SNI - Shangri-La National Insurance number
 	 */
 	public Voter (String fullname, String username, String password, SNI sni) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		this.name = fullname;
 		this.username = username;
-		this.password= password;
+		this.password= encoder.encode(password);
 		this.sni = sni;
-		this.role = Role.VOTER.toString();
+		this.role = Role.VOTER.role();
 	}
 
 	
@@ -58,7 +61,7 @@ public class Voter extends User{
 		this.name = voterForm.getName();
 		this.username = voterForm.getUsername();
 		this.password = voterForm.getPassword();
-		this.role = Role.VOTER.toString();
+		this.role = Role.VOTER.role();
 	}
 
 	/*Fullname*/
@@ -101,7 +104,7 @@ public class Voter extends User{
 	
 	
 	/*Voted*/
-	public boolean isVoted() {
+	public boolean hasVoted() {
 		return voted;
 	}
 

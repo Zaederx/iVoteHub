@@ -21,12 +21,11 @@
 <body>
 	<div class= "jumbotron text-center" >
 		<h1>Voter Home Page</h1>
-		<h2>Welcome ${voter.name}</h2>
+		<h2>Welcome <c:out value="${name}"></c:out></h2>
 	</div>
 	<div class="tron text-center">
-		<p>Vote</p>
-		<button href="/vote">Vote</button>
-		<button href="/logout">Logout</button>
+		<a href="${pageContext.request.contextPath}/voter/vote"><button type="button" class="btn default-btn">Vote</button></a>
+		<a href="/logout"><button type="button" class="btn default-btn">Logout</button></a>
 	</div>
 </body>
 </html>

@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import app.iVoteHub.addressEnums.VoterAddress;
 import app.iVoteHub.domain.SNI;
 import app.iVoteHub.domain.Voter;
 import app.iVoteHub.modelAttributes.VoterRegForm;
@@ -20,7 +22,7 @@ import helperClass.Print;
 
 
 @Controller
-public class SignUpController {
+public class VoterRegistrationController {
 
 	@Autowired
 	SNIRepository sniRepo;
@@ -28,18 +30,18 @@ public class SignUpController {
 	VoterRepository vRepo;
 	
 	
-	@GetMapping(value = "register")
+	@GetMapping("voter-registration")
 	public String signUp (Model model) {
 		Print.p("sign-up");
 		model.addAttribute("voterForm", new VoterRegForm());
 		model.addAttribute("sni", new SNI());
-		return "sign-up";
+		return "voter/sign-up";
 	}
 	
 	@PostMapping("register-voter-form")
 	public String postForm (@ModelAttribute(name = "voterForm") VoterRegForm voterForm, Model model, HttpServletRequest request) { 
 		Print.p("postForm");
-		boolean safe = false;
+	
 		
 		if (voterForm != null && getSNI(voterForm.getSniNum())!= null) {
 			SNI sni = getSNI(voterForm.getSniNum());
@@ -48,7 +50,9 @@ public class SignUpController {
 			voter.setSNI(sni);//so that it also passes SNI object with id.
 			vRepo.save(voter);
 			model.addAttribute("voter", voter);
-			return "redirect:"+request.getContextPath()+"voter-main";
+			model.addAttribute("name",voter.getName());
+			Print.p("redirect:"+request.getContextPath()+VoterAddress.HOME.configUrl());
+			return "redirect:"+request.getContextPath()+VoterAddress.HOME.configUrl();
 		}
 		return "login-error";
 		

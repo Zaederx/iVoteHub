@@ -5,9 +5,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+
+import app.iVoteHub.addressEnums.Role;
+import app.iVoteHub.addressEnums.VoterAddress;
 import app.iVoteHub.services.GeneralUserDetailsService;
 
 /**
@@ -17,15 +21,18 @@ import app.iVoteHub.services.GeneralUserDetailsService;
  */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	VoterAddress v;
 	@Autowired
-	GeneralUserDetailsService service;
+	UserDetailsService service;
 	@Override
 	protected void configure(HttpSecurity https) throws Exception {
 		//no authetication for home and login pages
 //		https.addFilterBefore(addCustomAuthFilter(), UsernamePasswordAuthenticationFilter.class)
 		https
-		.authorizeRequests().antMatchers("/register","/home","/login","/register/**","/voter-main","/register-voter-form").permitAll()
-			.anyRequest().authenticated() //requires authenticated access 
+		.authorizeRequests().antMatchers("/register-voter-form","/register","/home","/register/**",VoterAddress.HOME.configUrl(), VoterAddress.REGISTRATION.configUrl(),VoterAddress.LOGIN.configUrl()).permitAll()
+		.and().authorizeRequests()
+		.antMatchers("/voter/**").hasRole(Role.VOTER.toString())
+		.antMatchers("/candidate/**").hasRole(Role.CANADIDATE.toString()).anyRequest().authenticated() //requires authenticated access 
 			.and().formLogin() 
 			.loginPage("/login")
 			.permitAll().defaultSuccessUrl("/login-success",true).failureUrl("/login-error").permitAll()

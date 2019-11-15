@@ -26,7 +26,9 @@ public class WebConfig implements WebMvcConfigurer{
 	@Bean
 	public InternalResourceViewResolver jstlViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("WEB-INF/views/");
+		resolver.setPrefix("/WEB-INF/views/");
+		/* without the / before WEB-INF - spring will append context 
+		 * folder context infront of WEB-INF - takes you to incoreect address*/
 		resolver.setSuffix(".jsp");
 		
 		return resolver;
