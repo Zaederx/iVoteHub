@@ -68,11 +68,18 @@ public class Home {
 		return "login-page";
 	}
 	
+	
+	
 	@GetMapping("login-success")
 	public String loginSuccess () {
 		return "homeHome";
 	}
 
+	@GetMapping("logout-success")
+	public String logout() {
+		return "user-logout";
+	}
+	
 	@GetMapping("error")
 	public String defaultError() {
 		return "error-default";

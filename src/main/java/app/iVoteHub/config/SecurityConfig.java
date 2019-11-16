@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.requiresSecure()
 			
 		.and().authorizeRequests()
-		.antMatchers("/register-voter-form","/register","/home","/register/**",VAddressBook.V_HOME.configUrl(), VAddressBook.REGISTRATION.configUrl(),VAddressBook.LOGIN.configUrl()).permitAll()
+		.antMatchers("/register-voter-form","/register","/home","/register/**", VAddressBook.REGISTRATION.configUrl(),VAddressBook.LOGIN.configUrl()).permitAll()
 		
 		.and().authorizeRequests()
 			.antMatchers("/voter/**").hasRole(Role.VOTER.toString())//note: because hasRole appends "ROLE_" to what ever string provided
@@ -53,9 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			
 		.and().logout()
 			.invalidateHttpSession(true)
-			.clearAuthentication(true)
+			.deleteCookies("SESSION")//deletes Spring default cookies
+//			.clearAuthentication(true)
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/user-logout")
+			.logoutSuccessUrl("/logout-success")
 			.permitAll()
 		
 		.and().exceptionHandling().accessDeniedPage("/login-error")

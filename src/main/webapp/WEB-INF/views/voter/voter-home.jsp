@@ -27,12 +27,19 @@
 	<div class="tron text-center">
 	
 	<%
+	String link = "pointer-events: none; cursor: default";
 	boolean voted = Boolean.parseBoolean(request.getParameter("voted"));
 	if ( voted == true ) {
 		out.println("<h4 style=\"color:tomato;\">You have already voted.</h4>");
+		request.setAttribute("disabled", " disabled");
+		request.setAttribute("link",link);
 	} %>
-		<a href="${pageContext.request.contextPath}/voter/vote"><button type="button" class="btn default-btn">Vote</button></a>
-		<a href="/logout"><button type="button" class="btn default-btn">Logout</button></a>
+		<a href="${pageContext.request.contextPath}/voter/vote" style="${link}"><button type="submit"  class="btn default-btn${disabled}">Vote</button></a>
+		
+		<form:form action="${pageContext.request.contextPath}/logout" style="display:inline;" method="POST">
+		<a><button type="submit"name="logout" class="btn default-btn" id="logout">Logout</button></a>
+		</form:form>
+	</div>
 	</div>
 </body>
 </html>

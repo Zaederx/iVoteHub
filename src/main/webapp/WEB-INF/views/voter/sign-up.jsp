@@ -25,13 +25,13 @@
 <h1>Voter Registration</h1>
 <ul class="nav nav-tabs justify-content-center">
       <li class="nav-item">
-        <a class="nav-link" href="${pageContent.request.contextPath}/home">Home</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/home">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="${pageContent.request.contextPath}/voter-registration">Register</a>
+        <a class="nav-link active" href="${pageContext.request.contextPath}/voter-registration">Register</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${pageContent.request.contextPath}/login">Login</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
       </li>
 </ul>
 </div>
