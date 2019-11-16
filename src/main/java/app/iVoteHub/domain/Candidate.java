@@ -9,6 +9,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.transaction.annotation.Transactional;
 
 import app.iVoteHub.addressEnums.Role;
 
@@ -181,6 +182,11 @@ public class Candidate extends User{
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	@Transactional
+	public void addVote() {
+		votes++;
 	}
 	
 	

@@ -21,7 +21,7 @@ import app.iVoteHub.modelAttributes.VoterRegForm;
 //@PrimaryKeyJoinColumn(name = "voter_id")//for naming primary key in ddl
 public class Voter extends User{
 	
-	@Column
+	@Column(unique = true, nullable = false)
 	private String email;
 	@Column
 	private int candidate;
@@ -85,7 +85,7 @@ public class Voter extends User{
 
 	
 	/*Constituency*/
-	public int getConstituency() {
+	public int getCandidate() {
 		return candidate;
 	}
 

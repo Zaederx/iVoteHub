@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -76,18 +77,19 @@ public class VoterController {
 			return VAddressBook.VOTE.jsp();
 		}
 	}
-	
+	@Transactional
 	@PostMapping("/vote-post")
 	public String votePost(@ModelAttribute("voteForm") VoteForm voteForm, Principal principal) {
 		String vUsername = principal.getName();
 		Voter voter = vRepo.findByUsername(vUsername);
-		
-		Print.p("VoterController - voter.getName():"+voter.getName()); 
-		Print.p("Voter Controller - votePost - voteForm.getVote:"+voteForm.getVote());
+		Print.p("VoterController - voter.getName():"+voter.getName()); //TODO DELETE
+		Print.p("Voter Controller - votePost - voteForm.getVote:"+voteForm.getVote());//TODO DELETE
 		voter.setCandidate(voteForm.getVote());
-		Print.p("Voter Controller - votePost - voter.getCandidate:"+voter.getConstituency());
+		Print.p("Voter Controller - votePost - voter.getCandidate:"+voter.getCandidate());//TODO delete 
+		
+		cRepo.findById(voteForm.getVote()).addVote();
 		voter.setVoted(true);
-		vRepo.save(voter);// somehow creates new voter???
+		vRepo.save(voter);
 
 		
 		return "redirect:/voter/voter-success";
