@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.UniqueConstraint;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 
 
@@ -19,6 +22,8 @@ public abstract class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int id;
+	
+	@UniqueElements
 	@Column
 	protected String username;
 	@Column

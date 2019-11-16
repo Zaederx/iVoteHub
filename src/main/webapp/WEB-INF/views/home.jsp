@@ -28,10 +28,10 @@
         <a class="nav-link active" href="">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="">Register</a>
+        <a class="nav-link" href="${pageContent.request.contextPath}/voter-registration">Register</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="">Login</a>
+        <a class="nav-link" href="${pageContent.request.contextPath}/login">Login</a>
       </li>
     </ul>
   </div>
@@ -41,7 +41,7 @@
       <div class="col-sm-4">
         <h1>Welcome to iVoteHub</h1>
         <p>
-          Here you can Reigster to Vote online.
+          Here you can Register to Vote online.
         </p>
       </div>
     </div>

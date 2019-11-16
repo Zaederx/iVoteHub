@@ -9,9 +9,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import app.iVoteHub.addressEnums.Role;
-import app.iVoteHub.addressEnums.VoterAddress;
+import app.iVoteHub.addressEnums.VAddressBook;
 import app.iVoteHub.services.GeneralUserDetailsService;
 
 /**
@@ -21,7 +22,7 @@ import app.iVoteHub.services.GeneralUserDetailsService;
  */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	VoterAddress v;
+	VAddressBook v;
 	@Autowired
 	UserDetailsService service;
 	@Override
@@ -29,19 +30,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//no authetication for home and login pages
 //		https.addFilterBefore(addCustomAuthFilter(), UsernamePasswordAuthenticationFilter.class)
 		https
-		.authorizeRequests().antMatchers("/register-voter-form","/register","/home","/register/**",VoterAddress.HOME.configUrl(), VoterAddress.REGISTRATION.configUrl(),VoterAddress.LOGIN.configUrl()).permitAll()
+			.requiresChannel()
+			.anyRequest()
+			.requiresSecure()
+			
 		.and().authorizeRequests()
-		.antMatchers("/voter/**").hasRole(Role.VOTER.toString())
-		.antMatchers("/candidate/**").hasRole(Role.CANADIDATE.toString()).anyRequest().authenticated() //requires authenticated access 
-			.and().formLogin() 
-			.loginPage("/login").permitAll()
-//			.defaultSuccessUrl("/login-success",true)
-			.failureUrl("/login-error").permitAll()
-			.passwordParameter("password")
-			.usernameParameter("username")
-//			.defaultSuccessUrl("/home", true)
-			.loginProcessingUrl("/authenticate").failureForwardUrl("/login-error")
-			.failureHandler(new SimpleUrlAuthenticationFailureHandler("/login-error"))
+		.antMatchers("/register-voter-form","/register","/home","/register/**",VAddressBook.V_HOME.configUrl(), VAddressBook.REGISTRATION.configUrl(),VAddressBook.LOGIN.configUrl()).permitAll()
+		
+		.and().authorizeRequests()
+			.antMatchers("/voter/**").hasRole(Role.VOTER.toString())//note: because hasRole appends "ROLE_" to what ever string provided
+			.antMatchers("/candidate/**").hasRole(Role.CANDIDATE.toString()).anyRequest().authenticated() //requires authenticated access 
+		
+		.and().formLogin() 
+				.loginPage("/login").permitAll()
+				.defaultSuccessUrl("/logged-user",true)
+				.failureUrl("/login-error").permitAll()
+				.passwordParameter("password")
+				.usernameParameter("username")
+	//			.defaultSuccessUrl("/home", true)
+				.loginProcessingUrl("/authenticate").failureForwardUrl("/login-error")
+				.failureHandler(new SimpleUrlAuthenticationFailureHandler("/login-error"))
+			
+		.and().logout()
+			.invalidateHttpSession(true)
+			.clearAuthentication(true)
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.logoutSuccessUrl("/user-logout")
+			.permitAll()
+		
+		.and().exceptionHandling().accessDeniedPage("/login-error")
 		; 
 	}
 	

@@ -1,6 +1,7 @@
 package app.iVoteHub.addressEnums;
 
 /**
+ * The VoterAddressBook:
  * Acts and an authority url address.
  * Created to address problem of keeping track
  * of Controller url mappings correct
@@ -13,11 +14,11 @@ package app.iVoteHub.addressEnums;
  * @author Zachary Ishmael
  *
  */
-public enum VoterAddress {
+public enum VAddressBook {
 
 	REGISTRATION ("voter-registration", "/voter/sign-up"),
 	LOGIN("login",""),
-	HOME("voter/voter-main", "voter/voter-home"),
+	V_HOME("voter/voter-main", "voter/voter-home"),
 	VOTE("voter/vote", "voter/voter-vote"),
 	VOTE_SUCCESS("voter/voter-post", "voter/vote-success");
 	
@@ -26,7 +27,7 @@ public enum VoterAddress {
 	/*Address of the reosurce
 	 * relative to WEB-INF/views/*/
 	private String resource;
-	VoterAddress(String address, String resource) {
+	VAddressBook(String address, String resource) {
 		this.address = address;
 		this.resource = resource;
 	}

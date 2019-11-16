@@ -12,7 +12,7 @@ public class VoterRegForm {
 	
 	private String password2;
 	
-	private int sniNum;
+	private String sniNum;
 
 	public String getName() {
 		return name;
@@ -54,11 +54,11 @@ public class VoterRegForm {
 		this.password2 = password2;
 	}
 
-	public int getSniNum() {
+	public String getSniNum() {
 		return sniNum;
 	}
 
-	public void setSniNum(int sniNum) {
+	public void setSniNum(String sniNum) {
 		this.sniNum = sniNum;
 	}
 	

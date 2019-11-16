@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import app.iVoteHub.addressEnums.VoterAddress;
+import app.iVoteHub.addressEnums.VAddressBook;
 import app.iVoteHub.domain.SNI;
 import app.iVoteHub.domain.User;
 import app.iVoteHub.domain.Voter;
@@ -52,8 +52,8 @@ public class VoterRegistrationController {
 			model.addAttribute("voter", voter);
 			model.addAttribute("name",voter.getName());
 			Print.p("VoterRegistration - postForm - voter.getName()="+ voter.getName());
-			Print.p("redirect:"+request.getContextPath()+VoterAddress.HOME.configUrl());
-			return "redirect:"+request.getContextPath()+VoterAddress.HOME.configUrl();
+			Print.p("redirect:"+request.getContextPath()+VAddressBook.V_HOME.configUrl());
+			return "redirect:"+request.getContextPath()+VAddressBook.V_HOME.configUrl();
 		}
 		return "login-error";
 		
@@ -76,11 +76,11 @@ public class VoterRegistrationController {
 	 * @param sni - attribute from registration form.
 	 * @return true if not used | false if used
 	 */
-	 private SNI getSNI(int sniNum) {
+	 private SNI getSNI(String sniCode) {
 		 Print.p("getSNI");
 		 SNI tableSni = null;
 		 try {
-		 tableSni = sniRepo.findBySniCode(sniNum);
+		 tableSni = sniRepo.findBySniCode(sniCode);
 		 } catch (NullPointerException e) {
 			 e.printStackTrace();
 			 return tableSni;

@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 public class SNI {
 	
 	@Id
-	private int sniCode;
+	private String sniCode;
 	
 	@OneToOne(mappedBy = "sni")
 	private Voter voter;
@@ -24,11 +24,11 @@ public class SNI {
 		used = false;
 	}
 
-	public int getSniCode() {
+	public String getSniCode() {
 		return sniCode;
 	}
 
-	public void setSniCode(int sni) {
+	public void setSniCode(String sni) {
 		sniCode = sni;
 	}
 

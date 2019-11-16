@@ -50,7 +50,7 @@ public class Candidate extends User{
 	public Candidate (String name, String username) {
 		this.name = name;
 		this.username = username;
-		this.role = Role.CANADIDATE.toString();
+		this.role = Role.CANDIDATE.role();
 	}
 
 

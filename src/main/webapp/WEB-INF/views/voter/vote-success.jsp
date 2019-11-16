@@ -19,8 +19,8 @@
 		<h1>Vote Successful</h1>
 	</div>
 
-  <div class="tron textc=-center">
-    <a href="${pageContent.request.contextPath}/voter/voter-main-success">
+  <div class="tron text-center">
+    <a href="${pageContent.request.contextPath}/voter/voter-main">
       <button class="btn btn-default">Home</button>
     </a>
   </div>

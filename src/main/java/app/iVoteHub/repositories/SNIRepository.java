@@ -6,7 +6,7 @@ import app.iVoteHub.domain.SNI;
 
 public interface SNIRepository extends CrudRepository<SNI, Integer> {
 
-	SNI findBySniCode(int sniCode);
+	SNI findBySniCode(String sniCode);
 	
 	
 	

@@ -6,11 +6,11 @@ package app.iVoteHub.modelAttributes;
  * @author Zachary Ishmael
  *
  */
-public class VoterForm {
+public class VoteForm {
 	/*The username of the candidate to be chosen */
 	private String vote;
 	
-	public VoterForm () {
+	public VoteForm () {
 	
 	}
 	

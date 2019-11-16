@@ -8,43 +8,60 @@
 <head>
 <meta charset="UTF-8">
 <title>Register For Voting</title>
-<!-- CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+ <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="jumbotron text-center">
 <h1>Voter Registration</h1>
+<ul class="nav nav-tabs justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link" href="${pageContent.request.contextPath}/home">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="${pageContent.request.contextPath}/voter-registration">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${pageContent.request.contextPath}/login">Login</a>
+      </li>
+</ul>
 </div>
+<div class="container col-sm-2">
+
 <div class="form-group text-center">
-<h2>Please enter the following details:</h2>
+<h3>Please enter the following details:</h3>
 <form:form action="${pageContext.request.contextPath}/register-voter-form" modelAttribute="voterForm" method="POST"> 
 <!-- Make sure to have a tool tup explaining what is meant by fullname -->
 	<form:label path="name">Name</form:label><br>
- 	<form:input path="name"/><br>
+ 	<form:input path="name" class="form-control"/><br>
  	
  	<form:label path="username">Username</form:label><br>
- 	<form:input path="username"/><br>
+ 	<form:input path="username" class="form-control"/><br>
  	
  	<form:label path="email">Email</form:label><br>
- 	<form:input path="email"/><br>
+ 	<form:input path="email" class="form-control"/><br>
  	
  	<form:label path="password">Password</form:label><br>
- 	<form:password  path="password"/><br>
+ 	<form:password  path="password" class="form-control"/><br>
  	<form:label  path="password2">Re-enter Password</form:label><br>
- 	<form:password path="password2"/><br>
+ 	<form:password path="password2" class="form-control"/><br>
  	
  	<form:label path="sniNum">SNI number</form:label><br> <!-- Add tool tip later -->
- 	<form:input path="sniNum"/><br><br>
+ 	<form:input path="sniNum" class="form-control" placeholder="098234098234908" /><br><br>
  	
+ 	<button type="submit" class="btn btn-primary" value="Register">Register</button>
 
- 	<input type="submit" class="btn btn-default" value="Register"/>
  </form:form>
+</div>
 </div>
 </body>
 </html>

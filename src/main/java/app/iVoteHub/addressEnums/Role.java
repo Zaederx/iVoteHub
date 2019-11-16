@@ -2,7 +2,7 @@ package app.iVoteHub.addressEnums;
 
 public enum Role {
 	VOTER ("ROLE_VOTER"),
-	CANADIDATE("ROLE_CANDIDATE");
+	CANDIDATE("ROLE_CANDIDATE");
 	
 	private String role;
 	Role (String role) {

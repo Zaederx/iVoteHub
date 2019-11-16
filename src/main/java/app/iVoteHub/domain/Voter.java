@@ -30,13 +30,13 @@ public class Voter extends User{
 	private String password2;
 	
 	@OneToOne
-	private SNI sni;// Shangri-La National Insurance number
+	private SNI sni;// Shangri-LaNational Insurance number
 
 	@Column
 	private boolean voted;
 
 	public Voter () {
-		super();
+
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class Voter extends User{
 	
 	
 	/*Voted*/
-	public boolean hasVoted() {
+	public boolean getVoted() {
 		return voted;
 	}
 

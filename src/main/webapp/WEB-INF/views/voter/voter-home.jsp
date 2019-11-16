@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +24,7 @@
 		<h2>Welcome ${name}</h2>
 	</div>
 	<div class="tron text-center">
-		<a href="${pageContext.request.contextPath}vote"><button type="button" class="btn default-btn">Vote</button></a>
+		<a href="${pageContext.request.contextPath}/voter/vote"><button type="button" class="btn default-btn">Vote</button></a>
 		<a href="/logout"><button type="button" class="btn default-btn">Logout</button></a>
 	</div>
 </body>
