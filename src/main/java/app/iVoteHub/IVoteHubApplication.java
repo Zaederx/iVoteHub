@@ -51,13 +51,13 @@ public class IVoteHubApplication implements CommandLineRunner {
 //			
 //			uRepo.delete(u.get());
 //		}
-//		
+////		
 //		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//		Candidate c = new Candidate("Zachary", "Z");
+//		Candidate c = new Candidate("P", "P");
 //		c.setPassword(encoder.encode("password"));
-//		((Candidate) c).setConstituency("Constituency");
-//		((Candidate) c).setParty("party");
-//		((Candidate) c).setVotes(10000);
+//		((Candidate) c).setConstituency("P");
+//		((Candidate) c).setParty("party2");
+//		((Candidate) c).setVotes(0);
 //		c.setId(1);
 //		cRepo.delete(c);
 //		cRepo.save(c); //works

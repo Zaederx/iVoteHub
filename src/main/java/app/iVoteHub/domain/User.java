@@ -23,8 +23,7 @@ public abstract class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int id;
 	
-	@UniqueElements
-	@Column
+	@Column(unique = true, nullable = false)
 	protected String username;
 	@Column
 	protected String name;

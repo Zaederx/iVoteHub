@@ -7,18 +7,18 @@ package app.iVoteHub.modelAttributes;
  *
  */
 public class VoteForm {
-	/*The username of the candidate to be chosen */
-	private String vote;
+	/*The id of the candidate to be chosen */
+	private int vote;
 	
 	public VoteForm () {
 	
 	}
 	
-	public String getVote() {
+	public int getVote() {
 		return vote;
 	}
 
-	public void setVote(String vote) {
+	public void setVote(int vote) {
 		this.vote = vote;
 	}
 	

@@ -51,6 +51,7 @@ public class Candidate extends User{
 		this.name = name;
 		this.username = username;
 		this.role = Role.CANDIDATE.role();
+		this.votes = 0;
 	}
 
 

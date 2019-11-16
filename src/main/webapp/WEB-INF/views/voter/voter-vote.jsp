@@ -32,7 +32,7 @@
 		<tr>
 			<td>${candidate.name}</td>
 			<td>${candidate.constituency}</td>
-			<td> <form:button  class="btn btn-default" type="submit" path="vote" value="${candidate.username}"></form:button> </td>
+			<td> <form:button  class="btn btn-default" type="submit" path="vote" value="${candidate.id}" /> </td>
 		</tr>
 	</c:forEach>
 </table>

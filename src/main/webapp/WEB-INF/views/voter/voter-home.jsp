@@ -23,7 +23,14 @@
 		<h1>Voter Home Page</h1>
 		<h2>Welcome ${name}</h2>
 	</div>
+	
 	<div class="tron text-center">
+	
+	<%
+	boolean voted = Boolean.parseBoolean(request.getParameter("voted"));
+	if ( voted == true ) {
+		out.println("<h4 style=\"color:tomato;\">You have already voted.</h4>");
+	} %>
 		<a href="${pageContext.request.contextPath}/voter/vote"><button type="button" class="btn default-btn">Vote</button></a>
 		<a href="/logout"><button type="button" class="btn default-btn">Logout</button></a>
 	</div>
