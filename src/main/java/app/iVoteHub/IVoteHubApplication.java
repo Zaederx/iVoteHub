@@ -9,9 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import app.iVoteHub.domain.Candidate;
+import app.iVoteHub.domain.Constituency;
 import app.iVoteHub.domain.User;
 import app.iVoteHub.domain.Voter;
 import app.iVoteHub.repositories.CandidateRepository;
+import app.iVoteHub.repositories.ConstituencyRepository;
 import app.iVoteHub.repositories.GeneralUserRepository;
 import app.iVoteHub.repositories.VoterRepository;
 import app.iVoteHub.services.GeneralUserDetailsService;
@@ -24,6 +26,9 @@ public class IVoteHubApplication implements CommandLineRunner {
 	
 	@Autowired
 	CandidateRepository cRepo;
+	
+	@Autowired
+	ConstituencyRepository conRepo;
 	
 	@Autowired
 	GeneralUserRepository uRepo;
@@ -39,9 +44,10 @@ public class IVoteHubApplication implements CommandLineRunner {
 //		Voter v = new Voter();
 //		v.setName("Zach");
 //		v.setUsername("user");
+//		v.setEmail("email@email.com");
 //		v.setPassword(encoder.encode("pword"));
 //		v.setId(3);
-////		vRepo.save(v);
+//		vRepo.save(v);
 //		
 //		vRepo.delete(v);
 		/*Can cast UserType to User and save/ delete from User Repo
@@ -51,16 +57,20 @@ public class IVoteHubApplication implements CommandLineRunner {
 //			
 //			uRepo.delete(u.get());
 //		}
-////		
-//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//		Candidate c = new Candidate("P", "P");
-//		c.setPassword(encoder.encode("password"));
-//		((Candidate) c).setConstituency("P");
+////	
+//		Constituency con = new Constituency("Main party");
+//		conRepo.save(con);
+//		
+//		BCryptPasswordEncoder encoder2 = new BCryptPasswordEncoder();
+//		Candidate c = new Candidate("Zach", "Z");
+//		c.setPassword(encoder2.encode("password"));
+//		((Candidate) c).setConstituency(con);
 //		((Candidate) c).setParty("party2");
-//		((Candidate) c).setVotes(0);
+////		((Candidate) c).setVotes(0);
+//		cRepo.save(c); //works
 //		c.setId(1);
 //		cRepo.delete(c);
-//		cRepo.save(c); //works
+		
 //		uRepo.delete(c); //works
 //		uRepo.save(c);//works
 //		cRepo.save((Candidate) c);

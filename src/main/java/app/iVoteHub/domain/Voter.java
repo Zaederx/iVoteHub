@@ -24,7 +24,7 @@ public class Voter extends User{
 	@Column(unique = true, nullable = false)
 	private String email;
 	@Column
-	private int candidate;
+	private int candidateId;
 	
 	@Transient
 	private String password2;
@@ -86,11 +86,11 @@ public class Voter extends User{
 	
 	/*Constituency*/
 	public int getCandidate() {
-		return candidate;
+		return candidateId;
 	}
 
-	public void setCandidate(int i) {
-		this.candidate = i;
+	public void setCandidateId(int i) {
+		this.candidateId = i;
 	}
 
 	/*SNI*/

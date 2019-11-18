@@ -39,7 +39,7 @@
 	<tbody>
 		<tr>
 			<td>${candidate.name}</td>
-			<td>${candidate.constituency}</td>
+			<td>${candidate.constituency.name}</td>
 			<td><form:checkbox path="vote" value="${candidate.id}"/> </td>
 		</tr>
 	</tbody>

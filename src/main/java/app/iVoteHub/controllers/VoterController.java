@@ -1,27 +1,25 @@
 package app.iVoteHub.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
+
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import app.iVoteHub.addressEnums.VAddressBook;
 import app.iVoteHub.domain.Candidate;
+import app.iVoteHub.domain.Vote;
 import app.iVoteHub.domain.Voter;
 import app.iVoteHub.modelAttributes.VoteForm;
 import app.iVoteHub.repositories.CandidateRepository;
@@ -84,10 +82,11 @@ public class VoterController {
 		Voter voter = vRepo.findByUsername(vUsername);
 		Print.p("VoterController - voter.getName():"+voter.getName()); //TODO DELETE
 		Print.p("Voter Controller - votePost - voteForm.getVote:"+voteForm.getVote());//TODO DELETE
-		voter.setCandidate(voteForm.getVote());
+		voter.setCandidateId(voteForm.getVote());
 		Print.p("Voter Controller - votePost - voter.getCandidate:"+voter.getCandidate());//TODO delete 
+		Candidate c = cRepo.findById(voteForm.getVote());
+		c.addVote(voter.getEmail());
 		
-		cRepo.findById(voteForm.getVote()).addVote();
 		voter.setVoted(true);
 		vRepo.save(voter);
 

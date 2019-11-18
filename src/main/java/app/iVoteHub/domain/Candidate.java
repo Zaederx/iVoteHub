@@ -1,10 +1,15 @@
 package app.iVoteHub.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.hibernate.annotations.OnDelete;
@@ -21,21 +26,21 @@ import app.iVoteHub.addressEnums.Role;
  * @author Zachary Ishmael
  */
 @Entity(name = "Candidate_Table")
-//@PrimaryKeyJoinColumn()
-//@PrimaryKeyJoinColumn(name = "c_id",referencedColumnName = "id",foreignKey = @ForeignKey(value=ConstraintMode.NO_CONSTRAINT))
-//@OnDelete(action = OnDeleteAction.CASCADE)
 public class Candidate extends User{
 
 
 	@Column
 	private String role;
-	@Column
-	private String constituency;
+
 	@Column
 	private String party;
-	@Column
-	private int votes;
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Vote> votes;
+	
+	/*The party of the candidate*/
+	@ManyToOne
+	private Constituency constituency; 
 	
 	/*Default Constrcutor - Explicitly Required  by 
 	 * Spring for new Object generation and casting */
@@ -52,7 +57,6 @@ public class Candidate extends User{
 		this.name = name;
 		this.username = username;
 		this.role = Role.CANDIDATE.role();
-		this.votes = 0;
 	}
 
 
@@ -60,7 +64,7 @@ public class Candidate extends User{
 	 * 
 	 * @return
 	 */
-	public String getConstituency() {
+	public Constituency getConstituency() {
 		return constituency;
 	}
 
@@ -68,7 +72,7 @@ public class Candidate extends User{
 	 * 
 	 * @param constituency
 	 */
-	public void setConstituency(String constituency) {
+	public void setConstituency(Constituency constituency) {
 		this.constituency = constituency;
 	}
 
@@ -94,7 +98,7 @@ public class Candidate extends User{
 	 *  Gets candidate votes.
 	 * @return number of votes.
 	 */
-	public int getVotes() {
+	public List<Vote> getVotes() {
 		return votes;
 	}
 
@@ -102,7 +106,7 @@ public class Candidate extends User{
 	 * Set the number of candidate votes.
 	 * @param votes
 	 */
-	public void setVotes(int votes) {
+	public void setVotes(List<Vote> votes) {
 		this.votes = votes;
 	}
 
@@ -185,10 +189,13 @@ public class Candidate extends User{
 	}
 
 	@Transactional
-	public void addVote() {
-		votes++;
+	public void addVote(Vote vote) {
+		votes.add(vote);
 	}
-	
+	@Transactional
+	public void addVote (String email) {
+		votes.add(new Vote(this,this.constituency,email));
+	}
 	
 
 }
