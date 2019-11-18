@@ -29,7 +29,7 @@
 <form:form action="${pageContent.request.contextPath}/voter/vote-post" modelAttribute="voteForm">
 <table class="table">
 	<thead>
-	<tr> 
+	<tr>
 		<th>Candidate</th>
 		<th>Constituency</th>
 		<th>Select</th>
@@ -40,8 +40,7 @@
 		<tr>
 			<td>${candidate.name}</td>
 			<td>${candidate.constituency}</td>
-			<td><form:checkbox path="vote" value="${candidate.id}"/>
-			
+			<td><form:checkbox path="vote" value="${candidate.id}"/> </td>
 		</tr>
 	</tbody>
 	</c:forEach>

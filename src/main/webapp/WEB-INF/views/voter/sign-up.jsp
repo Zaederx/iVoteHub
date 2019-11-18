@@ -56,7 +56,7 @@
  	<form:password path="password2" class="form-control"/><br>
  	
  	<form:label path="sniNum">SNI number</form:label><br> <!-- Add tool tip later -->
- 	<form:input path="sniNum" class="form-control" placeholder="098234098234908" /><br><br>
+ 	<form:input path="sniNum" class="form-control" placeholder="098234098234908"/><br><br>
  	
  	<button type="submit" class="btn btn-primary" value="Register">Register</button>
 
