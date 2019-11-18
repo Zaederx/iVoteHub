@@ -42,6 +42,10 @@ public class Candidate extends User{
 	@ManyToOne
 	private Constituency constituency; 
 	
+	/*Total number of votes*/
+	@Column
+	private Integer count;
+	
 	/*Default Constrcutor - Explicitly Required  by 
 	 * Spring for new Object generation and casting */
 	public Candidate() {
@@ -192,10 +196,18 @@ public class Candidate extends User{
 	public void addVote(Vote vote) {
 		votes.add(vote);
 	}
+	
 	@Transactional
 	public void addVote (String email) {
 		votes.add(new Vote(this,this.constituency,email));
 	}
 	
+	public int getCount() {
+		return votes.size();
+	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 }

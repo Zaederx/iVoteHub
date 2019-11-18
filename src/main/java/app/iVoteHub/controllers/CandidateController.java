@@ -38,6 +38,7 @@ public class CandidateController {
 //		constituency.stream().findAny().filter(con -> con.get)
 		model.addAttribute("candidates", candidates);
 		model.addAttribute("constituencies", constituency);
+//		model.addAttribute("votes", );
 		
 		
 		return "/candidate/all-polls-view";

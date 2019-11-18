@@ -61,7 +61,7 @@
                    <tr>
                      <td>${candidate.name}</td>
                      <td>${candidate.constituency.name}</td>
-                     <td>${candidate.votes}</td>
+                     <td>${candidate.count}</td>
                    </tr>
                  </tbody>
                </c:forEach>
@@ -83,14 +83,14 @@
                  <tr>
                    <th>Constituency Name</th>
                    <th>Constituency Votes</th>
-                   <th>Votes</th>
+                   <th></th>
                  </tr>
                </thead>
                <c:forEach var = "constituency" items="${constituencies}">
                  <tbody>
                    <tr>
                      <td>${constituency.name}</td>
-                     <td>${constituency.votes}</td>
+                     <td>${constituency.count}</td>
                      <td></td>
                    </tr>
                  </tbody>
