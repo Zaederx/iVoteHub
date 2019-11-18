@@ -26,7 +26,11 @@ public class CandidateController {
 	}
 	
 	@GetMapping("/view-polls")
-	public String viewPolls() {
+	public String viewPolls(Model model) {
+		
+		List<Candidate> candidates = (List<Candidate>) cRepo.findAll();
+		
+		model.addAttribute("candidates", candidates);
 		
 		return "/candidate/all-polls-view";
 	}
