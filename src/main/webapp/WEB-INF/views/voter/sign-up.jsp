@@ -22,53 +22,55 @@
 </head>
 <body>
 <div class="jumbotron text-center">
-<h1>Voter Registration</h1>
-<ul class="nav nav-tabs justify-content-center">
-      <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/home">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="${pageContext.request.contextPath}/voter-registration">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
-      </li>
-</ul>
+  <h1>Voter Registration</h1>
+  <ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link" href="${pageContext.request.contextPath}/home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="${pageContext.request.contextPath}/voter-registration">Register</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+    </li>
+  </ul>
 </div>
-<div class="container col-sm-2">
+<div class="container col-sm-8">
+  <h3>Please enter the following details:</h3>
+<div class="container col-sm-8">
+  <div class="form-group text-center">
 
-<div class="form-group text-center">
-<h3>Please enter the following details:</h3>
-<form:form action="${pageContext.request.contextPath}/register-voter-form" modelAttribute="voterForm" method="POST"> 
-<!-- Make sure to have a tool tup explaining what is meant by fullname -->
-	<form:label path="name">Name</form:label><br>
- 	<form:input path="name" class="form-control"/><br>
- 	<form:errors path="name" /><br>
- 	
- 	<form:label path="username">Username</form:label><br>
- 	<form:input path="username" class="form-control"/><br>
- 	<form:errors path="username" /><br>
- 	
- 	<form:label path="email">Email</form:label><br>
- 	<form:input path="email" class="form-control"/><br>
- 	<form:errors path="email" /><br>
- 	
- 	<form:label path="password">Password</form:label><br>
- 	<form:password  path="password" class="form-control"/><br>
- 	<form:errors path="password"/><br>
- 	
- 	<form:label  path="password2">Re-enter Password</form:label><br>
- 	<form:password path="password2"/><br>
- 	<form:errors path="password2" /><br>
- 	
- 	<form:label path="sniCode">SNI number</form:label><br> <!-- Add tool tip later -->
- 	<form:input path="sniCode" class="form-control" placeholder="098234098234908"/><br><br>
- 	<form:errors path="sniCode" /><br>
- 	
- 	<button type="submit" class="btn btn-primary" value="Register">Register</button>
+  <form:form action="${pageContext.request.contextPath}/register-voter-form" modelAttribute="voterForm" class="justify-content-center" method="POST">
+  <!-- Make sure to have a tool tup explaining what is meant by fullname -->
+  	<form:label path="name">Name</form:label><br>
+   	<form:input path="name" class="form-control text-center" placeholder="Jack Sparrow"/><br>
+   	<form:errors path="name" class="alert alert-danger fade show"/><br><br>
 
- </form:form>
-</div>
+   	<form:label path="username">Username</form:label><br>
+   	<form:input path="username" class="form-control text-center" placeholder="ThePirate"/><br>
+   	<form:errors path="username" class="alert alert-danger"/><br><br>
+
+   	<form:label path="email">Email</form:label><br>
+   	<form:input path="email" class="form-control text-center" placeholder="theBlackPearl@sevenseas.com"/><br>
+   	<form:errors path="email" class="alert alert-danger fade show"/><br><br>
+
+   	<form:label path="password">Password</form:label><br>
+   	<form:password  path="password" class="form-control text-center" placeholder="DavieJonesLocker"/><br>
+   	<form:errors path="password" class="alert alert-danger fade show"/><br><br>
+
+   	<form:label  path="password2">Re-enter Password</form:label><br>
+   	<form:password path="password2" class="form-control text-center" placeholder="DavieJonesLocker"/><br>
+   	<form:errors path="password2" />
+
+   	<form:label path="sniCode">SNI number</form:label><br> <!-- Add tool tip later -->
+   	<form:input path="sniCode" class="form-control text-center" placeholder="R8HFERGO8UHE5GU"/><br>
+   	<form:errors path="sniCode" class="alert alert-danger fade show"/><br><br><br>
+
+   	<button type="submit" class="btn btn-primary" value="Register">Register</button>
+
+   </form:form>
+ </div>
+  </div>
 </div>
 </body>
 </html>

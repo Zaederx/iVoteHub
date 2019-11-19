@@ -42,7 +42,7 @@
 <form:form action = "${pageContext.request.contextPath}/authenticate"  method ="POST">
 
 	<h3>Username</h3>
-		<input  type="text" class="form-control" name="username"/>
+		<input   type="text" class="form-control" name="username"/>
 	<h3> Password</h3>
 		<input type="password" class="form-control"name="password"/><br><br>
 	<button type="submit" class="btn btn-primary" value="Login">Login</button>

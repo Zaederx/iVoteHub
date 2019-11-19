@@ -8,9 +8,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>An error has Ocurred</title>
+<title>Error Page</title>
 </head>
 <body>
- <h1> An error has Occured</h1>
+<div class="jumbotron text-center">
+ <h1>An Error has occurred: Please return to home page.</h1>
+</div>
 </body>
 </html>

@@ -19,34 +19,36 @@
 </head>
 <body>
 <div class="jumbotron text-center">
-<div>
-<p>Please Select one candidate of a constituency for whom you will vote</p>
+  <div>
+    <p>Please Select one candidate of a constituency for whom you will vote</p>
 
-</div>
+  </div>
 
 </div>
 <div class="container">
-<form:form action="${pageContent.request.contextPath}/voter/vote-post" modelAttribute="voteForm">
-<table class="table">
-	<thead>
-	<tr>
-		<th>Candidate</th>
-		<th>Constituency</th>
-		<th>Select</th>
-	</tr>
-	</thead>
-	<c:forEach var = "candidate" items ="${candidates}" >
-	<tbody>
-		<tr>
-			<td>${candidate.name}</td>
-			<td>${candidate.constituency.name}</td>
-			<td><form:checkbox path="vote" value="${candidate.id}"/> </td>
-		</tr>
-	</tbody>
-	</c:forEach>
-</table>
-<form:button  class="btn btn-default" type="submit" >vote </form:button>
-</form:form>
+  <form:form action="${pageContent.request.contextPath}/voter/vote-post" modelAttribute="voteForm">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Candidate</th>
+          <th>Constituency</th>
+          <th>Select</th>
+        </tr>
+      </thead>
+      <c:forEach var="candidate" items="${candidates}">
+        <tbody>
+          <tr>
+            <td>${candidate.name}</td>
+            <td>${candidate.constituency.name}</td>
+            <td><form:checkbox path="vote" value="${candidate.id}"/>
+            </td>
+          </tr>
+        </tbody>
+      </c:forEach>
+    </table>
+    <form:button class="btn btn-default" type="submit">vote
+    </form:button>
+  </form:form>
 </div>
 </body>
 </html>
