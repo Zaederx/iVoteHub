@@ -19,7 +19,7 @@
 		<h1>Vote Successful</h1>
 	</div>
 
-  <div class="tron text-center">
+  <div class="container text-center">
     <a href="${pageContent.request.contextPath}/voter/voter-main">
       <button class="btn btn-default">Home</button>
     </a>

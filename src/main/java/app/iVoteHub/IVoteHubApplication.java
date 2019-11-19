@@ -66,7 +66,6 @@ public class IVoteHubApplication implements CommandLineRunner {
 //		c.setPassword(encoder2.encode("password"));
 //		((Candidate) c).setConstituency(con);
 //		((Candidate) c).setParty("party2");
-////		((Candidate) c).setVotes(0);
 //		cRepo.save(c); //works
 //		c.setId(1);
 //		cRepo.delete(c);

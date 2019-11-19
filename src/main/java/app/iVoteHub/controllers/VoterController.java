@@ -47,9 +47,9 @@ public class VoterController {
 	/*Returns voter-home*/
 	@GetMapping("/voter-main")
 	public String voterHome(@RequestParam(defaultValue = "false", name = "voted",required = false) boolean voted, 
-			@RequestParam(required = false, name = "name") String name,Principal principal,  Model model) {
+			@RequestParam(required = false, name = "name") String name, Model model) {
 		Print.p("voter-main controller");
-		Voter voter = (Voter)vRepo.findByUsername(principal.getName());
+//		Voter voter = (Voter)vRepo.findByUsername(principal.getName());
 //		model.addAttribute("name", voter.getName());
 		return "voter/voter-home";
 	}

@@ -20,11 +20,11 @@ public class Vote {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne
-	@JoinColumn(name = "candidate")
+	@JoinColumn(name = "candidate_id", referencedColumnName = "id")
 	private Candidate candidate;
 	
 	@ManyToOne
-	@JoinColumn(name = "constituency")
+	@JoinColumn(name = "constituency_id", referencedColumnName = "id")
 	private Constituency constituency;
 	
 	/*to make sure votes are unique / verify no double voting

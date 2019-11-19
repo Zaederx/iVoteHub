@@ -44,7 +44,7 @@ public class VoterRegistrationController {
 		Print.p("VoterRegistration - postForm");
 	
 		SNI sni = getSNI(voterForm.getSniNum());
-		if (voterForm != null && sni != null) {
+		if (voterForm != null && sni != null && sni.getUsed() == false) {
 			sni.setUsed(true);
 			User voter = new Voter(voterForm);
 			((Voter) voter).setSNI(sni);//so that it also passes SNI object with id.
@@ -52,10 +52,10 @@ public class VoterRegistrationController {
 			model.addAttribute("voter", voter);
 			model.addAttribute("name",voter.getName());
 			Print.p("VoterRegistration - postForm - voter.getName()="+ voter.getName());
-			Print.p("redirect:"+request.getContextPath()+VAddressBook.V_HOME.configUrl());
-			return "redirect:"+request.getContextPath()+VAddressBook.V_HOME.configUrl();
+			Print.p("redirect:"+VAddressBook.V_HOME.configUrl());//TODO
+			return "redirect:"+VAddressBook.V_HOME.configUrl();//TODO
 		}
-		return "login-error";
+		return "/login-error";
 		
 		
 		
