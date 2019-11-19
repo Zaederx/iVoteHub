@@ -62,7 +62,8 @@ public class VoterRegistrationController {
 			Print.p("redirect:"+VAddressBook.V_HOME.configUrl());//TODO -DELETE
 			return "redirect:"+VAddressBook.V_HOME.configUrl();//TODO - TRY USING JSP DIRECTLY
 			}
-		return "/login-error";
+//		return "/login-error";
+		return "voter/sign-up";
 	
 		
 		//TODO - REMOVE COMMENT TO SELF

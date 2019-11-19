@@ -43,20 +43,27 @@
 <!-- Make sure to have a tool tup explaining what is meant by fullname -->
 	<form:label path="name">Name</form:label><br>
  	<form:input path="name" class="form-control"/><br>
+ 	<form:errors path="name" /><br>
  	
  	<form:label path="username">Username</form:label><br>
  	<form:input path="username" class="form-control"/><br>
+ 	<form:errors path="username" /><br>
  	
  	<form:label path="email">Email</form:label><br>
  	<form:input path="email" class="form-control"/><br>
+ 	<form:errors path="email" /><br>
  	
  	<form:label path="password">Password</form:label><br>
  	<form:password  path="password" class="form-control"/><br>
- 	<form:label  path="password2">Re-enter Password</form:label><br>
- 	<form:password path="password2" class="form-control"/><br>
+ 	<form:errors path="password"/><br>
  	
- 	<form:label path="sniNum">SNI number</form:label><br> <!-- Add tool tip later -->
- 	<form:input path="sniNum" class="form-control" placeholder="098234098234908"/><br><br>
+ 	<form:label  path="password2">Re-enter Password</form:label><br>
+ 	<form:password path="password2"/><br>
+ 	<form:errors path="password2" /><br>
+ 	
+ 	<form:label path="sniCode">SNI number</form:label><br> <!-- Add tool tip later -->
+ 	<form:input path="sniCode" class="form-control" placeholder="098234098234908"/><br><br>
+ 	<form:errors path="sniCode" /><br>
  	
  	<button type="submit" class="btn btn-primary" value="Register">Register</button>
 
