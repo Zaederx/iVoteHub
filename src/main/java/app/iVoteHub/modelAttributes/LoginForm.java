@@ -3,7 +3,7 @@ package app.iVoteHub.modelAttributes;
 
 public class LoginForm {
 
-	private String usertype;
+
 	
 	private String username;
 	
@@ -11,19 +11,6 @@ public class LoginForm {
 
 	
 	
-	/**
-	 * @return the usertype
-	 */
-	public String getUsertype() {
-		return usertype;
-	}
-
-	/**
-	 * @param usertype - the usertype to set
-	 */
-	public void setUsertype(String usertype) {
-		this.usertype = usertype;
-	}
 
 	/**
 	 * @return the username

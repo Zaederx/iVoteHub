@@ -38,7 +38,7 @@
 </ul>
 </div>
 <div class="container col-sm-8 d-flex justify-content-center">
-<form:form action="${pageContext.request.contextPath}/authenticate" method="POST">
+<form:form action="${pageContext.request.contextPath}/preprocessing" modelAttribute="loginForm" method="POST">
   <c:if test="${param.error != null}">
     <i class="alert alert-danger">
       Please enter valid username and password.</i><br><br>
@@ -47,16 +47,18 @@
     <i class="alert alert-primary">Logout successful.</i>
     <br>
       <br></c:if>
-  <div class="form-group text-center col-sm-12 d-flex-vertical justify-content-center">
+  <!-- <div class="form-group text-center col-sm-12 d-flex-vertical justify-content-center"> -->
 
     <h3>Username</h3>
-    <input type="text" class="form-control" name="username"/>
+    <form:input path="username" type="text" class="form-control" name="username"/>
+   <form:errors path="username"/>
     <h3>Password</h3>
-    <input type="password" class="form-control" name="password"/>
+    <form:input path="password" type="password" class="form-control" name="password"/>
+    <form:errors path="password"/>
     <p style="display:inline">Remember Me</p>
     <input type="checkbox" name="remember-me"/><br><br>
-    <button type="submit" class="btn btn-primary" value="Login">Login</button>
-  </div>
+    <button type="submit" class="btn btn-primary" >Login</button>
+<!--   </div> -->
 </form:form>
 
 </div>

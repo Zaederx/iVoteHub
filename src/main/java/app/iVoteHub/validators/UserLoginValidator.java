@@ -2,6 +2,7 @@ package app.iVoteHub.validators;
 
 
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -12,6 +13,7 @@ import app.iVoteHub.repositories.GeneralUserRepository;
 
 public class UserLoginValidator implements Validator {
 
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	private GeneralUserRepository uRepo;
 	
 	public UserLoginValidator(GeneralUserRepository uRepo) {
@@ -25,25 +27,41 @@ public class UserLoginValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
+		System.out.println("Performing User Login Form Validations");
 		LoginForm form = (LoginForm) target;
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "", "Name must not be empty");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "", "Name must not be empty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "", "Username must not be empty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", "Password must not be empty.");
 		
-		User u = uRepo.findByUsername(form.getUsername());
-		if (u == null) {
-			errors.rejectValue("user", "", "Invalid username.");
-		} /*Done this way for purposes of the assignment, but 
+		boolean safeUser = true;
+		User u = null;
+		try {
+			u = uRepo.findByUsername(form.getUsername());
+		} catch (NullPointerException e) {
+			errors.rejectValue("username", "", "Invalid username.");
+			safeUser = false;
+		}
+		if (!safeUser) {
+			errors.rejectValue("username", "", "Invalid username");
+		}
+		/*Done this way for purposes of the assignment, but 
 		would be better to use unspecific error messages for security reasons - specifying invalid or valid user would
 		unkowningly give hackers knowledge of valid usernames 
 		*/
-		
-		String uPassword = uRepo.findByUsername(form.getUsername()).getPassword();
-		if (!form.getPassword().equals(uPassword)) {
-			errors.rejectValue("user", "", "Invalid password.");
+		if (safeUser) {
+			boolean safeString = true;
+			String uPassword = "";
+			try {
+			uPassword= u.getPassword();
+			} catch (NullPointerException e) {
+				errors.rejectValue("password", "", "Invalid password.");
+				safeString = false;
+			}
+			
+			if (safeString == false || !encoder.matches(form.getPassword(), uPassword)) {
+				errors.rejectValue("password", "", "Invalid password.");
+			}
 		}
 	}
-	
-	
 }

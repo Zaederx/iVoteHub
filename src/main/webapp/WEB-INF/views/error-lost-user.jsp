@@ -19,7 +19,7 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>Error Page - Lost User</title>
+<title>Error Page - 404 - Lost User </title>
 </head>
 <body>
 <div class="jumbotron text-center">

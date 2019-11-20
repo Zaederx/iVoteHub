@@ -1,5 +1,6 @@
 package app.iVoteHub.controllers;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class VoterRegistrationController {
 	}
 	
 	@PostMapping("register-voter-form")
-	public String postForm (@Valid @ModelAttribute(name = "voterForm") VoterRegForm voterForm, BindingResult result, Model model) { 
+	public String postForm ( @Valid @ModelAttribute(name = "voterForm") VoterRegForm voterForm, BindingResult result, Model model) { 
 		Print.p("VoterRegistration - postForm");
 	
 		if(!result.hasErrors()) {

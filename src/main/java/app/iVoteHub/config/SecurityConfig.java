@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.requiresSecure()
 			
 		.and().authorizeRequests()
-		.antMatchers("/register-voter-form","/register","/home","/register/**", VAddressBook.REGISTRATION.configUrl(),VAddressBook.LOGIN.configUrl()).permitAll()
+		.antMatchers("/","/preprocessing","/login","/register-voter-form","/register","/home","/register/**", VAddressBook.REGISTRATION.configUrl(),VAddressBook.LOGIN.configUrl()).permitAll()
 		
 		.and().authorizeRequests()
 			.antMatchers("/voter/**").hasRole(Role.VOTER.toString())//note: because hasRole appends "ROLE_" to what ever string provided
@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and().formLogin() 
 				.loginPage("/login").permitAll()
 				.defaultSuccessUrl("/logged-user",true)
-//				.failureUrl("/login?error") doesn't work
+				.failureUrl("/login?error")// doesn't work
 				.passwordParameter("password")
 				.usernameParameter("username")
 //				.defaultSuccessUrl("/home", true)
