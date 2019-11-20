@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Entity
-public class Constituency {
+public class Party {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,11 +34,11 @@ public class Constituency {
 	@Column
 	private Integer count;
 	
-	public Constituency () {
+	public Party () {
 
 	}
 
-	public Constituency (String name) {
+	public Party (String name) {
 		this.name = name;
 		
 	}

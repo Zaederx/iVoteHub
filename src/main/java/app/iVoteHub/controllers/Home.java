@@ -5,16 +5,20 @@ package app.iVoteHub.controllers;
 
 
 import java.lang.reflect.Array;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,7 +44,7 @@ import app.iVoteHub.validators.UserLoginValidator;
 
 @Controller
 public class Home {
-	
+	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	@Autowired
 	GeneralUserRepository uRepo;
 	
@@ -85,22 +89,33 @@ public class Home {
 		return "login-page";
 	}
 	
-	@PostMapping("preprocessing")
-	public String loginPrep(HttpServletRequest request, @Valid @ModelAttribute("loginForm")LoginForm loginForm, BindingResult result, Model model) {
-		
-		if (result.hasErrors()) {
-			System.out.println("\n\n************hasErrors*************\n\n");
-			return "login-page";
-		}
-		System.out.println("preprocessing - no errors");
-		System.out.println(request.getRequestURI());
-		try {
-			request.login(loginForm.getUsername(), loginForm.getPassword());
-		} catch (ServletException e) {
-			System.out.println("User Already Authenticated");
-		}
-		return "redirect:/logged-user";
-	}
+//	@PostMapping("preprocessing")
+//	public String loginPrep(HttpServletRequest request, HttpServletResponse response,@Valid @ModelAttribute("loginForm")LoginForm loginForm, BindingResult result, Model model) {
+//		
+//		if (result.hasErrors()) {
+//			System.out.println("\n\n************hasErrors*************\n\n");
+//			return "login-page";
+//		}
+//		System.out.println("preprocessing - no errors");
+//		System.out.println(request.getRequestURI());
+//		try {
+//			request.login(loginForm.getUsername(), loginForm.getPassword());
+//		} catch (ServletException e) {
+//			System.out.println("User Already Authenticated");
+//		}
+//		if (loginForm.isRememberMe()) {
+//			System.out.println("Remember Me");
+//		Cookie cookie = new Cookie(loginForm.getUsername(),loginForm.getPassword());
+//		cookie.setMaxAge(172800);//2DAYS
+//		cookie.setDomain("localhost");
+//		cookie.setPath("/");
+//		cookie.setValue("98HERF9HER9UHEFIJNSDOIUVERJNF0EHRG8EFVAEY0BRFBC");
+//		cookie.setHttpOnly(true);
+//		cookie.setSecure(true);
+//		response.addCookie(cookie);
+//		}
+//		return "redirect:/logged-user";
+//	}
 	
 	
 	@GetMapping("login-success")

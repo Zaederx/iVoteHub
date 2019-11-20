@@ -32,15 +32,13 @@ public class Candidate extends User{
 	@Column
 	private String role;
 
-	@Column
-	private String party;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Vote> votes;
 	
 	/*The party of the candidate*/
 	@ManyToOne
-	private Constituency constituency; 
+	private Party party; 
 	
 	/*Total number of votes*/
 	@Column
@@ -68,35 +66,18 @@ public class Candidate extends User{
 	 * 
 	 * @return
 	 */
-	public Constituency getConstituency() {
-		return constituency;
-	}
-
-	/**
-	 * 
-	 * @param constituency
-	 */
-	public void setConstituency(Constituency constituency) {
-		this.constituency = constituency;
-	}
-
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String getParty() {
+	public Party getConstituency() {
 		return party;
 	}
-
 
 	/**
 	 * 
 	 * @param party
 	 */
-	public void setParty(String party) {
+	public void setConstituency(Party party) {
 		this.party = party;
 	}
+
 
 	/**
 	 *  Gets candidate votes.
@@ -199,7 +180,7 @@ public class Candidate extends User{
 	
 	@Transactional
 	public void addVote (String email) {
-		votes.add(new Vote(this,this.constituency,email));
+		votes.add(new Vote(this,this.party,email));
 	}
 	
 	public int getCount() {

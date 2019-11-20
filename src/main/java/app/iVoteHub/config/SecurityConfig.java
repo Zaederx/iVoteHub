@@ -52,14 +52,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.failureHandler(new SimpleUrlAuthenticationFailureHandler("/login?error"))//calls this url authentication fails
 		
 		.and().rememberMe()
-		.key("jd734j92s94terg8u34")
-//		.rememberMeParameter("remember-me")
+		.key("98HERF9HER9UHEFIJNSDOIUVERJNF0EHRG8EFVAEY0BRFBC")
+		.rememberMeParameter("remember")
 		.rememberMeCookieName("iVoteHub")
 		.tokenValiditySeconds(172800)//2 days
 		
 		.and().logout()
-			.invalidateHttpSession(false)
-			.deleteCookies("JSESSION")//deletes Spring default cookies
+			.invalidateHttpSession(true)
+			.deleteCookies("JSESSION","iVoteHub")//deletes cookies
 //			.clearAuthentication(true)
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/login")

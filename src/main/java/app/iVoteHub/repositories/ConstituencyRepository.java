@@ -2,10 +2,10 @@ package app.iVoteHub.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import app.iVoteHub.domain.Constituency;
+import app.iVoteHub.domain.Party;
 
-public interface ConstituencyRepository extends CrudRepository<Constituency, Integer> {
+public interface ConstituencyRepository extends CrudRepository<Party, Integer> {
 
-	Constituency findByName(String name);
-	Constituency findById(int id);
+	Party findByName(String name);
+	Party findById(int id);
 }

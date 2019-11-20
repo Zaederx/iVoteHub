@@ -25,7 +25,7 @@ public class Vote {
 	
 	@ManyToOne
 	@JoinColumn(name = "constituency_id", referencedColumnName = "id")
-	private Constituency constituency;
+	private Party party;
 	
 	/*to make sure votes are unique / verify no double voting
 	 * without compromising user confidentiality*/
@@ -36,9 +36,9 @@ public class Vote {
 		
 	}
 	
-	public Vote (Candidate candidate, Constituency constituency, String email) {
+	public Vote (Candidate candidate, Party party, String email) {
 		this.candidate = candidate;
-		this.constituency = constituency;
+		this.party = party;
 		this.emailHash = encoder.encode(email);
 		
 	}

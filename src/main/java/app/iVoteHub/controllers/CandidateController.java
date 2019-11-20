@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import app.iVoteHub.addressEnums.CAddressBook;
 import app.iVoteHub.domain.Candidate;
-import app.iVoteHub.domain.Constituency;
+import app.iVoteHub.domain.Party;
 import app.iVoteHub.repositories.CandidateRepository;
 import app.iVoteHub.repositories.ConstituencyRepository;
 
@@ -34,10 +34,10 @@ public class CandidateController {
 	public String viewPolls(Model model) {
 		
 		List<Candidate> candidates = (List<Candidate>) cRepo.findAll();
-		List<Constituency> constituency = (List<Constituency>) conRepo.findAll();
+		List<Party> party = (List<Party>) conRepo.findAll();
 //		constituency.stream().findAny().filter(con -> con.get)
 		model.addAttribute("candidates", candidates);
-		model.addAttribute("constituencies", constituency);
+		model.addAttribute("constituencies", party);
 //		model.addAttribute("votes", );
 		
 		

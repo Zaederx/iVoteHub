@@ -9,7 +9,10 @@ public class LoginForm {
 	
 	private String password;
 
-	
+	/*Value representing whether user
+	 * wishes to be remebered if 
+	 * site is left without logging out*/
+	private boolean remember;
 	
 
 	/**
@@ -38,5 +41,22 @@ public class LoginForm {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	/**
+	 * 
+	 * @return whether the user wants
+	 * to be remebered if not logged out.
+	 */
+	public boolean isRemember() {
+		return remember;
+	}
+
+	/**
+	 * 
+	 * @param rememberMe 
+	 */
+	public void setRemember(boolean rememberMe) {
+		this.remember = rememberMe;
 	}
 }

@@ -38,7 +38,7 @@
 </ul>
 </div>
 <div class="container col-sm-8 d-flex justify-content-center">
-<form:form action="${pageContext.request.contextPath}/preprocessing" modelAttribute="loginForm" method="POST">
+<form:form action="${pageContext.request.contextPath}/authentication" modelAttribute="loginForm" method="POST">
   <c:if test="${param.error != null}">
     <i class="alert alert-danger">
       Please enter valid username and password.</i><br><br>
@@ -56,7 +56,7 @@
     <form:input path="password" type="password" class="form-control" name="password"/>
     <form:errors path="password"/>
     <p style="display:inline">Remember Me</p>
-    <input type="checkbox" name="remember-me"/><br><br>
+    <form:checkbox path="remember" name="remember" /><br><br>
     <button type="submit" class="btn btn-primary" >Login</button>
 <!--   </div> -->
 </form:form>
