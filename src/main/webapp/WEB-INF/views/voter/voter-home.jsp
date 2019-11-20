@@ -40,6 +40,6 @@
 		<a><button type="submit"name="logout" class="btn default-btn" id="logout">Logout</button></a>
 		</form:form>
 	</div>
-	</div>
+	<!-- </div> -->
 </body>
 </html>

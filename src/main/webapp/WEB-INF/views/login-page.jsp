@@ -23,7 +23,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="jumbotron text-center"> 
+<div class="jumbotron text-center">
 <h1>Voter Login</h1>
 <ul class="nav nav-tabs justify-content-center">
       <li class="nav-item">
@@ -37,17 +37,30 @@
       </li>
 </ul>
 </div>
-<div class="container col-sm-2">
-<div class="form-group text-center">
-<form:form action = "${pageContext.request.contextPath}/authenticate"  method ="POST">
+<div class="container col-sm-8 d-flex justify-content-center">
+<form:form action="${pageContext.request.contextPath}/authenticate" method="POST">
+  <c:if test="${param.error != null}">
+    <i class="alert alert-danger">
+      Please enter valid username and password.</i><br><br>
+  </c:if>
+  <c:if test="${param.logout != null}">
+    <i class="alert alert-primary">Logout successful.</i>
+    <br>
+      <br></c:if>
+  <div class="form-group text-center col-sm-12 d-flex-vertical justify-content-center">
 
-	<h3>Username</h3>
-		<input   type="text" class="form-control" name="username"/>
-	<h3> Password</h3>
-		<input type="password" class="form-control"name="password"/><br><br>
-	<button type="submit" class="btn btn-primary" value="Login">Login</button>
+    <h3>Username</h3>
+    <input type="text" class="form-control" name="username"/>
+    <h3>Password</h3>
+    <input type="password" class="form-control" name="password"/>
+    <p style="display:inline">Remember Me</p>
+    <input type="checkbox" name="remember-me"/><br><br>
+    <button type="submit" class="btn btn-primary" value="Login">Login</button>
+  </div>
 </form:form>
+
 </div>
-</div>
+
 </body>
 </html>
+

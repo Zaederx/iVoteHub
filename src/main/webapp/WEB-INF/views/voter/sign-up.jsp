@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,37 +36,58 @@
   </ul>
 </div>
 <div class="container col-sm-8">
-  <h3>Please enter the following details:</h3>
-<div class="container col-sm-8">
+  <h3 class="d-flex justify-content-center">Please enter the following details:</h3>
+<div class="container col-sm-10 d-flex justify-content-center">
   <div class="form-group text-center">
 
+<!-- Spring form tags automatically make use of csrf tags for security -->
   <form:form action="${pageContext.request.contextPath}/register-voter-form" modelAttribute="voterForm" class="justify-content-center" method="POST">
   <!-- Make sure to have a tool tup explaining what is meant by fullname -->
   	<form:label path="name">Name</form:label><br>
    	<form:input path="name" class="form-control text-center" placeholder="Jack Sparrow"/><br>
    	<form:errors path="name" class="alert alert-danger fade show"/><br><br>
 
+	<c:if test="${param.error != null}">
+   		<br> <br> <br>
+   		</c:if>
+
    	<form:label path="username">Username</form:label><br>
    	<form:input path="username" class="form-control text-center" placeholder="ThePirate"/><br>
    	<form:errors path="username" class="alert alert-danger"/><br><br>
+
+	<c:if test="${param.error != null}">
+   		<br> <br> <br>
+   		</c:if>
 
    	<form:label path="email">Email</form:label><br>
    	<form:input path="email" class="form-control text-center" placeholder="theBlackPearl@sevenseas.com"/><br>
    	<form:errors path="email" class="alert alert-danger fade show"/><br><br>
 
+	<c:if test="${param.error != null}">
+   		<br> <br> <br>
+   		</c:if>
+   	
    	<form:label path="password">Password</form:label><br>
-   	<form:password  path="password" class="form-control text-center" placeholder="DavieJonesLocker"/><br>
+   	<form:password  path="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control text-center" placeholder="DavieJonesLocker!25"/><br>
    	<form:errors path="password" class="alert alert-danger fade show"/><br><br>
-
+   	
+   	<c:if test="${param.error != null}">
+   		<br> <br> <br>
+   		</c:if>
+   		
    	<form:label  path="password2">Re-enter Password</form:label><br>
-   	<form:password path="password2" class="form-control text-center" placeholder="DavieJonesLocker"/><br>
+   	<form:password path="password2" class="form-control text-center" placeholder="DavieJonesLocker!25"/><br>
    	<form:errors path="password2" />
-
+   	<div>
+   	<c:if test="${param.error != null}">
+   		<br> <br> <br>
+   		</c:if>
+   	</div>
    	<form:label path="sniCode">SNI number</form:label><br> <!-- Add tool tip later -->
    	<form:input path="sniCode" class="form-control text-center" placeholder="R8HFERGO8UHE5GU"/><br>
    	<form:errors path="sniCode" class="alert alert-danger fade show"/><br><br><br>
 
-   	<button type="submit" class="btn btn-primary" value="Register">Register</button>
+   	<button type="submit" class="btn btn-primary" value="Register">Register</button><br><br><br><br>
 
    </form:form>
  </div>

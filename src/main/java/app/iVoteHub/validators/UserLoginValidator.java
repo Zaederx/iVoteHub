@@ -33,13 +33,15 @@ public class UserLoginValidator implements Validator {
 		
 		User u = uRepo.findByUsername(form.getUsername());
 		if (u == null) {
-			errors.rejectValue("user", "", "Invalid username or password");
-		} /*unspecific for security reasons - specifiy invalid or valid user would
-		unkowningly give hackers knowledge of valid usernames */
+			errors.rejectValue("user", "", "Invalid username.");
+		} /*Done this way for purposes of the assignment, but 
+		would be better to use unspecific error messages for security reasons - specifying invalid or valid user would
+		unkowningly give hackers knowledge of valid usernames 
+		*/
 		
 		String uPassword = uRepo.findByUsername(form.getUsername()).getPassword();
 		if (!form.getPassword().equals(uPassword)) {
-			errors.rejectValue("user", "", "Invalid username or password.");
+			errors.rejectValue("user", "", "Invalid password.");
 		}
 	}
 	

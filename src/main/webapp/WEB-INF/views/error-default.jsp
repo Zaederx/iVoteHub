@@ -23,7 +23,15 @@
 </head>
 <body>
 <div class="jumbotron text-center">
- <h1>An Error has occurred during login: Please return to home page.</h1>
+ <h1>Opps.. Looks like something went wrong..</h1>
+ <h3>We all deserve a second chance..</h3>
+  <h3>Please click home to try agin.</h3>
+  <ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link active" href="${pageContext.request.contextPath}/">Home</a>
+    </li>
+  </ul>
+</div>
 </div>
 </body>
 </html>

@@ -8,6 +8,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -68,6 +70,15 @@ public class Home {
 		return "login-page";
 	}
 	
+//	@PostMapping("preprocessing")
+//	public String loginPrep(@Valid LoginForm loginForm, BindingResult result, Model model) {
+//		
+//		if (result.hasErrors()) {
+//			return "redirect:/login?error";
+//		}
+//		return null;
+//	}
+	
 	
 	
 	@GetMapping("login-success")
@@ -79,11 +90,7 @@ public class Home {
 	public String logout() {
 		return "user-logout";
 	}
-	
-	@GetMapping("error")
-	public String defaultError() {
-		return "error-default";
-	}
+
 	@RequestMapping(value = "error-login", method = RequestMethod.GET)
 	public String error (Model model) {
 //		model.addAttribute("error",true); use later for ajax?

@@ -19,11 +19,18 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>Error Page</title>
+<title>Error Page - Lost User</title>
 </head>
 <body>
 <div class="jumbotron text-center">
- <h1>An Error has occurred during login: Please return to home page.</h1>
+ <h1>We all get lost sometimes...</h1>
+ <h3>Click on the button to find your way home</h3>
+  <ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link active" href="${pageContext.request.contextPath}/home">Home</a>
+    </li>
+  </ul>
+</div>
 </div>
 </body>
 </html>

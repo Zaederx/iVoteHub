@@ -44,20 +44,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and().formLogin() 
 				.loginPage("/login").permitAll()
 				.defaultSuccessUrl("/logged-user",true)
-				.failureUrl("/login-error").permitAll()
+//				.failureUrl("/login?error") doesn't work
 				.passwordParameter("password")
 				.usernameParameter("username")
-	//			.defaultSuccessUrl("/home", true)
+//				.defaultSuccessUrl("/home", true)
 				.loginProcessingUrl("/authenticate").failureForwardUrl("/login-error")
-				.failureHandler(new SimpleUrlAuthenticationFailureHandler("/login-error"))
-			
+				.failureHandler(new SimpleUrlAuthenticationFailureHandler("/login?error"))//calls this url authentication fails
+		
+		.and().rememberMe()
+		.key("jd734j92s94terg8u34")
+//		.rememberMeParameter("remember-me")
+		.rememberMeCookieName("iVoteHub")
+		.tokenValiditySeconds(172800)//2 days
+		
 		.and().logout()
-			.invalidateHttpSession(true)
-			.deleteCookies("SESSION")//deletes Spring default cookies
+			.invalidateHttpSession(false)
+			.deleteCookies("JSESSION")//deletes Spring default cookies
 //			.clearAuthentication(true)
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.logoutSuccessUrl("/login")
 			.logoutSuccessUrl("/logout-success")
 			.permitAll()
+		
 		
 		.and().exceptionHandling().accessDeniedPage("/login-error")
 		; 
