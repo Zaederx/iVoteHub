@@ -86,11 +86,11 @@
                    <th></th>
                  </tr>
                </thead>
-               <c:forEach var = "constituency" items="${constituencies}">
+               <c:forEach var = "party" items="${parties}">
                  <tbody>
                    <tr>
-                     <td>${constituency.name}</td>
-                     <td>${constituency.count}</td>
+                     <td>${party.name}</td>
+                     <td>${party.count}</td>
                      <td></td>
                    </tr>
                  </tbody>

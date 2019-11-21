@@ -7,7 +7,7 @@ import app.iVoteHub.domain.Vote;
 
 public interface VoteRepository extends CrudRepository<Vote, Integer> {
 
-	Vote getVotesByConstituency(Party party);
+	Vote getVotesByParty(Party party);
 	
 	
 	

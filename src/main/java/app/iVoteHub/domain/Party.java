@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
 @Entity
 public class Party {
@@ -73,12 +74,14 @@ public class Party {
 	public void count () {
 		count = votes.size();
 	}
-	
+	@Transactional
 	public int getCount() {
-		return votes.size();
+		setCount();
+		if (count == null) {return 0;}
+		return count;
 	}
-	
-	public void setCount(int count) {
-		this.count = count;
+	@Transactional
+	public void setCount() {
+		this.count = votes.size();
 	}
 }

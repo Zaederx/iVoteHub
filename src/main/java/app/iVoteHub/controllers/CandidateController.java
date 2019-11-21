@@ -13,17 +13,17 @@ import app.iVoteHub.addressEnums.CAddressBook;
 import app.iVoteHub.domain.Candidate;
 import app.iVoteHub.domain.Party;
 import app.iVoteHub.repositories.CandidateRepository;
-import app.iVoteHub.repositories.ConstituencyRepository;
+import app.iVoteHub.repositories.PartyRepository;
 
 @Controller
 @RequestMapping("candidate")
 public class CandidateController {
 
 	@Autowired
-	CandidateRepository cRepo;
+	CandidateRepository canRepo;
 	
 	@Autowired
-	ConstituencyRepository conRepo;
+	PartyRepository pRepo;
 	
 	@GetMapping("/home")
 	public String candidateHome() {
@@ -33,11 +33,11 @@ public class CandidateController {
 	@GetMapping("/view-polls")
 	public String viewPolls(Model model) {
 		
-		List<Candidate> candidates = (List<Candidate>) cRepo.findAll();
-		List<Party> party = (List<Party>) conRepo.findAll();
+		List<Candidate> candidates = (List<Candidate>) canRepo.findAll();
+		List<Party> party = (List<Party>) pRepo.findAll();
 //		constituency.stream().findAny().filter(con -> con.get)
 		model.addAttribute("candidates", candidates);
-		model.addAttribute("constituencies", party);
+		model.addAttribute("parties", party);
 //		model.addAttribute("votes", );
 		
 		

@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -26,19 +28,22 @@ import app.iVoteHub.addressEnums.Role;
  * @author Zachary Ishmael
  */
 @Entity(name = "Candidate_Table")
-public class Candidate extends User{
-
-
-	@Column
-	private String role;
-
-	
+public class Candidate {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@Column(unique = true, nullable = false)
+	String name;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Vote> votes;
 	
-	/*The party of the candidate*/
+	/*The Constituency of the candidate*/
 	@ManyToOne
-	private Party party; 
+	private Constituency constituency; 
+	
+	/*Party of the candidate*/
+	@ManyToOne(optional = true)
+	private Party party;
 	
 	/*Total number of votes*/
 	@Column
@@ -55,10 +60,8 @@ public class Candidate extends User{
 	 * @param username
 	 * @param role
 	 */
-	public Candidate (String name, String username) {
+	public Candidate (String name) {
 		this.name = name;
-		this.username = username;
-		this.role = Role.CANDIDATE.role();
 	}
 
 
@@ -66,16 +69,16 @@ public class Candidate extends User{
 	 * 
 	 * @return
 	 */
-	public Party getConstituency() {
-		return party;
+	public Constituency getConstituency() {
+		return constituency;
 	}
 
 	/**
 	 * 
-	 * @param party
+	 * @param constituency
 	 */
-	public void setConstituency(Party party) {
-		this.party = party;
+	public void setConstituency(Constituency constituency) {
+		this.constituency = constituency;
 	}
 
 
@@ -134,44 +137,7 @@ public class Candidate extends User{
 	 * Gets the Candidate username.
 	 * @return candidate username
 	 */
-	public String getUsername() {
-		return username;
-	}
 
-
-	/**
-	 * Sets the candidate username.
-	 * @param username
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	/**
-	 * Gets the candidate password.
-	 * @return candidate
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * Set the candidate password.
-	 * @return candidate password
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public String getRole() {
-		return role;
-	}
-
-
-	public void setRole(String role) {
-		this.role = role;
-	}
 
 	@Transactional
 	public void addVote(Vote vote) {
@@ -183,12 +149,15 @@ public class Candidate extends User{
 		votes.add(new Vote(this,this.party,email));
 	}
 	
+	@Transactional
 	public int getCount() {
-		return votes.size();
+		setCount();
+		if (count == null) {return 0;}//TODO remove if not found to be necessary
+		return count;
 	}
 	
-	public void setCount(int count) {
-		this.count = count;
+	public void setCount() {
+		this.count = votes.size(); //TODO - Change to check for zero and save to db - if neccessary to display result size;
 	}
 
 }

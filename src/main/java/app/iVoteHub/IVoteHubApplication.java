@@ -9,11 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import app.iVoteHub.domain.Candidate;
-import app.iVoteHub.domain.Constituency;
+import app.iVoteHub.domain.Party;
 import app.iVoteHub.domain.User;
 import app.iVoteHub.domain.Voter;
 import app.iVoteHub.repositories.CandidateRepository;
-import app.iVoteHub.repositories.ConstituencyRepository;
+import app.iVoteHub.repositories.PartyRepository;
 import app.iVoteHub.repositories.GeneralUserRepository;
 import app.iVoteHub.repositories.VoterRepository;
 import app.iVoteHub.services.GeneralUserDetailsService;
@@ -28,7 +28,7 @@ public class IVoteHubApplication implements CommandLineRunner {
 	CandidateRepository cRepo;
 	
 	@Autowired
-	ConstituencyRepository conRepo;
+	PartyRepository conRepo;
 	
 	@Autowired
 	GeneralUserRepository uRepo;
@@ -58,8 +58,9 @@ public class IVoteHubApplication implements CommandLineRunner {
 //			uRepo.delete(u.get());
 //		}
 ////	
-		Constituency con = new Constituency("Main party");
-		con.setCount(0);
+		Party con = new Party("Main p");
+		conRepo.save(con);
+		Party com1 = new Party("Main party");
 		conRepo.save(con);
 //		
 //		BCryptPasswordEncoder encoder2 = new BCryptPasswordEncoder();

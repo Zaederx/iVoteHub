@@ -12,6 +12,16 @@ import javax.persistence.Transient;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * Vote Entity class for storing votes.
+ * 
+ * Votes do not directly reference voters for privacy and 
+ * security reasons. Instead an encrypted hash of voters email is used to 
+ * ensure privacy of the voters.
+ * 
+ * @author Zachary Ishmael
+ *
+ */
 @Entity
 public class Vote {
 	@Transient
