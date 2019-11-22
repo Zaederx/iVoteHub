@@ -67,7 +67,6 @@ public class VoterController {
 			Print.p("hasVoted"+voter.getName());
 			return "redirect:/voter/voter-main?voted=true";//forward?
 		} else {
-//			ModelAndView m = new ModelAndView();
 			List<Candidate> candidates = (List<Candidate>) cRepo.findAll();
 			model.addAttribute("candidates", candidates);
 			Print.p("vote - else statement");

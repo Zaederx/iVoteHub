@@ -14,7 +14,7 @@ public class ElectionCommission extends User{
 
 	
 	public ElectionCommission() {
-		this.role = "ELECTION_COMMISION";
+		this.role = "ROLE_ELECTION_COMMISSION";
 	}
 	
 	@Override

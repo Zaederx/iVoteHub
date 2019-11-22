@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import app.iVoteHub.addressEnums.CAddressBook;
 import app.iVoteHub.addressEnums.HomeAddressBook;
@@ -57,22 +59,28 @@ public class Home {
 	
 	@GetMapping("/")
 	public String root (Model model) {
-	String uname = SecurityContextHolder.getContext().getAuthentication().getName();
-		return "redirect:/logged-user?name="+uname;
+		return "redirect:/logged-user";
 	}
 	
 	@GetMapping("logged-user")
 	public String loggedUser(@RequestParam(required = false) String uname, Model model) {
-		org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User u = uRepo.findByUsername(uname);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+		User u = uRepo.findByUsername(username);
+		
+		if (u!=null) {
 		model.addAttribute("name", u.getName());
+		}
+		/*Not included in if statement to protect against timing based hacker strategies for
+		 * determining true users */
 		String authority =  auth.getAuthorities().stream().findFirst().get().getAuthority();
+		
 		print("Home - loggedUser - authroity:"+authority);
 		switch (authority) {
 		
 		case "ROLE_VOTER": print("Home-loggedUser-VOTER");return VAddressBook.V_HOME.jsp();
 		
-		case "ROLE_ELECTIONCOMMISSION": print("Home-loggedUser-CANDIDATE");return CAddressBook.C_HOME.jsp();
+		case "ROLE_ELECTIONCOMMISSION": print("Home-loggedUser-COMMISION");return CAddressBook.C_HOME.jsp();
 		
 		}
 		return "home";
@@ -89,9 +97,9 @@ public class Home {
 	public String login (Model model) {
 		model.addAttribute("loginForm", new LoginForm());
 		String uname = SecurityContextHolder.getContext().getAuthentication().getName();//gets the username
-
-		if (uname == null) {
-			
+		System.out.println("username is:"+uname);
+		if (!uname.equals("anonymousUser")) {
+			System.out.println("Home: login - redirect:logged-user");
 			model.addAttribute("name", uname);
 			return "redirect:logged-user?name="+uname;
 		}
@@ -99,33 +107,18 @@ public class Home {
 		return "login-page";
 	}
 	
-//	@PostMapping("preprocessing")
-//	public String loginPrep(HttpServletRequest request, HttpServletResponse response,@Valid @ModelAttribute("loginForm")LoginForm loginForm, BindingResult result, Model model) {
-//		
-//		if (result.hasErrors()) {
-//			System.out.println("\n\n************hasErrors*************\n\n");
-//			return "login-page";
-//		}
-//		System.out.println("preprocessing - no errors");
-//		System.out.println(request.getRequestURI());
-//		try {
-//			request.login(loginForm.getUsername(), loginForm.getPassword());
-//		} catch (ServletException e) {
-//			System.out.println("User Already Authenticated");
-//		}
-//		if (loginForm.isRememberMe()) {
-//			System.out.println("Remember Me");
-//		Cookie cookie = new Cookie(loginForm.getUsername(),loginForm.getPassword());
-//		cookie.setMaxAge(172800);//2DAYS
-//		cookie.setDomain("localhost");
-//		cookie.setPath("/");
-//		cookie.setValue("98HERF9HER9UHEFIJNSDOIUVERJNF0EHRG8EFVAEY0BRFBC");
-//		cookie.setHttpOnly(true);
-//		cookie.setSecure(true);
-//		response.addCookie(cookie);
-//		}
-//		return "redirect:/logged-user";
-//	}
+	@PostMapping("preprocessing")
+	public String loginPrep(HttpServletRequest request, HttpServletResponse response,@Valid @ModelAttribute("loginForm")LoginForm loginForm, BindingResult result, Model model) {
+		
+		if (result.hasErrors()) {
+			System.out.println("\n\n************hasErrors*************\n\n");
+			return "login-page";
+		}
+		/*keeps request as a post request after interception at this controller.
+		The user login form request will not be accepted by spring security otherwise*/
+		request.setAttribute(View.RESPONSE_STATUS_ATTRIBUTE, HttpStatus.TEMPORARY_REDIRECT);
+		return "redirect:/authenticate";
+	}
 	
 	
 	@GetMapping("login-success")
