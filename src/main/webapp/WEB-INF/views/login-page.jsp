@@ -38,7 +38,7 @@
 </ul>
 </div>
 <div class="container col-sm-8 d-flex justify-content-center">
-<form:form action="${pageContext.request.contextPath}/authentication" modelAttribute="loginForm" method="POST">
+<form:form action="${pageContext.request.contextPath}/authenticate" modelAttribute="loginForm" method="POST">
   <c:if test="${param.error != null}">
     <i class="alert alert-danger">
       Please enter valid username and password.</i><br><br>

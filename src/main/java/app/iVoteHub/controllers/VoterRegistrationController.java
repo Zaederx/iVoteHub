@@ -18,6 +18,7 @@ import app.iVoteHub.domain.SNI;
 import app.iVoteHub.domain.User;
 import app.iVoteHub.domain.Voter;
 import app.iVoteHub.modelAttributes.VoterRegForm;
+import app.iVoteHub.repositories.GeneralUserRepository;
 import app.iVoteHub.repositories.SNIRepository;
 import app.iVoteHub.repositories.VoterRepository;
 import app.iVoteHub.validators.VoterRegFormValidator;
@@ -32,10 +33,12 @@ public class VoterRegistrationController {
 	SNIRepository sniRepo;
 	@Autowired
 	VoterRepository vRepo;
+	@Autowired
+	GeneralUserRepository uRepo;
 	
 	@InitBinder("voterForm")
 	protected void initBinder(WebDataBinder binder) {
-		binder.addValidators(new VoterRegFormValidator(sniRepo));
+		binder.addValidators(new VoterRegFormValidator(sniRepo,uRepo,vRepo));
 	}
 	
 	

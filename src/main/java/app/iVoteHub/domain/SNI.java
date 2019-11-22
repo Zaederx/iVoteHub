@@ -1,5 +1,6 @@
 package app.iVoteHub.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -17,11 +18,15 @@ public class SNI {
 	
 	@OneToOne(mappedBy = "sni")
 	private Voter voter;
-	
+	@Column
 	private boolean used;
 	
 	public SNI () {
 		used = false;
+	}
+
+	public SNI(String sniCode) {
+		this.sniCode = sniCode;
 	}
 
 	public String getSniCode() {

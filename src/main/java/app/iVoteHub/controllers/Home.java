@@ -56,7 +56,7 @@ public class Home {
 	@GetMapping("/")
 	public String root (Model model) {
 	
-		return "redirect:/home";
+		return "redirect:/logged-user";
 	}
 	
 	@GetMapping("logged-user")
@@ -69,7 +69,7 @@ public class Home {
 		
 		case "ROLE_VOTER": print("Home-loggedUser-VOTER");return VAddressBook.V_HOME.jsp() ;
 		
-		case "ROLE_CANDIDATE": print("Home-loggedUser-CANDIDATE");return CAddressBook.C_HOME.jsp();
+		case "ROLE_ELECTIONCOMMISSION": print("Home-loggedUser-CANDIDATE");return CAddressBook.C_HOME.jsp();
 		
 		}
 		return "redirect:/home";

@@ -12,9 +12,6 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.validator.constraints.UniqueElements;
 
 
-
-
-
 @Entity(name="General_User_Table")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {

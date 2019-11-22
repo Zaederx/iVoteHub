@@ -36,7 +36,7 @@ public class Party {
 	private Integer count;
 	
 	public Party () {
-
+		this.count = 0;
 	}
 
 	public Party (String name) {

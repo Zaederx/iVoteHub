@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		.and().authorizeRequests()
 			.antMatchers("/voter/**").hasRole(Role.VOTER.toString())//note: because hasRole appends "ROLE_" to what ever string provided
-			.antMatchers("/candidate/**").hasRole(Role.CANDIDATE.toString()).anyRequest().authenticated() //requires authenticated access 
+			.antMatchers("/candidate/**").hasRole(Role.ELECTIONCOMMISSION.toString()).anyRequest().authenticated() //requires authenticated access 
 		
 		.and().formLogin() 
 				.loginPage("/login").permitAll()
@@ -55,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.key("98HERF9HER9UHEFIJNSDOIUVERJNF0EHRG8EFVAEY0BRFBC")
 		.rememberMeParameter("remember")
 		.rememberMeCookieName("iVoteHub")
+		.rememberMeCookieDomain("localhost")
 		.tokenValiditySeconds(172800)//2 days
 		
 		.and().logout()
@@ -71,13 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		; 
 	}
 	
-//	@Autowired
-//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//		MessageDigest digest = MessageDigest.getInstance("SHA-256");
-//		auth.userDetailsService().passwordEncoder(digest);
-//		//Note - SHA is no longer secure - BCrypt recommended
-//		//byte[] hash = digest.digest(digest.getBytes("UTF-8"));
-//	}
+	
 	
 	/**
 	 * Implements the {@link WebSecurityConfigurerAdapter} configure method.

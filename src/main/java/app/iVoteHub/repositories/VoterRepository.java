@@ -9,6 +9,8 @@ public interface VoterRepository extends CrudRepository<Voter, Integer>{
  public Voter findByUsername(String username);
  
  public Voter findById(int id);
+
+public Voter findByEmail(String email);
  
 	
 }

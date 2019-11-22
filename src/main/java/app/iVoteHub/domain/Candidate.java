@@ -52,7 +52,7 @@ public class Candidate {
 	/*Default Constrcutor - Explicitly Required  by 
 	 * Spring for new Object generation and casting */
 	public Candidate() {
-		
+		this.count = 0;
 	}
 	
 	/**
@@ -159,5 +159,26 @@ public class Candidate {
 	public void setCount() {
 		this.count = votes.size(); //TODO - Change to check for zero and save to db - if neccessary to display result size;
 	}
+
+	/**
+	 * @return the party
+	 */
+	public Party getParty() {
+		return party;
+	}
+
+	/**
+	 * @param party the party to set
+	 */
+	public void setParty(Party party) {
+		this.party = party;
+	}
+
+//	/**
+//	 * @param count the count to set
+//	 */
+//	public void setCount(Integer count) {
+//		this.count = count;
+//	}
 
 }

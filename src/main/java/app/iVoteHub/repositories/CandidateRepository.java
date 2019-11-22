@@ -9,7 +9,7 @@ import app.iVoteHub.domain.Candidate;
 public interface CandidateRepository extends CrudRepository<Candidate, Integer>{
 	
 	
-	public Candidate findByUsername(String username);
+	public Candidate findByName(String name);
 	
 	public Candidate findById (int id);
 }

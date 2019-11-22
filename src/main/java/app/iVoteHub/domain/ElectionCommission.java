@@ -13,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class ElectionCommission extends User{
 
 	
+	public ElectionCommission() {
+		this.role = "ELECTION_COMMISION";
+	}
 	
 	@Override
 	public int getId() {

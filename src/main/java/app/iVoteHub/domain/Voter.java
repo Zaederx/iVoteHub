@@ -36,7 +36,7 @@ public class Voter extends User{
 	private boolean voted;
 
 	public Voter () {
-
+		this.role = "ROLE_VOTER";
 	}
 
 	/**
