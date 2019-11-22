@@ -21,7 +21,7 @@
 <body>
 	<div class= "jumbotron text-center" >
 		<h1>Voter Home Page</h1>
-		<h2>Welcome </h2>
+		<h2>Welcome ${name} </h2>
 	</div>
 	
 	<div class="tron text-center">

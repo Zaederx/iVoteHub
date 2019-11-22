@@ -1,5 +1,7 @@
 package app.iVoteHub.validators;
 
+import java.util.regex.Pattern;
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
@@ -36,12 +38,12 @@ public class VoterRegFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		VoterRegForm form = (VoterRegForm) target;
 		
-		//Check if fields are empty
+		/*Check if fields are empty*/
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name","", "Name must not be empty.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username","" , "Username must not be empty.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "", "Email must not be empty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "","Password must not be empty");
-	
+		
 		
 		
 		User u = null;
@@ -54,12 +56,19 @@ public class VoterRegFormValidator implements Validator {
 			System.out.println("catch 2: Username is free for use");
 		}
 	
-		//USERNAME MUST NOT BE USED BY ANOTEHR VOTER
+		/*USERNAME MUST NOT BE USED BY ANOTEHR VOTER*/
 		if(u != null) {errors.rejectValue("username", "", "Username is already in use.");}
 		
 		Voter v = null;
 		
-		//email must not be in use by another VOTER
+		/*Check that email matches standard email regex pattern.*/
+		String emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$";
+		boolean matches = Pattern.matches(emailPattern, form.getEmail()); 		
+		if (!matches) {
+			errors.rejectValue("email", "", "Invalid Email: Email does not match standard email pattern.");
+		}
+		
+		/*email must not be in use by another VOTER*/
 		try {
 			v = vRepo.findByEmail(form.getEmail());
 		} catch (NullPointerException e) {
@@ -69,9 +78,18 @@ public class VoterRegFormValidator implements Validator {
 		}
 		
 		if (v != null) {errors.rejectValue("email", "", "Email is already in use.");}
-		// TODO - password must meet regex - can do that from the fron end as well perhaps?? 
+		
+		/*Password must be checked against standard  password regex pattern */
+		String passwordPattern = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
+		boolean pMatches = Pattern.matches(passwordPattern, form.getPassword());
+		
+		if (!pMatches) {
+			errors.rejectValue("password", "", "Invalid Password: Passoword must be 8 characters long, have at least 1 number, 1 uppercase letter, 1 lowercase lettter.");
+		}
+		
+		//TODO - Add extra specific password check - separate for legnth and content
 				
-		// password 1 and 2 must match
+		/* password 1 and 2 must match */
 		if(!form.getPassword().equals(form.getPassword2())) {
 			errors.rejectValue("password", "","Passwords do not match.");
 		}

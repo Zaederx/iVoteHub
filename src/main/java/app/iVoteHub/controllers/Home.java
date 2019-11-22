@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,24 +57,25 @@ public class Home {
 	
 	@GetMapping("/")
 	public String root (Model model) {
-	
-		return "redirect:/logged-user";
+	String uname = SecurityContextHolder.getContext().getAuthentication().getName();
+		return "redirect:/logged-user?name="+uname;
 	}
 	
 	@GetMapping("logged-user")
-	public String loggedUser() {
+	public String loggedUser(@RequestParam(required = false) String uname, Model model) {
 		org.springframework.security.core.Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+		User u = uRepo.findByUsername(uname);
+		model.addAttribute("name", u.getName());
 		String authority =  auth.getAuthorities().stream().findFirst().get().getAuthority();
 		print("Home - loggedUser - authroity:"+authority);
 		switch (authority) {
 		
-		case "ROLE_VOTER": print("Home-loggedUser-VOTER");return VAddressBook.V_HOME.jsp() ;
+		case "ROLE_VOTER": print("Home-loggedUser-VOTER");return VAddressBook.V_HOME.jsp();
 		
 		case "ROLE_ELECTIONCOMMISSION": print("Home-loggedUser-CANDIDATE");return CAddressBook.C_HOME.jsp();
 		
 		}
-		return "redirect:/home";
+		return "home";
 	}
 
 	String s = "At view:";
@@ -85,6 +88,13 @@ public class Home {
 	@GetMapping("login")
 	public String login (Model model) {
 		model.addAttribute("loginForm", new LoginForm());
+		String uname = SecurityContextHolder.getContext().getAuthentication().getName();//gets the username
+
+		if (uname == null) {
+			
+			model.addAttribute("name", uname);
+			return "redirect:logged-user?name="+uname;
+		}
 		print(s+"login-page");
 		return "login-page";
 	}
