@@ -45,47 +45,31 @@
   <!-- Make sure to have a tool tup explaining what is meant by fullname -->
   	<form:label path="name">Name</form:label><br>
    	<form:input path="name" class="form-control text-center" placeholder="Jack Sparrow"/><br>
-   	<form:errors path="name" class="alert alert-danger fade show"/><br><br>
+   	<form:errors path="name" class="alert alert-danger" style="display:block"/>
 
 	<c:if test="${param.error != null}">
-   		<br> <br> <br>
    		</c:if>
 
    	<form:label path="username">Username</form:label><br>
    	<form:input path="username" class="form-control text-center" placeholder="ThePirate"/><br>
-   	<form:errors path="username" class="alert alert-danger"/><br><br>
-
-	<c:if test="${param.error != null}">
-   		<br> <br> <br>
-   		</c:if>
+   	<form:errors path="username" class="alert alert-danger" style="display:block"/>
 
    	<form:label path="email">Email</form:label><br>
    	<form:input path="email" class="form-control text-center" placeholder="theBlackPearl@sevenseas.com"/><br>
-   	<form:errors path="email" class="alert alert-danger fade show"/><br><br>
-
-	<c:if test="${param.error != null}">
-   		<br> <br> <br>
-   		</c:if>
+   	<form:errors path="email" class="alert alert-danger" style="display:block"/>
    	
    	<form:label path="password">Password</form:label><br>
-   	<form:password  path="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control text-center" placeholder="DavieJonesLocker!25"/><br>
-   	<form:errors path="password" class="alert alert-danger fade show"/><br><br>
-   	
-   	<c:if test="${param.error != null}">
-   		<br> <br> <br>
-   		</c:if>
+   	<form:password  path="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" <%--To catch password error on client end before sending the entire form for backend validation --%>
+   	title="Ensure password is at least 8 characters long, has at least one uppercase and one lowercase letter, and contains at least one number. Special characters are not necessary, but recommended" class="form-control text-center" placeholder="DavieJonesLocker!25"/><br>
+   	<form:errors path="password" class="alert alert-danger" style="display:block"/>
    		
    	<form:label  path="password2">Re-enter Password</form:label><br>
    	<form:password path="password2" class="form-control text-center" placeholder="DavieJonesLocker!25"/><br>
-   	<form:errors path="password2" />
-   	<div>
-   	<c:if test="${param.error != null}">
-   		<br> <br> <br>
-   		</c:if>
-   	</div>
-   	<form:label path="sniCode">SNI number</form:label><br> <!-- Add tool tip later -->
+   	<form:errors path="password2" style="display:block"/><br>
+ 
+   	<form:label path="sniCode">SNI number</form:label><br> 
    	<form:input path="sniCode" class="form-control text-center" placeholder="R8HFERGO8UHE5GU"/><br>
-   	<form:errors path="sniCode" class="alert alert-danger fade show"/><br><br><br>
+   	<form:errors path="sniCode" class="alert alert-danger" style="display:block"/><br><br><br>
 
    	<button type="submit" class="btn btn-primary" value="Register">Register</button><br><br><br><br>
 

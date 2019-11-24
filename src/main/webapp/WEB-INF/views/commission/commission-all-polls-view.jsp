@@ -40,7 +40,7 @@
 
       <div id="poll-accordian">
 
-       <div class="card">
+       <div class="card" onclick="location.reload();">
          <div class="card-header">
            <a class="card-link" data-toggle="collapse" href="#c1">
              Candidates
@@ -70,13 +70,13 @@
          </div>
        </div>
 
-       <div class="card">
+       <div class="card" onclick="location.reload();">
          <div class="card-header">
            <a class="collapsed card-link" data-toggle="collapse" href="#c2">
              Constituency
            </a>
          </div>
-         <div id="c2" class="collapse" data-parent="#poll-accordian">
+         <div id="c2" class="collapse show" data-parent="#poll-accordian">
            <div class="card-body">
              <table class="table">
                <thead>
@@ -100,38 +100,13 @@
          </div>
        </div>
 
-       <div class="card">
-         <div class="card-header">
-           <a class="collapsed card-link" data-toggle="collapse" href="#c3">
-             Statistics
-           </a>
-         </div>
-         <div id="c3" class="collapse" data-parent="#poll-accordian">
-           <div class="card-body">
-             <table class="table">
-               <thead>
-                 <tr>
-                   <th>Candidate Name</th>
-                   <th>Candidate Constituency</th>
-                   <th>Votes</th>
-                 </tr>
-               </thead>
-               <c:forEach var = "candidate" items="${candidates}">
-                 <tbody>
-                   <tr>
-                     <td>${candidate.name}</td>
-                     <td>${candidate.constituency}</td>
-                     <td>${candidate.votes}</td>
-                   </tr>
-                 </tbody>
-               </c:forEach>
-             </table>
-           </div>
-         </div>
-       </div>
-
      </div>
 
     </div>
+    <script>
+    setInterval(function() {
+    	location.reload();
+    }, 18050)
+    </script>
 </body>
 </html>

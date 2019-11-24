@@ -87,7 +87,7 @@ public class VoterRegFormValidator implements Validator {
 			errors.rejectValue("password", "", "Invalid Password: Passoword must be 8 characters long, have at least 1 number, 1 uppercase letter, 1 lowercase lettter.");
 		}
 		
-		//TODO - Add extra specific password check - separate for legnth and content
+		
 				
 		/* password 1 and 2 must match */
 		if(!form.getPassword().equals(form.getPassword2())) {

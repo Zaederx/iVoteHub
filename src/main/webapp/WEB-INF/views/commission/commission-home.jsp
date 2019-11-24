@@ -26,13 +26,10 @@
       <h3>Welcome ${name}</h3>
       <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
-          <a class="nav-link active" href="${pageContext.request.contextPath}/commission/home">Candidate Home</a>
+          <a class="nav-link active" href="${pageContext.request.contextPath}/commission/home">Commission Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="${pageContext.request.contextPath}/commission/view-polls">View Polls</a>
-        </li>
-        <li>
-       		<a class="nav-link" href="${pageContext.request.contextPath}/commission/candidate-search">Candidate Search</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="${pageContext.request.contextPath}/logout">Logout</a>
