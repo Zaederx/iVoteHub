@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class iVoteErrorController implements ErrorController{
 
-//	private int count = 0;
+	@Override
+	public String getErrorPath() {
+		return "/error";
+	}
+	
 	@RequestMapping("/error")
 	public String defaultError(HttpServletRequest request) {
 	System.out.println("defaultError page");
@@ -28,15 +32,7 @@ public class iVoteErrorController implements ErrorController{
 		}
 	}
 	return "error-default";
-//	if (count%2==0) {
-//		return "error-default";
-//	}else {
-//		return "error-default-two";
-//	}
 	}
-	@Override
-	public String getErrorPath() {
-		return "/error";
-	}
+	
 
 }

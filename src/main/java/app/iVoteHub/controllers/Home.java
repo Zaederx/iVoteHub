@@ -1,24 +1,12 @@
 package app.iVoteHub.controllers;
 
 
-
-
-
-import java.lang.reflect.Array;
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.Collection;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,18 +16,13 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
 import app.iVoteHub.addressEnums.CAddressBook;
-import app.iVoteHub.addressEnums.HomeAddressBook;
-import app.iVoteHub.addressEnums.Role;
 import app.iVoteHub.addressEnums.VAddressBook;
 import app.iVoteHub.domain.User;
 import app.iVoteHub.modelAttributes.LoginForm;
@@ -80,7 +63,7 @@ public class Home {
 		
 		case "ROLE_VOTER": print("Home-loggedUser-VOTER");return VAddressBook.V_HOME.jsp();
 		
-		case "ROLE_ELECTIONCOMMISSION": print("Home-loggedUser-COMMISION");return CAddressBook.C_HOME.jsp();
+		case "ROLE_ELECTION_COMMISSION": print("Home-loggedUser-COMMISION");return CAddressBook.C_HOME.jsp();
 		
 		}
 		return "home";
@@ -93,6 +76,8 @@ public class Home {
 		return "home";
 	}
 	
+	/*Login form redirects to home if user has an
+	 * "iVoteHub" cookie with valid user credentials*/
 	@GetMapping("login")
 	public String login (Model model) {
 		model.addAttribute("loginForm", new LoginForm());
@@ -108,7 +93,7 @@ public class Home {
 	}
 	
 	@PostMapping("preprocessing")
-	public String loginPrep(HttpServletRequest request, HttpServletResponse response,@Valid @ModelAttribute("loginForm")LoginForm loginForm, BindingResult result, Model model) {
+	public String loginPrep(HttpServletRequest request, @Valid @ModelAttribute("loginForm")LoginForm loginForm, BindingResult result, Model model) {
 		
 		if (result.hasErrors()) {
 			System.out.println("\n\n************hasErrors*************\n\n");
@@ -131,13 +116,6 @@ public class Home {
 		return "user-logout";
 	}
 
-	@RequestMapping(value = "error-login", method = RequestMethod.GET)
-	public String error (Model model) {
-//		model.addAttribute("error",true); use later for ajax?
-		print(s+"error-login");
-		print("Login error occured!!!!");
-		return "login-error";
-	}
 	
 	public void print(String s) {
 		System.out.println(s);

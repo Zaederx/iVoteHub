@@ -32,6 +32,5 @@
     </li>
   </ul>
 </div>
-</div>
 </body>
 </html>

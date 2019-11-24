@@ -20,6 +20,11 @@
 <body>
 <div class="jumbotron text-center">
 <h1> You have been successfully logged out.</h1>
+<ul class="nav nav-tabs justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active" href="${pageContext.request.contextPath}/">Home</a>
+      </li>
+    </ul>
 </div>
 </body>
 </html>

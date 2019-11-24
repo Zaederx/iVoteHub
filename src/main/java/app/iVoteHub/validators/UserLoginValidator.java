@@ -31,7 +31,7 @@ public class UserLoginValidator implements Validator {
 		LoginForm form = (LoginForm) target;
 		
 //		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "", "Name must not be empty");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "", "Username must not be empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "", "Username must not be empty.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", "Password must not be empty.");
 		
 		boolean safeUser = true;
@@ -39,11 +39,15 @@ public class UserLoginValidator implements Validator {
 		try {
 			u = uRepo.findByUsername(form.getUsername());
 		} catch (NullPointerException e) {
-			errors.rejectValue("username", "", "Invalid username.");
+			safeUser = false;
+		}catch (Exception e) {
 			safeUser = false;
 		}
-		if (!safeUser) {
-			errors.rejectValue("username", "", "Invalid username");
+		
+		if (u == null) {
+			errors.rejectValue("username", "", "Invalid username.");
+			errors.rejectValue("password", "", "No valid user was given to check password.");
+			safeUser = false;
 		}
 		/*Done this way for purposes of the assignment, but 
 		would be better to use unspecific error messages for security reasons - specifying invalid or valid user would
@@ -59,7 +63,7 @@ public class UserLoginValidator implements Validator {
 				safeString = false;
 			}
 			
-			if (safeString == false || !encoder.matches(form.getPassword(), uPassword)) {
+			if (safeString == true && !encoder.matches(form.getPassword(), uPassword)) {
 				errors.rejectValue("password", "", "Invalid password.");
 			}
 		}

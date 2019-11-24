@@ -10,12 +10,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import app.iVoteHub.domain.Candidate;
 import app.iVoteHub.domain.Constituency;
+import app.iVoteHub.domain.ElectionCommission;
 import app.iVoteHub.domain.Party;
 import app.iVoteHub.domain.SNI;
 import app.iVoteHub.domain.User;
 import app.iVoteHub.domain.Voter;
 import app.iVoteHub.repositories.CandidateRepository;
 import app.iVoteHub.repositories.ConstituencyRepository;
+import app.iVoteHub.repositories.ElectionCommissionRepository;
 import app.iVoteHub.repositories.PartyRepository;
 import app.iVoteHub.repositories.SNIRepository;
 import app.iVoteHub.repositories.GeneralUserRepository;
@@ -43,6 +45,9 @@ public class IVoteHubApplication implements CommandLineRunner {
 	@Autowired
 	SNIRepository sniRepo;
 	
+	@Autowired
+	ElectionCommissionRepository ecRepo;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(IVoteHubApplication.class, args);
 	}
@@ -50,8 +55,15 @@ public class IVoteHubApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		//TODO - REMOVE OLD DATA SET
-		// Generate SNI's
+		
+//		ElectionCommission com = new ElectionCommission();
+//		
+//		com.setName("Thomas Anderson");
+//		com.setPassword("ADMIN");
+//		com.setUsername("ADMIN");
+//		ecRepo.save(com);
+//		//TODO - REMOVE OLD DATA SET
+//		//Generate SNI's
 //		SNI s = new SNI("OXFG75MZ");
 //		SNI s1 = new SNI("B7F6EM2Y");
 //		SNI s2 = new SNI("Q7OW5WWM");

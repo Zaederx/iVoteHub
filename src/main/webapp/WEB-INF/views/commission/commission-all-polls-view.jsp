@@ -25,10 +25,10 @@
       <h1>All Polls</h1>
       <ul class="nav nav-tabs justify-content-center">
         <li class="nav-item">
-          <a class="nav-link" href="${pageContent.request.contextPath}/candidate/home">Candidate Home</a>
+          <a class="nav-link" href="${pageContent.request.contextPath}/commission/home">Candidate Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="${pageContent.request.contextPath}/candidate/view-polls">View Polls</a>
+          <a class="nav-link" href="${pageContent.request.contextPath}/commission/view-polls">View Polls</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="${pageContent.request.contextPath}/logout">Logout</a>

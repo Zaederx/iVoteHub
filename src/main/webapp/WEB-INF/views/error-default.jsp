@@ -25,7 +25,7 @@
 <div class="jumbotron text-center">
  <h1>Opps.. Looks like something went wrong..</h1>
  <h3>We all deserve a second chance..</h3>
-  <h3>Please click home to try agin.</h3>
+  <h3>Please click home to try again.</h3>
   <ul class="nav nav-tabs justify-content-center">
     <li class="nav-item">
       <a class="nav-link active" href="${pageContext.request.contextPath}/">Home</a>

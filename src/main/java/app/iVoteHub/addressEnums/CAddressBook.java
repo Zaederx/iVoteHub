@@ -2,7 +2,7 @@ package app.iVoteHub.addressEnums;
 
 public enum CAddressBook {
 
-	C_HOME ("commission/home","commission/candidate-home"),
+	C_HOME ("commission/home","commission/commission-home"),
 	C_VIEW_POLLS ("commission-polls","commission-polls-view"),
 	
 	;

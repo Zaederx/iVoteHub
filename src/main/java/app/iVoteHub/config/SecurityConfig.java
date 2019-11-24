@@ -27,27 +27,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	UserDetailsService service;
 	@Override
 	protected void configure(HttpSecurity https) throws Exception {
-		//no authetication for home and login pages
-//		https.addFilterBefore(addCustomAuthFilter(), UsernamePasswordAuthenticationFilter.class)
 		https
 			.requiresChannel()
 			.anyRequest()
 			.requiresSecure()
 			
 		.and().authorizeRequests()
-		.antMatchers("/","/preprocessing","/login","/register-voter-form","/register","/home","/register/**", VAddressBook.REGISTRATION.configUrl(),VAddressBook.LOGIN.configUrl()).permitAll()
+		.antMatchers("/","/preprocessing","/login","/register-voter-form","/register","/home","/register/**",VAddressBook.REGISTRATION.configUrl(),VAddressBook.LOGIN.configUrl()).permitAll()
 		
 		.and().authorizeRequests()
 			.antMatchers("/voter/**").hasRole(Role.VOTER.toString())//note: because hasRole appends "ROLE_" to what ever string provided
-			.antMatchers("/candidate/**").hasRole(Role.ELECTIONCOMMISSION.toString()).anyRequest().authenticated() //requires authenticated access 
+			.antMatchers("/commision/**", "/commission-rest/**").hasRole(Role.ELECTIONCOMMISSION.toString()).anyRequest().authenticated() //requires authenticated access 
 		
 		.and().formLogin() 
 				.loginPage("/login").permitAll()
 				.defaultSuccessUrl("/logged-user",true)
-				.failureUrl("/login?error")// doesn't work
+				.failureUrl("/login?error")
 				.passwordParameter("password")
 				.usernameParameter("username")
-//				.defaultSuccessUrl("/home", true)
 				.loginProcessingUrl("/authenticate").failureForwardUrl("/login-error")
 				.failureHandler(new SimpleUrlAuthenticationFailureHandler("/login?error"))//calls this url authentication fails
 		
@@ -60,8 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		.and().logout()
 			.invalidateHttpSession(true)
-			.deleteCookies("JSESSION","iVoteHub")//deletes cookies
-//			.clearAuthentication(true)
+			.deleteCookies("JSESSIONID","iVoteHub")//deletes cookies
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/login")
 			.logoutSuccessUrl("/logout-success")
@@ -73,13 +69,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	
-	
-	/**
-	 * Implements the {@link WebSecurityConfigurerAdapter} configure method.
-	 * Configures the @{@link AuthenticationManagerBuilder} with the 
-	 * {@link CustomUserDetailsAuthenticationProvider} that has been set with the
-	 * {@link BCryptPasswordEncoder} and a {@link CustomUserDetailsService}.
-	 */
 	@Override
 	public void configure (AuthenticationManagerBuilder auth) throws Exception {
 		System.out.println("cofigure authenticationManager - Security Config");

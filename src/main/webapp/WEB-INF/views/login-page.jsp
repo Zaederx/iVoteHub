@@ -39,7 +39,7 @@
 </div>
 <div class="container col-sm-8 d-flex justify-content-center">
 <form:form action="${pageContext.request.contextPath}/preprocessing" modelAttribute="loginForm" method="POST">
-  <c:if test="${param.error != null}">
+  <c:if test="${param.error != null}"><!--in unlikely case that an erorr happens to pass validation but then is caught by spring security  -->
     <i class="alert alert-danger">
       Please enter valid username and password.</i><br><br>
   </c:if>
@@ -51,10 +51,10 @@
 
     <h3>Username</h3>
     <form:input path="username" type="text" class="form-control" name="username"/>
-   <form:errors path="username"/>
+    <form:errors path="username" style="display:block" class="alert alert-danger"/>
     <h3>Password</h3>
     <form:input path="password" type="password" class="form-control" name="password"/>
-    <form:errors path="password"/>
+    <form:errors path="password" style="display:block" class="alert alert-danger"/>
     <p style="display:inline">Remember Me</p>
     <form:checkbox path="remember" name="remember" /><br><br>
     <button type="submit" class="btn btn-primary" >Login</button>

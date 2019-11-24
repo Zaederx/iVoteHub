@@ -16,8 +16,8 @@ import app.iVoteHub.repositories.CandidateRepository;
 import app.iVoteHub.repositories.PartyRepository;
 
 @Controller
-@RequestMapping("candidate")
-public class CandidateController {
+@RequestMapping("commission")
+public class CommissionController {
 
 	@Autowired
 	CandidateRepository canRepo;
@@ -41,9 +41,16 @@ public class CandidateController {
 //		model.addAttribute("votes", );
 		
 		
-		return "/candidate/all-polls-view";
+		return "/commission/commission-all-polls-view";
 	}
 	
+	
+	
+	@GetMapping("/candidate-search") 
+	public String candidateSearch() {
+		
+		return "commission/commission-candidate-search";
+	}
 //	@GetMapping("/view-individual")
 //	public String candidatePoll(Model model) {
 //		
