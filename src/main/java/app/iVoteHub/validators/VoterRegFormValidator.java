@@ -43,6 +43,7 @@ public class VoterRegFormValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username","" , "Username must not be empty.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "", "Email must not be empty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "","Password must not be empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "sniCode", "","SNI Code must not be empty");
 		
 		
 		
@@ -93,11 +94,37 @@ public class VoterRegFormValidator implements Validator {
 		if(!form.getPassword().equals(form.getPassword2())) {
 			errors.rejectValue("password", "","Passwords do not match.");
 		}
-		SNI s = sRepo.findBySniCode(form.getSniCode());
-		
-		if (s == null || s.getUsed() == true) {
+		boolean validSNI = false;
+		SNI s = null;
+		try {
+
+			System.out.println("form sni:"+ form.getSniCode());
+		s = sRepo.findBySniCode(form.getSniCode());
+		} catch (NullPointerException e) {
+			errors.rejectValue("sniCode", "", "Invalid SNI.");
+		} catch (Exception e) {
+			validSNI = false;
 			errors.rejectValue("sniCode", "", "Invalid SNI.");
 		}
-	}
+		
+		// needs this rather verbose redundant or is always skipped by compiler optimisation
+		try {
+		if (s.equals(null)) {
+			int one = 1;
+		};
+		} catch (Exception e) {
+			errors.rejectValue("sniCode", "", "Invalid SNI.");
+		}
+		try {
+			if (s.getUsed()) {
+				errors.rejectValue("sniCode", "", "SNI has already been used.");	
+			}
+		} catch (NullPointerException e) {
+		
+		} catch (Exception e) {
+			errors.rejectValue("sniCode", "", "SNI has already been used.");	
+		}
+		}
+
 
 }

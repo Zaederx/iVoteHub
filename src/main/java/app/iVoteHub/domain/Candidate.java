@@ -6,19 +6,24 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import app.iVoteHub.addressEnums.Role;
+import app.iVoteHub.repositories.VoterRepository;
 
 /**
  * 
@@ -29,6 +34,10 @@ import app.iVoteHub.addressEnums.Role;
  */
 @Entity(name = "Candidate_Table")
 public class Candidate {
+	@Transient
+	@Autowired
+	VoterRepository vRepo;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -38,11 +47,12 @@ public class Candidate {
 	private List<Vote> votes;
 	
 	/*The Constituency of the candidate*/
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Constituency.class)
+	@JoinColumn(name="constituency", referencedColumnName = "id")
 	private Constituency constituency; 
 	
 	/*Party of the candidate*/
-	@ManyToOne(optional = true)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY,targetEntity = Party.class)
 	private Party party;
 	
 	/*Total number of votes*/
@@ -62,6 +72,7 @@ public class Candidate {
 	 */
 	public Candidate (String name) {
 		this.name = name;
+		this.count = 0;
 	}
 
 
@@ -139,27 +150,28 @@ public class Candidate {
 	 */
 
 
-	@Transactional
 	public void addVote(Vote vote) {
 		votes.add(vote);
 	}
 	
-	@Transactional
+
 	public void addVote (String email) {
-		votes.add(new Vote(this,this.party,email));
+		Vote vote = new Vote(this,this.party,email);
+		
+		votes.add(vote);
 	}
 	
-	@Transactional
+
 	public int getCount() {
-		setCount();
-		if (count == null) {return 0;}//TODO remove if not found to be necessary
+		setCount(votes.size());
 		return count;
 	}
 	
-	public void setCount() {
-		this.count = votes.size(); //TODO - Change to check for zero and save to db - if neccessary to display result size;
+	public void setCount(int count) {
+		this.count = count; //TODO - Change to check for zero and save to db - if neccessary to display result size;
 	}
 
+	
 	/**
 	 * @return the party
 	 */

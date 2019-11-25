@@ -14,12 +14,21 @@ public class VoteForm {
 	
 	}
 	
-	public int getVote() {
+	
+	public int getCandidateId() {
 		return vote;
 	}
 
 	public void setVote(int vote) {
 		this.vote = vote;
+	}
+
+
+	/**
+	 * @return the vote
+	 */
+	public int getVote() {
+		return vote;
 	}
 	
 }

@@ -82,11 +82,12 @@ public class VoterController {
 		String vUsername = principal.getName();
 		Voter voter = vRepo.findByUsername(vUsername);
 		Print.p("VoterController - voter.getName():"+voter.getName()); //TODO DELETE
-		Print.p("Voter Controller - votePost - voteForm.getVote:"+voteForm.getVote());//TODO DELETE
-		voter.setCandidateId(voteForm.getVote());
+		Print.p("Voter Controller - votePost - voteForm.getVote:"+voteForm.getCandidateId());//TODO DELETE
+		voter.setCandidateId(voteForm.getCandidateId());
 		Print.p("Voter Controller - votePost - voter.getCandidate:"+voter.getCandidate());//TODO delete 
-		Candidate c = cRepo.findById(voteForm.getVote());
+		Candidate c = cRepo.findById(voteForm.getCandidateId());
 		c.addVote(voter.getEmail());
+		
 		
 		voter.setVoted(true);
 		vRepo.save(voter);

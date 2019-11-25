@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,17 +25,22 @@ public class Constituency {
 	@Column
 	private String name;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "constituency",targetEntity = Candidate.class)
 	private List<Candidate> candidate;
 	
 	@OneToMany
 	private List<Voter> voters;
 	
+	@Column
+	int count;
+	
+	
 	public Constituency () {
-		
+		count = 0;
 	}
 
 	public Constituency(String name) {
+		this.count = 0;
 		this.name = name;
 	}
 
@@ -92,5 +98,24 @@ public class Constituency {
 	 */
 	public void setVoters(List<Voter> voters) {
 		this.voters = voters;
+	}
+
+	/**
+	 * @return the count
+	 */
+	public int getCount() {
+		int temp = 0;
+		for(Candidate c : candidate) {
+			temp+=c.getVotes().size();
+		}
+		setCount(temp);
+		return count;
+	}
+
+	/**
+	 * @param count the count to set
+	 */
+	public void setCount(int count) {
+		this.count = count;
 	}
 }

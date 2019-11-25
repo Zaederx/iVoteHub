@@ -40,13 +40,13 @@
           <tr>
             <td>${candidate.name}</td>
             <td>${candidate.constituency.name}</td>
-            <td><form:checkbox path="vote" value="${candidate.id}"/>
+            <td><form:radiobutton path="vote" name="group" value="${candidate.id}"/>
             </td>
           </tr>
         </tbody>
       </c:forEach>
     </table>
-    <form:button class="btn btn-default" type="submit">vote
+    <form:button class="btn btn-default" type="submit">Vote
     </form:button>
   </form:form>
 </div>

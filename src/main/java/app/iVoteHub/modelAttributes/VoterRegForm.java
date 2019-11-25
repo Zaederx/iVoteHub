@@ -58,8 +58,8 @@ public class VoterRegForm {
 		return sniCode;
 	}
 
-	public void setSniNum(String sniNum) {
-		this.sniCode = sniNum;
+	public void setSniCode(String sniCode) {
+		this.sniCode = sniCode;
 	}
 	
 	

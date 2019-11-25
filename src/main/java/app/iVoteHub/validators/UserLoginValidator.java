@@ -30,7 +30,6 @@ public class UserLoginValidator implements Validator {
 		System.out.println("Performing User Login Form Validations");
 		LoginForm form = (LoginForm) target;
 		
-//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "", "Name must not be empty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "", "Username must not be empty.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", "Password must not be empty.");
 		

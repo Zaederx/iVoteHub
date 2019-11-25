@@ -59,7 +59,8 @@
    	<form:errors path="email" class="alert alert-danger" style="display:block"/>
    	
    	<form:label path="password">Password</form:label><br>
-   	<form:password  path="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" <%--To catch password error on client end before sending the entire form for backend validation --%>
+   	<%--To catch password error on client end before sending the entire form for backend validation --%>
+   	<form:password  path="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
    	title="Ensure password is at least 8 characters long, has at least one uppercase and one lowercase letter, and contains at least one number. Special characters are not necessary, but recommended" class="form-control text-center" placeholder="DavieJonesLocker!25"/><br>
    	<form:errors path="password" class="alert alert-danger" style="display:block"/>
    		
@@ -67,8 +68,8 @@
    	<form:password path="password2" class="form-control text-center" placeholder="DavieJonesLocker!25"/><br>
    	<form:errors path="password2" style="display:block"/><br>
  
-   	<form:label path="sniCode">SNI number</form:label><br> 
-   	<form:input path="sniCode" class="form-control text-center" placeholder="R8HFERGO8UHE5GU"/><br>
+   	<form:label path="sniCode">SNI Code</form:label><br> 
+   	<form:input path="sniCode" type="text" class="form-control text-center" placeholder="R8HFERGO8UHE5GU"/><br>
    	<form:errors path="sniCode" class="alert alert-danger" style="display:block"/><br><br><br>
 
    	<button type="submit" class="btn btn-primary" value="Register">Register</button><br><br><br><br>

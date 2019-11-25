@@ -1,5 +1,6 @@
 package app.iVoteHub.controllers;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -51,7 +52,7 @@ public class VoterRegistrationController {
 	}
 	
 	@PostMapping("register-voter-form")
-	public String postForm ( @Valid @ModelAttribute(name = "voterForm") VoterRegForm voterForm, BindingResult result, Model model) { 
+	public String postForm (@Valid @ModelAttribute(name = "voterForm") VoterRegForm voterForm, BindingResult result, Model model) { 
 		Print.p("VoterRegistration - postForm");
 	
 		if(!result.hasErrors()) {
@@ -62,6 +63,7 @@ public class VoterRegistrationController {
 			vRepo.save((Voter) voter);
 			model.addAttribute("voter", voter);
 			model.addAttribute("name",voter.getName());
+	
 			Print.p("VoterRegistration - postForm - voter.getName()="+ voter.getName());//TODO - DELETE + REMOVE HELPER CLASS
 			Print.p("redirect:"+VAddressBook.V_HOME.configUrl());//TODO -DELETE
 			return "redirect:"+VAddressBook.V_HOME.configUrl();//TODO - TRY USING JSP DIRECTLY

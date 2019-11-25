@@ -24,15 +24,15 @@ public class Party {
 	@Column
 	private String name;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.REFRESH, mappedBy = "party",targetEntity = Candidate.class )
 	private List<Candidate> candidates;
 	
-	/*must be mappedBy id - too allow Vote Entity id to assign vote to constituencies
-	 * Doesn't work without it */
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "id")
+
+	 /* Doesn't work without it */
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "id")
 	private List<Vote> votes;
 	
-	@Column
+	@Transient
 	private Integer count;
 	
 	public Party () {
@@ -41,6 +41,7 @@ public class Party {
 
 	public Party (String name) {
 		this.name = name;
+		this.count = 0;
 		
 	}
 	public int getId() {
@@ -74,14 +75,19 @@ public class Party {
 	public void count () {
 		count = votes.size();
 	}
-	@Transactional
+
+
 	public int getCount() {
-		setCount();
-		if (count == null) {return 0;}
+		int temp = 0;
+		for(Candidate c : candidates) {
+			temp+=c.getVotes().size();
+		}
+		setCount(temp);
 		return count;
 	}
-	@Transactional
-	public void setCount() {
-		this.count = votes.size();
+
+	
+	public void setCount(int count) {
+		this.count = count;
 	}
 }
