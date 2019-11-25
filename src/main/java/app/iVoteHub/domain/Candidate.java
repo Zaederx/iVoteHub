@@ -56,7 +56,7 @@ public class Candidate {
 	private Party party;
 	
 	/*Total number of votes*/
-	@Column
+	@Transient
 	private Integer count;
 	
 	/*Default Constrcutor - Explicitly Required  by 

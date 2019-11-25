@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 /**
  * Entity to persist constituency.
@@ -31,7 +32,7 @@ public class Constituency {
 	@OneToMany
 	private List<Voter> voters;
 	
-	@Column
+	@Transient
 	int count;
 	
 	
