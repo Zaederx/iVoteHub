@@ -1,4 +1,6 @@
 # iVoteHub - Web Technology Course Work 2
+![Home](./images/Home.png)
+![VotingPage](./images/VotingPage.png)
 This was for an assignment in which we were asked to build a voting application. We were to pretend that it would be for a remote town that just recently recieved the right to vote and that this system would help ensure the process is carried out fairly. 
 
 
@@ -10,6 +12,7 @@ This was for an assignment in which we were asked to build a voting application.
 * [Running the project](#running-the-project)
 * [Project Shortcommings](#shortcommings)
 * [Additional Notes](#additional-notes)
+* [Images](#images)
 
 ## Background
 We were given an assignemnt to create an application for instantaneous live voting. 
@@ -36,9 +39,6 @@ Parties:
 - Red Party
 - Yellow Party
 - Independent Party
-
-![Login](./images/Login.png)
-
 
 
 ## Technologies
@@ -75,7 +75,7 @@ On Windows
 ./gradlew.bat bootRun
 ```
 
-Once the boot process is complete, you can then view the website from https://localhost:8090/ (if you are using default configurations). 
+Once the boot process is complete, you can then view the website from https://localhost:8090/home (if you are using default configurations). 
 
 ## Trying out the Application
 
@@ -124,4 +124,15 @@ I created this before I learnt how to use AJAX so you will notice that the admin
 
 ## Additional Notes
 The project website uses a self-signed certificate so may not work on Safari, in which case I recommend opening it in FireFox or Google Chrome which which after displaying a warning allows you the option to proceed to open the page.
+
+## Images
+![Home](./images/Home.png)
+![Login](./images/Login.png)
+![LoginUnderway](./images/LoginUnderway.png)
+![LoginFailed](./images/LoginFailed.png)
+![HomePage](./images/HomePage.png)
+![VotingPage](./images/VotingPage.png)
+![VoteSuccessful](./images/VoteSuccessful.png)
+![AlreadyVoted](./images/AlreadyVoted.png)
+![LoggedOut](./images/LoggedOut.png)
 
