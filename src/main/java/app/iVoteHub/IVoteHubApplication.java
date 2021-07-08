@@ -57,16 +57,14 @@ public class IVoteHubApplication implements CommandLineRunner {
 	@Transactional
 	@Override
 	public void run(String... args) throws Exception {
-
-		testUsers();
-
-
-
+		// test();//used to fill DB when empty
 	}
 
-	public void testUsers() {
+	/**
+	 * Used to fill DB with test data when empty
+	 */
+	public void test() {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		
 		ElectionCommission com = new ElectionCommission();
 		
 		com.setName("Thomas Anderson");
@@ -75,7 +73,7 @@ public class IVoteHubApplication implements CommandLineRunner {
 		ecRepo.save(com);
 //		//TODO - REMOVE OLD DATA SET
 //		//Generate SNI's
-		SNI s0 = new SNI("OXFG75MZ");
+		SNI s = new SNI("OXFG75MZ");
 		SNI s1 = new SNI("B7F6EM2Y");
 		SNI s2 = new SNI("Q7OW5WWM");
 		SNI s3 = new SNI("7XP02HJ3");
@@ -97,7 +95,7 @@ public class IVoteHubApplication implements CommandLineRunner {
 		SNI s19 = new SNI("P4YHAJUX");
 
 		
-		sniRepo.save(s0);
+		sniRepo.save(s);
 		sniRepo.save(s1);
 		sniRepo.save(s2);
 		sniRepo.save(s3);
@@ -121,16 +119,16 @@ public class IVoteHubApplication implements CommandLineRunner {
 		//TODO - Create Voters
 		Voter v = new Voter();
 		v.setName("Captain Kirk");
-		v.setUsername("Person0");
+		v.setUsername("Z-Voter");
 		v.setEmail("email@email.com");
 		v.setPassword(encoder.encode("password"));
-		v.setSNI(s0);
-		s0.setUsed(true);
+		v.setSNI(s);
+		s.setUsed(true);
 		
 		
 		Voter v1 = new Voter();
 		v1.setName("Roger Moore");
-		v1.setUsername("Person1");
+		v1.setUsername("P1");
 		v1.setEmail("email1@email.com");
 		v1.setPassword(encoder.encode("password"));
 		v1.setSNI(s1);
@@ -233,5 +231,8 @@ public class IVoteHubApplication implements CommandLineRunner {
 		cRepo.save(c6);
 		cRepo.save(c7);
 		cRepo.save(c8);
+		
 	}
+
+	
 }

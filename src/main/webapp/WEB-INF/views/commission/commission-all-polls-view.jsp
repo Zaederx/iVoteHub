@@ -57,12 +57,12 @@
                  </tr>
                </thead>
                <c:forEach var = "candidate" items="${candidates}">
-                 <tbody>
-                   <tr>
+                 <tbody id="candidate-table">
+                   <!-- <tr>
                      <td>${candidate.name}</td>
                      <td>${candidate.constituency.name}</td>
                      <td>${candidate.count}</td>
-                   </tr>
+                   </tr> -->
                  </tbody>
                </c:forEach>
              </table>
@@ -87,12 +87,12 @@
                  </tr>
                </thead>
                <c:forEach var = "party" items="${parties}">
-                 <tbody>
-                   <tr>
+                 <tbody id="party-table">
+                   <!-- <tr>
                      <td>${party.name}</td>
                      <td>${party.count}</td>
                      <td></td>
-                   </tr>
+                   </tr> -->
                  </tbody>
                </c:forEach>
              </table>
@@ -104,8 +104,80 @@
 
     </div>
     <script>
+      window.onload = () => {
+        getCandidates()
+        getParties()
+      }
+      function success(res) {
+        console.log(res)
+        console.log(res[0])
+        var html =  ''
+        var count = 0
+        var tableBody = document.querySelector('#candidate-table')
+        $('#candidate-table').empty()
+        for (let index = 0; index < res.length; index++) {
+          var candidate = res[index];
+          html += '<tr>'
+            + '<td>'+candidate.name+ '</td>'
+          + '<td>'+candidate.constituency+'</td>'
+          + '<td>'+candidate.votes+'</td>'
+          + '</tr>\n'
+        }
+        tableBody[0]=''
+        tableBody.innerHTML = html
+       
+        
+      }
+
+      function error() {
+        console.error('There is an error retrieving response from server at: /candidates-all')
+      }
     setInterval(function() {
-    	location.reload();
+      getCandidates()
+    	// location.reload();
+    }, 18050)
+
+    function getCandidates() {
+      $.ajax({
+        method:'GET',
+        url: '/candidates-all',
+        success: (res) => success(res),
+        error: () => error()
+      })
+    }
+
+    function getParties() {
+      $.ajax({
+        method:'GET',
+        url: '/parties-all',
+        success: (res) => success2(res),
+        error: () => error2()
+      })
+    }
+    function success2(res) {
+      console.log(res)
+        var html =  ''
+        var count = 0
+        var table = document.querySelector('#party-table')
+        $('#party-table').empty()
+        for (let index = 0; index < res.length; index++) {
+          
+          var party = res[index];
+          html += '<tr>'
+            + '<td>'+party.name+ '</td>'
+          + '<td>'+party.votes+'</td>'
+          + '</tr>\n'
+          
+        }
+        
+        table.innerHTML = html
+    }
+    function error2() {
+      console.error('There is an error retrieving response from server at: /parties-all')
+    }
+    setInterval(function() {
+      getParties()
+    	// location.reload();
     }, 18050)
     </script>
 </body>

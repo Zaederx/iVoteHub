@@ -14,6 +14,7 @@ import app.iVoteHub.domain.Candidate;
 import app.iVoteHub.domain.Party;
 import app.iVoteHub.repositories.CandidateRepository;
 import app.iVoteHub.repositories.PartyRepository;
+import app.iVoteHub.responseObjects.CandidateResponse;
 
 @Controller
 @RequestMapping("commission")
@@ -51,27 +52,6 @@ public class CommissionController {
 		
 		return "commission/commission-candidate-search";
 	}
-//	@GetMapping("/view-individual")
-//	public String candidatePoll(Model model) {
-//		
-//		List<Candidate> candidates = (List<Candidate>) cRepo.findAll();
-//		
-//		model.addAttribute("candidates", candidates);
-//		
-//		return "/candidate/candidate-polls-view";
-//	}
-//	
-//	@GetMapping("/view-constituency")
-//	public String constituencyPoll(Model model) {
-//		
-//		List<Candidate> candidates = (List<Candidate>) cRepo.findAll();
-//		
-//		model.addAttribute("candidates", candidates);
-//		
-//		return "/candidate/candidate-polls-view";
-		
-//	}
-	
-	
+
 	
 }
