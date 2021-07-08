@@ -119,8 +119,9 @@ SNI s19 = new SNI("P4YHAJUX");
 ```
 
 
-## Project Shortcommings
+## Project Shortcommings - (8TH July 2021 Update - Now uses AJAX)
 I created this before I learnt how to use AJAX so you will notice that the admin's view of the results are refreshed every so often instead of true live loading of the results. When I get the chance, I'll update the site API's with some rest controllers for AJAX use.
+(Update - Now uses AJAX for that section)
 
 ## Additional Notes
 The project website uses a self-signed certificate so may not work on Safari, in which case I recommend opening it in FireFox or Google Chrome which which after displaying a warning allows you the option to proceed to open the page.
