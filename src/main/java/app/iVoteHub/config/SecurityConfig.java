@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.requiresSecure()
 			
 		.and().authorizeRequests()
-		.antMatchers("/","/preprocessing","/login","/register-voter-form","/register","/home","/register/**",VAddressBook.REGISTRATION.configUrl(),VAddressBook.LOGIN.configUrl()).permitAll()
+		.antMatchers("/","/preprocessing","/login","/register-voter-form","/register","/home","/register/**","/h2-console/**",VAddressBook.REGISTRATION.configUrl(),VAddressBook.LOGIN.configUrl()).permitAll()
 		
 		.and().authorizeRequests()
 			.antMatchers("/voter/**").hasRole(Role.VOTER.toString())//note: because hasRole appends "ROLE_" to what ever string provided
@@ -65,6 +65,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		.and().exceptionHandling().accessDeniedPage("/login-error")
+
+		.and()
+            .csrf().ignoringAntMatchers("/h2-console/**")
+        .and()
+            .headers().frameOptions().disable();//prevents h2-console frame problems
 		; 
 	}
 	
