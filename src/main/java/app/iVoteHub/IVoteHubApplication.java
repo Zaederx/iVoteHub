@@ -119,7 +119,7 @@ public class IVoteHubApplication implements CommandLineRunner {
 		//TODO - Create Voters
 		Voter v = new Voter();
 		v.setName("Captain Kirk");
-		v.setUsername("Z-Voter");
+		v.setUsername("Person0");
 		v.setEmail("email@email.com");
 		v.setPassword(encoder.encode("password"));
 		v.setSNI(s);
@@ -128,7 +128,7 @@ public class IVoteHubApplication implements CommandLineRunner {
 		
 		Voter v1 = new Voter();
 		v1.setName("Roger Moore");
-		v1.setUsername("P1");
+		v1.setUsername("Person1");
 		v1.setEmail("email1@email.com");
 		v1.setPassword(encoder.encode("password"));
 		v1.setSNI(s1);
