@@ -5,6 +5,7 @@ plugins {
 	id 'org.asciidoctor.convert' version '1.5.8'
 	id 'java'
 	id 'war'
+	
 }
 
 war {
@@ -30,6 +31,8 @@ ext {
 }
 
 dependencies {
+	//for heroku war web app deployment
+	implementation 'com.github.jsimone:webapp-runner:8.5.11.3'
 	implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'//needed for tomcat to render jsp files to browser
@@ -60,6 +63,24 @@ asciidoctor {
 	inputs.dir snippetsDir
 	dependsOn test
 }
+
+// For heroku web war build
+
+task stage() {
+    dependsOn clean, war
+}
+war.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+    into "$buildDir/server"
+    from(configurations.compile) {
+        include "webapp-runner*"
+    }
+}
+
+stage.dependsOn(copyToLib)
+
+
 
 // task warToJar() {
 // 	println "\u001B[32m"+"converting WAR TO JAR"
