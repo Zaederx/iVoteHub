@@ -1,11 +1,15 @@
+import java.util.concurrent.TimeUnit;
 plugins {
 	id 'org.springframework.boot' version '2.2.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'org.asciidoctor.convert' version '1.5.8'
 	id 'java'
-	id	'war'
+	id 'war'
 }
 
+war {
+	enabled = true
+}
 group = 'app'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
@@ -56,3 +60,29 @@ asciidoctor {
 	inputs.dir snippetsDir
 	dependsOn test
 }
+
+// task warToJar() {
+// 	println "\u001B[32m"+"converting WAR TO JAR"
+// 	ext.process = new ProcessBuilder()
+//             .directory(projectDir)
+//             .command("jar", "-xvf", "build/libs/iVoteHub-0.0.1-SNAPSHOT.war")
+//             .start();
+	
+
+// 	ext.process.waitFor(5,TimeUnit.SECONDS);
+// 	ext.process.destroy();
+// 	ext.process.waitFor(5,TimeUnit.SECONDS);
+// 	ext.process.destroyForcibly();
+// 	ext.process.waitFor();
+
+	
+// 	// ext.output = { //for access to external output if needed
+// 	// 	return "\u001B[32m"+standardOutput.toString();
+// 	// }
+// 	timeout = Duration.ofMinutes(1)
+// 	doLast { 
+// 		println "\u001B[32m"+"warToJar done!"
+// 	}
+// }
+
+// build.dependsOn warToJar
