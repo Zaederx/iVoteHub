@@ -22,7 +22,7 @@
 </head>
 <body>
   <div class="jumbotron text-center">
-    <h1>This is the Home JSP</h1>
+    <h1>Home Page</h1>
     <ul class="nav nav-tabs justify-content-center">
       <li class="nav-item">
         <a class="nav-link active" href="">Home</a>

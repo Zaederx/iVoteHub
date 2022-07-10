@@ -26,10 +26,10 @@ ext {
 }
 
 dependencies {
-	compile group: 'com.h2database', name: 'h2', version: '1.4.200'
-	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
-	compile 'org.apache.tomcat.embed:tomcat-embed-jasper'//needed for tomcat to render jsp files to browser
-	compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+	implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'//needed for tomcat to render jsp files to browser
+	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
 	providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
 	providedCompile group: 'javax.servlet.jsp', name: 'javax.servlet.jsp-api', version: '2.3.3'
 //	providedCompile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2.1-b03'
