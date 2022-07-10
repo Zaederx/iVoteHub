@@ -1,1 +1,1 @@
-heroku deploy:war libs/iVoteHub-0.0.1-SNAPSHOT.war
+heroku deploy:jar -xvf libs/iVoteHub-0.0.1-SNAPSHOT.war && java -jar libs/iVoteHub-0.0.1-SNAP.jar
