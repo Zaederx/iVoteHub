@@ -5,7 +5,6 @@ plugins {
 	id 'org.asciidoctor.convert' version '1.5.8'
 	id 'java'
 	id 'war'
-	
 }
 
 war {
@@ -65,19 +64,18 @@ asciidoctor {
 }
 
 // For heroku web war build
-task stage(dependsOn: ['build', 'clean'])
+task stage(dependsOn: ['build', 'clean', 'war'])
 build.mustRunAfter clean
+war.mustRunAfter clean
 
+//skips testing - don't have any tests for this project
 gradle.taskGraph.whenReady {
   taskGraph ->
     if (taskGraph.hasTask(stage)) {
       test.enabled = false
     }
 }
-// task stage() {
-//     dependsOn clean, war
-// }
-// war.mustRunAfter clean
+
 
 task copyToLib(type: Copy) {
     into "$buildDir/server"
@@ -89,29 +87,3 @@ task copyToLib(type: Copy) {
 stage.dependsOn(copyToLib)
 
 configurations.implementation.setCanBeResolved(true)
-
-// task warToJar() {
-// 	println "\u001B[32m"+"converting WAR TO JAR"
-// 	ext.process = new ProcessBuilder()
-//             .directory(projectDir)
-//             .command("jar", "-xvf", "build/libs/iVoteHub-0.0.1-SNAPSHOT.war")
-//             .start();
-	
-
-// 	ext.process.waitFor(5,TimeUnit.SECONDS);
-// 	ext.process.destroy();
-// 	ext.process.waitFor(5,TimeUnit.SECONDS);
-// 	ext.process.destroyForcibly();
-// 	ext.process.waitFor();
-
-	
-// 	// ext.output = { //for access to external output if needed
-// 	// 	return "\u001B[32m"+standardOutput.toString();
-// 	// }
-// 	timeout = Duration.ofMinutes(1)
-// 	doLast { 
-// 		println "\u001B[32m"+"warToJar done!"
-// 	}
-// }
-
-// build.dependsOn warToJar
