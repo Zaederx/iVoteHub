@@ -17,13 +17,11 @@ configurations {
 		extendsFrom developmentOnly
 	}
 }
-
+//to add a manifest to the jar file
 jar {
 	enabled = true
 	manifest {
-        attributes(
-                'Main-Class': 'app.iVoteHub.IVoteHubApplication'
-        )
+        attributes 'Main-Class': 'app.iVoteHub.IVoteHubApplication'
     }
 }
 
