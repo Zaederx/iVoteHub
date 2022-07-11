@@ -21,7 +21,7 @@ configurations {
 jar {
 	enabled = true
 	manifest {
-		attributes 'Main-Class' : 'app/iVoteHub/IVoteHubApplication'
+		attributes 'Main-Class' : 'app.iVoteHub.IVoteHubApplication'
 		attributes 'Start-Class' : 'org.springframework.boot.loader.JarLauncher'
     }
 }
