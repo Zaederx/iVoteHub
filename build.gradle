@@ -88,7 +88,8 @@ task copyToLib(type: Copy) {
 
 stage.dependsOn(copyToLib)
 
-
+configurations.implementation.setCanBeResolved(true)
+configurations.api.setCanBeResolved(true)
 
 // task warToJar() {
 // 	println "\u001B[32m"+"converting WAR TO JAR"
