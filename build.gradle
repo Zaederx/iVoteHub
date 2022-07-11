@@ -20,6 +20,11 @@ configurations {
 
 jar {
 	enabled = true
+	manifest {
+        attributes(
+                'Main-Class': 'app.iVoteHub.IVoteHubApplication'
+        )
+    }
 }
 
 repositories {
@@ -63,7 +68,6 @@ asciidoctor {
 	inputs.dir snippetsDir
 	dependsOn test
 }
-
 
 // task runBootJar() {
 // 	println "\u001B[32m"+"running bootJar task"
