@@ -1,1 +1,1 @@
-web: java -jar build/libs/iVoteHub-0.0.1-SNAPSHOT.jar
+web: java -jar build/libs/iVoteHub-0.0.1-SNAPSHOT.jar $PORT
