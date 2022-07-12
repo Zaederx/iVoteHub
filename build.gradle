@@ -34,6 +34,17 @@ dependencies {
 	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+
+	//old dependencies
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'//needed for tomcat to render jsp files to browser
+	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+	implementation group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+	implementation group: 'javax.servlet.jsp', name: 'javax.servlet.jsp-api', version: '2.3.3'
+//	providedCompile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2.1-b03'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.session:spring-session-core'
 }
 
 test {
