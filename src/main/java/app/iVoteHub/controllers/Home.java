@@ -40,9 +40,14 @@ public class Home {
 		binder.addValidators(new UserLoginValidator(uRepo));
 	}
 	
-	@GetMapping("/")
+	@GetMapping({"/","/home"})
 	public String root (Model model) {
-		return "redirect:/logged-user";
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		boolean hasPermissions = !auth.getAuthorities().isEmpty();//true if note empty
+		if (auth != null && hasPermissions) {
+			return "redirect:/logged-user";
+		}
+		return "home";
 	}
 	
 	@GetMapping("logged-user")
@@ -108,7 +113,7 @@ public class Home {
 	
 	@GetMapping("login-success")
 	public String loginSuccess () {
-		return "homeHome";
+		return "home";
 	}
 
 	@GetMapping("logout-success")

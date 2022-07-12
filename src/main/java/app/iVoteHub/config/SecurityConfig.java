@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 
 import app.iVoteHub.addressEnums.Role;
 import app.iVoteHub.addressEnums.VAddressBook;
@@ -81,6 +82,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(service).passwordEncoder(encoder);
 	}
 	
-
 	
 }
