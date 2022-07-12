@@ -15,14 +15,14 @@ public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-//		WebMvcConfigurer.super.addResourceHandlers(registry);
+		// WebMvcConfigurer.super.addResourceHandlers(registry);
 	}
 	
 	/*Allows bootstrap to be used with Spring security*/
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();
-//		WebMvcConfigurer.super.configureDefaultServletHandling(configurer);
+		configurer.enable("iVoteHub");
+		// WebMvcConfigurer.super.configureDefaultServletHandling(configurer);
 	}
 	 
 	@Bean
@@ -31,10 +31,9 @@ public class WebConfig implements WebMvcConfigurer{
 		resolver.setViewClass(JstlView.class);
 		resolver.setPrefix("/WEB-INF/views/");
 		/* without the / before WEB-INF - spring will append context 
-		 * folder context infront of WEB-INF - takes you to incoreect address*/
+		 * folder context infront of WEB-INF - takes you to incorrect address*/
 		resolver.setSuffix(".jsp");
 		
 		return resolver;
 	}
-
 }
