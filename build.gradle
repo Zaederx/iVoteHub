@@ -27,8 +27,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'mysql:mysql-connector-java'
+	// runtimeOnly 'com.h2database:h2'
+	// runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.0-RC1'
 	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
@@ -37,6 +37,7 @@ dependencies {
 
 
 	//old dependencies
+	implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'//needed for tomcat to render jsp files to browser
 	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
