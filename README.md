@@ -1,5 +1,6 @@
 # iVoteHub - Web Technology Course Work 2
 ## [See Youtub Video Walkthrough](https://youtu.be/CC4o43OOnWE)
+## 
 
 ![Home](./images/Home.png)
 ![VotingPage](./images/VotingPage.png)
@@ -12,6 +13,7 @@ This was for an assignment in which we were asked to build a voting application.
 * [Requirements to run the project](#requirements-to-run-the-project)
 * [Setup](#setup)
 * [Running the project](#running-the-project)
+* [Trying out the Application](#trying-out-the-application)
 * [Project Shortcommings](#shortcommings)
 * [Additional Notes](#additional-notes)
 * [Images](#images)
@@ -81,7 +83,7 @@ Once the boot process is complete, you can then view the website from https://lo
 
 ## Trying out the Application
 
-You can login to the application using these credentials:
+You can login to the application at the [demo site](https://i-vote-hub.herokuapp.com/home) using these credentials:
 |UserType|Username| Password| SNI|
 |:-------:|:-------:|:-------:|:-------:|
 |ADMIN|ADMIN |ADMIN| n/a|
