@@ -40,10 +40,10 @@ public class Home {
 		binder.addValidators(new UserLoginValidator(uRepo));
 	}
 	
-	@GetMapping({"/","/home"})
+	@GetMapping({"/"})
 	public String root (Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		boolean hasPermissions = !auth.getAuthorities().isEmpty();//true if note empty
+		boolean hasPermissions = !auth.getAuthorities().isEmpty();//true if not empty
 		if (auth != null && hasPermissions) {
 			return "redirect:/logged-user";
 		}
