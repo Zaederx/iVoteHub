@@ -1,120 +1,51 @@
 import java.util.concurrent.TimeUnit;
 plugins {
-	id 'org.springframework.boot' version '2.2.1.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-	id 'org.asciidoctor.convert' version '1.5.8'
+	id 'org.springframework.boot' version '2.5.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	// id 'war'
 }
 
-group = 'iVoteHub'
+group = 'app.iVoteHub'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
-
-configurations {
-	developmentOnly
-	runtimeClasspath {
-		extendsFrom developmentOnly
-	}
-}
-//to add a manifest to the jar file
-jar {
-	enabled = true
-	manifest {
-		attributes 'Main-Class' : 'app.iVoteHub.IVoteHubApplication'
-		attributes 'Start-Class' : 'org.springframework.boot.loader.JarLauncher'
-    }
-}
 
 repositories {
 	mavenCentral()
 }
 
-ext {
-	set('snippetsDir', file("build/generated-snippets"))
-}
-
 dependencies {
-	//for heroku war web app deployment
-	// implementation 'com.github.jsimone:webapp-runner:8.5.11.3'
-	implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
-	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
-	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'//needed for tomcat to render jsp files to browser
-	implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
-	implementation group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
-	implementation group: 'javax.servlet.jsp', name: 'javax.servlet.jsp-api', version: '2.3.3'
-//	providedCompile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2.1-b03'
+	// https://mvnrepository.com/artifact/javax.validation/validation-api
+	implementation group: 'javax.validation', name: 'validation-api'
+	// https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator
+	implementation group: 'org.hibernate.validator', name: 'hibernate-validator'
+	implementation group: 'org.springframework', name: 'spring-webmvc'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.session:spring-session-core'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.0-RC1'
+	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 test {
-	outputs.dir snippetsDir
 	useJUnitPlatform()
+	//show tests info in standard output
+	testLogging.showStandardStreams = true
+	//show testLogging
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }
 
-asciidoctor {
-	inputs.dir snippetsDir
-	dependsOn test
-}
-
-// task runBootJar() {
-// 	println "\u001B[32m"+"running bootJar task"
-// 	ext.process = new ProcessBuilder()
-//             .directory(projectDir)
-//             .command("./gradlew", "bootJar")
-//             .start();
-	
-// 	ext.process.waitFor(5,TimeUnit.SECONDS);
-// 	ext.process.destroy();
-// 	ext.process.waitFor(5,TimeUnit.SECONDS);
-// 	println "\u001B[32m"+"bootJar done!"
-// 	ext.process.destroyForcibly();
-// 	ext.process.waitFor();
-	
-// 	// ext.output = { //for access to external output if needed
-// 	// 	return "\u001B[32m"+standardOutput.toString();
-// 	// }
-// 	timeout = Duration.ofMinutes(1)
-// 	doLast { 
-// 		println "\u001B[32m"+"bootJar done!"
-// 	}
-// }
-
-// runBootJar.dependsOn build
-
-// For heroku web war build
-// task stage(dependsOn: ['build', 'clean', 'war'])
-// build.mustRunAfter clean
-// war.mustRunAfter clean
-
-// //skips testing - don't have any tests for this project
-// gradle.taskGraph.whenReady {
-//   taskGraph ->
-//     if (taskGraph.hasTask(stage)) {
-//       test.enabled = false
-//     }
-// }
 
 
 
-// task copyToLib(type: Copy) {
-//     into "$buildDir/server"
-//     from(configurations.implementation) {
-//         include "webapp-runner*"
-//     }
-// }
-
-// stage.dependsOn(copyToLib)
-
-// configurations.implementation.setCanBeResolved(true)
